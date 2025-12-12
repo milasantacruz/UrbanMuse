@@ -18,7 +18,6 @@ class PreviewHomePage extends StatelessWidget {
         children: [
           // Header
           Card(
-            color: AppColors.primaryContainer,
             child: Padding(
               padding: EdgeInsets.all(AppSpacing.space5),
               child: Column(
@@ -26,9 +25,8 @@ class PreviewHomePage extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.visibility,
-                        color: AppColors.onPrimaryContainer,
                         size: 32,
                       ),
                       SizedBox(width: AppSpacing.space3),
@@ -38,16 +36,12 @@ class PreviewHomePage extends StatelessWidget {
                           children: [
                             Text(
                               'Component Showcase',
-                              style: AppTextStyles.h2.copyWith(
-                                color: AppColors.onPrimaryContainer,
-                              ),
+                              style: AppTextStyles.h2,
                             ),
                             SizedBox(height: AppSpacing.space1),
                             Text(
                               'Sistema de visualización de componentes de diseño',
-                              style: AppTextStyles.bodySmall.copyWith(
-                                color: AppColors.onPrimaryContainer,
-                              ),
+                              style: AppTextStyles.bodySmall,
                             ),
                           ],
                         ),
@@ -58,15 +52,13 @@ class PreviewHomePage extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.all(AppSpacing.space3),
                     decoration: BoxDecoration(
-                      color: AppColors.white.withOpacity(0.2),
                       borderRadius:
                           BorderRadius.circular(AppBorderRadius.radiusMd),
                     ),
                     child: Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.check_circle,
-                          color: AppColors.onPrimaryContainer,
                           size: 16,
                         ),
                         SizedBox(width: AppSpacing.space2),
@@ -74,7 +66,6 @@ class PreviewHomePage extends StatelessWidget {
                           child: Text(
                             'Colores sincronizados con Figma UI Kit ✅',
                             style: AppTextStyles.caption.copyWith(
-                              color: AppColors.onPrimaryContainer,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -102,7 +93,6 @@ class PreviewHomePage extends StatelessWidget {
             icon: Icons.smart_button,
             route: '/preview/buttons',
             badgeText: '✓ Implementado',
-            badgeColor: AppColors.success,
           ),
           _buildComponentTile(
             context: context,
@@ -110,8 +100,7 @@ class PreviewHomePage extends StatelessWidget {
             subtitle: 'Iconos de Material y custom',
             icon: Icons.interests,
             route: '/preview/icons',
-            badgeText: 'Próximamente',
-            badgeColor: AppColors.neutral400,
+            badgeText: '✓ Implementado',
           ),
           _buildComponentTile(
             context: context,
@@ -119,8 +108,7 @@ class PreviewHomePage extends StatelessWidget {
             subtitle: 'Tipografía y estilos de texto',
             icon: Icons.text_fields,
             route: '/preview/text-styles',
-            badgeText: 'Próximamente',
-            badgeColor: AppColors.neutral400,
+            badgeText: '✓ Implementado',
           ),
           _buildComponentTile(
             context: context,
@@ -128,8 +116,39 @@ class PreviewHomePage extends StatelessWidget {
             subtitle: 'Text fields, text areas, search',
             icon: Icons.input,
             route: '/preview/inputs',
-            badgeText: 'Próximamente',
-            badgeColor: AppColors.neutral400,
+            badgeText: '✓ Implementado',
+          ),
+          _buildComponentTile(
+            context: context,
+            title: 'Badges',
+            subtitle: 'Dot, Circle, Rounded, Category',
+            icon: Icons.label,
+            route: '/preview/badges',
+            badgeText: '✓ Implementado',
+          ),
+          _buildComponentTile(
+            context: context,
+            title: 'Avatars',
+            subtitle: 'Avatar con verified y edit badges',
+            icon: Icons.account_circle,
+            route: '/preview/avatars',
+            badgeText: '✓ Implementado',
+          ),
+          _buildComponentTile(
+            context: context,
+            title: 'Dividers',
+            subtitle: 'Separadores horizontales y verticales',
+            icon: Icons.horizontal_rule,
+            route: '/preview/dividers',
+            badgeText: '✓ Implementado',
+          ),
+          _buildComponentTile(
+            context: context,
+            title: 'Loading Indicators',
+            subtitle: 'Progress indicators circulares y lineales',
+            icon: Icons.refresh,
+            route: '/preview/loading',
+            badgeText: '✓ Implementado',
           ),
 
           SizedBox(height: AppSpacing.space6),
@@ -147,16 +166,14 @@ class PreviewHomePage extends StatelessWidget {
             icon: Icons.search,
             route: '/preview/search-bar',
             badgeText: 'Próximamente',
-            badgeColor: AppColors.neutral400,
           ),
           _buildComponentTile(
             context: context,
-            title: 'Category Badges',
-            subtitle: 'Badges de categorías de obras',
-            icon: Icons.label,
-            route: '/preview/badges',
+            title: 'Filter Chip Group',
+            subtitle: 'Grupo de chips de filtro',
+            icon: Icons.filter_alt,
+            route: '/preview/filter-chips',
             badgeText: 'Próximamente',
-            badgeColor: AppColors.neutral400,
           ),
           _buildComponentTile(
             context: context,
@@ -165,7 +182,14 @@ class PreviewHomePage extends StatelessWidget {
             icon: Icons.place,
             route: '/preview/map-pins',
             badgeText: 'Próximamente',
-            badgeColor: AppColors.neutral400,
+          ),
+          _buildComponentTile(
+            context: context,
+            title: 'Info Row',
+            subtitle: 'Fila de información (icono + texto)',
+            icon: Icons.info,
+            route: '/preview/info-row',
+            badgeText: 'Próximamente',
           ),
 
           SizedBox(height: AppSpacing.space6),
@@ -183,7 +207,6 @@ class PreviewHomePage extends StatelessWidget {
             icon: Icons.art_track,
             route: '/preview/obra-card',
             badgeText: 'Próximamente',
-            badgeColor: AppColors.neutral400,
           ),
           _buildComponentTile(
             context: context,
@@ -192,7 +215,6 @@ class PreviewHomePage extends StatelessWidget {
             icon: Icons.web_asset,
             route: '/preview/app-bar',
             badgeText: 'Próximamente',
-            badgeColor: AppColors.neutral400,
           ),
           _buildComponentTile(
             context: context,
@@ -201,7 +223,6 @@ class PreviewHomePage extends StatelessWidget {
             icon: Icons.navigation,
             route: '/preview/bottom-nav',
             badgeText: 'Próximamente',
-            badgeColor: AppColors.neutral400,
           ),
 
           SizedBox(height: AppSpacing.space6),
@@ -255,22 +276,18 @@ class PreviewHomePage extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(icon, size: 20, color: AppColors.primary),
+          Icon(icon, size: 20),
           SizedBox(width: AppSpacing.space2),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 title,
-                style: AppTextStyles.h3.copyWith(
-                  color: AppColors.primary,
-                ),
+                style: AppTextStyles.h3,
               ),
               Text(
                 subtitle,
-                style: AppTextStyles.caption.copyWith(
-                  color: AppColors.onSurfaceVariant,
-                ),
+                style: AppTextStyles.caption,
               ),
             ],
           ),
@@ -286,18 +303,13 @@ class PreviewHomePage extends StatelessWidget {
     required IconData icon,
     required String route,
     required String badgeText,
-    required Color badgeColor,
   }) {
     final isImplemented = badgeText.contains('Implementado');
 
     return Card(
       child: ListTile(
         leading: CircleAvatar(
-          backgroundColor: AppColors.primaryContainer,
-          child: Icon(
-            icon,
-            color: AppColors.onPrimaryContainer,
-          ),
+          child: Icon(icon),
         ),
         title: Text(
           title,
@@ -315,17 +327,12 @@ class PreviewHomePage extends StatelessWidget {
             vertical: AppSpacing.space1,
           ),
           decoration: BoxDecoration(
-            color: badgeColor.withOpacity(0.1),
             borderRadius: BorderRadius.circular(AppBorderRadius.radiusSm),
-            border: Border.all(
-              color: badgeColor.withOpacity(0.3),
-              width: 1,
-            ),
+            border: Border.all(width: 1),
           ),
           child: Text(
             badgeText,
             style: AppTextStyles.caption.copyWith(
-              color: badgeColor,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -351,7 +358,6 @@ class PreviewHomePage extends StatelessWidget {
             child: Text(
               label,
               style: AppTextStyles.caption.copyWith(
-                color: AppColors.onSurfaceVariant,
                 fontWeight: FontWeight.w600,
               ),
             ),

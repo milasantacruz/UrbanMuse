@@ -34,13 +34,54 @@ Este sistema permite visualizar y testear todos los componentes de UI de la apli
   - Estados: Normal, Loading, Disabled
   - Con iconos: Left, Right, Both
 
-### Próximos Componentes
+### Icons
+- **Ruta:** `/preview/icons`
+- **Componente:** `IconsPreviewPage`
+- **Descripción:** Showcase de todos los iconos (Navigation, Action, Category, Map, Social, UI)
 
-- `/preview/icons` - Icons (Material + Custom)
-- `/preview/text-styles` - Typography styles
-- `/preview/inputs` - Input fields y text areas
+### Text Styles
+- **Ruta:** `/preview/text-styles`
+- **Componente:** `TextStylesPreviewPage`
+- **Descripción:** Showcase de tipografía (Display, Headline, Title, Label, Body)
+
+### Input Fields
+- **Ruta:** `/preview/inputs`
+- **Componente:** `InputsPreviewPage`
+- **Descripción:** Showcase de campos de texto (Filled, Outlined, Flat, validación)
+
+### Badges
+- **Ruta:** `/preview/badges`
+- **Componente:** `BadgesPreviewPage`
+- **Descripción:** Showcase de badges (Dot, Circle, Rounded, Category, Notification)
+
+### Avatars
+- **Ruta:** `/preview/avatars`
+- **Componente:** `AvatarsPreviewPage`
+- **Descripción:** Showcase de avatares (Simple, Verified, Editable, con imágenes 3D)
+- **Assets:** 6 imágenes de avatares 3D en `lib/assets/`
+
+### Dividers
+- **Ruta:** `/preview/dividers`
+- **Componente:** `DividersPreviewPage`
+- **Descripción:** Showcase de separadores (Horizontal, Vertical, Full-width, Inset, Middle-inset, With Subhead)
+
+### Loading Indicators
+- **Ruta:** `/preview/loading`
+- **Componente:** `LoadingPreviewPage`
+- **Descripción:** Showcase de loaders (Circular, Linear, Button, Overlay, con progreso)
+
+---
+
+## 🎉 ¡ATOMS 100% COMPLETOS!
+
+Todos los componentes atómicos han sido implementados y están disponibles para uso.
+
+---
+
+### Próximos Componentes (Molecules)
+- `/preview/loading` - Loading indicators
 - `/preview/search-bar` - Search bar component
-- `/preview/badges` - Category badges
+- `/preview/filter-chips` - Filter chip group
 - `/preview/map-pins` - Map pins por categoría
 - `/preview/obra-card` - Obra cards (grid y list)
 - `/preview/app-bar` - App bar variations
@@ -49,20 +90,64 @@ Este sistema permite visualizar y testear todos los componentes de UI de la apli
 ## 📁 Estructura de Archivos
 
 ```
-lib/presentation/
-├── pages/
-│   └── preview/
-│       ├── README.md                 # Este archivo
-│       ├── preview_home_page.dart    # Página índice de preview
-│       └── buttons_preview_page.dart # Preview de botones
-└── widgets/
-    └── buttons/
-        ├── buttons.dart              # Export file
-        ├── app_button.dart           # Componente de botón
-        └── app_fab.dart              # Componente de FAB
+lib/
+├── assets/                           # Assets del proyecto
+│   ├── 3d_avatar_1.png              # Avatar 3D 1
+│   ├── 3d_avatar_2.png              # Avatar 3D 2
+│   ├── 3d_avatar_3.png              # Avatar 3D 3
+│   ├── 3d_avatar_4.png              # Avatar 3D 4
+│   ├── 3d_avatar_5.png              # Avatar 3D 5
+│   └── 3d_avatar_6.png              # Avatar 3D 6
+│
+├── core/
+│   └── theme/                        # Design tokens
+│       ├── app_colors.dart
+│       ├── app_text_styles.dart
+│       ├── app_spacing.dart
+│       ├── app_border_radius.dart
+│       └── app_shadows.dart
+│
+└── presentation/
+    ├── pages/
+    │   └── preview/
+    │       ├── README.md                      # Este archivo
+    │       ├── preview_home_page.dart         # Índice de preview
+    │       ├── buttons_preview_page.dart      # Preview de botones
+    │       ├── icons_preview_page.dart        # Preview de iconos
+    │       ├── text_styles_preview_page.dart  # Preview de tipografía
+    │       ├── inputs_preview_page.dart       # Preview de inputs
+    │       ├── badges_preview_page.dart       # Preview de badges
+    │       └── avatars_preview_page.dart      # Preview de avatares
+    │
+    └── widgets/
+        ├── buttons/
+        │   ├── buttons.dart
+        │   ├── app_button.dart
+        │   └── app_fab.dart
+        ├── icons/
+        │   ├── icons.dart
+        │   ├── app_icon.dart
+        │   └── category_icon.dart
+        ├── inputs/
+        │   ├── inputs.dart
+        │   └── app_text_field.dart
+        ├── badges/
+        │   ├── badges.dart
+        │   └── app_badge.dart
+        └── avatars/
+            ├── avatars.dart
+            └── app_avatar.dart
 ```
 
 ## 🎨 Componentes Implementados
+
+### ✅ Design Tokens
+Todos los design tokens están definidos en `lib/core/theme/`:
+- **Colores:** Sincronizados con Figma (#6BA034 primary, etc.)
+- **Tipografía:** Expletus Sans y Exo 2 via Google Fonts
+- **Espaciado:** Sistema base 8px
+- **Border Radius:** sm(4px), md(8px), lg(12px), xl(16px), full(999px)
+- **Sombras:** Elevation 1-4
 
 ### ✅ Botones (Buttons)
 
@@ -134,11 +219,225 @@ AppFAB.extended(
 )
 ```
 
+### ✅ Avatares (Avatars)
+
+#### `AppAvatar`
+Avatar personalizado con badges de verificación y edición.
+
+**Constructores:**
+```dart
+// Avatar simple con imagen local
+AppAvatar.simple(
+  imageUrl: 'lib/assets/3d_avatar_1.png',
+  size: AvatarSize.medium,
+)
+
+// Avatar simple con iniciales (fallback)
+AppAvatar.simple(
+  initials: 'DM',
+  size: AvatarSize.medium,
+)
+
+// Avatar verificado (badge azul)
+AppAvatar.verified(
+  imageUrl: 'lib/assets/3d_avatar_1.png',
+)
+
+// Avatar editable (badge de editar)
+AppAvatar.editable(
+  imageUrl: 'lib/assets/3d_avatar_2.png',
+  onEdit: () => _pickImage(),
+)
+```
+
+**Tamaños:**
+- `AvatarSize.small` - 32px
+- `AvatarSize.medium` - 48px (default)
+- `AvatarSize.large` - 64px
+- `AvatarSize.xLarge` - 88px
+
+#### `AppCircleAvatar`
+Avatar simplificado para listas y comentarios.
+
+```dart
+// Con imagen remota
+AppCircleAvatar(
+  imageUrl: 'https://example.com/avatar.jpg',
+  size: 40,
+)
+
+// Con imagen local
+AppCircleAvatar(
+  imageUrl: 'lib/assets/3d_avatar_1.png',
+  size: 40,
+)
+
+// Con iniciales
+AppCircleAvatar(
+  initials: 'DM',
+  size: 40,
+  backgroundColor: AppColors.primary,
+)
+```
+
+**Assets:**
+- 6 imágenes de avatares 3D en `lib/assets/`:
+  - `3d_avatar_1.png` - `3d_avatar_6.png`
+- Soporte para imágenes locales (`lib/assets/`) y remotas (URLs)
+- Fallback automático a iniciales si no hay imagen
+
+### ✅ Dividers (Separadores)
+
+#### `AppDivider`
+Separador horizontal o vertical siguiendo Material 3 y sincronizado con Figma.
+
+**Constructores:**
+```dart
+// Horizontal full-width (sin padding)
+AppDivider.fullWidth()
+
+// Horizontal con inset izquierdo (16px)
+AppDivider.inset()
+
+// Horizontal con inset en ambos lados (16px)
+AppDivider.middleInset()
+
+// Divider con subencabezado
+AppDivider.withSubhead(
+  subheadText: 'Obras Recientes',
+)
+
+// Vertical full-width
+AppDivider.verticalFullWidth(
+  height: 120,
+)
+
+// Vertical con inset superior
+AppDivider.verticalInset()
+
+// Vertical con inset en ambos lados
+AppDivider.verticalMiddleInset()
+
+// Custom color y grosor
+AppDivider.fullWidth(
+  color: AppColors.primary,
+  thickness: 2,
+)
+```
+
+**Especificaciones:**
+- Grosor por defecto: 1px
+- Color por defecto: `onSurfaceVariant` (#323232)
+- Padding Inset: 16px
+- Gap Subhead: 4px
+- Orientaciones: Horizontal y Vertical
+
+**Casos de uso:**
+- Separar elementos en listas
+- Dividir secciones de contenido
+- Crear secciones con subencabezados
+- Navegación horizontal con separadores verticales
+
+### ✅ Loading Indicators (Loaders)
+
+#### `AppLoader`
+Loader circular siguiendo Material 3 y sincronizado con Figma.
+
+**Constructores:**
+```dart
+// Tamaños predefinidos
+AppLoader.small()    // 24px
+AppLoader.medium()   // 40px (default Figma)
+AppLoader.large()    // 56px
+AppLoader.xLarge()   // 72px
+
+// Con color primario
+AppLoader.primary(
+  loaderSize: LoaderSize.large,
+)
+
+// Con progreso específico (0.0 - 1.0)
+AppLoader.large(
+  value: 0.5,  // 50% de progreso
+)
+
+// Custom
+AppLoader(
+  loaderSize: LoaderSize.large,
+  color: AppColors.tertiary,
+  strokeWidth: 6.0,
+  value: 0.7,
+)
+```
+
+**Tamaños:**
+- `LoaderSize.small` - 24px, stroke 2px
+- `LoaderSize.medium` - 40px, stroke 4px (default Figma)
+- `LoaderSize.large` - 56px, stroke 6px
+- `LoaderSize.xLarge` - 72px, stroke 8px
+
+#### `AppLinearLoader`
+Barra de progreso lineal horizontal.
+
+```dart
+// Indeterminado (animado)
+AppLinearLoader.indeterminate()
+
+// Con progreso
+AppLinearLoader.determinate(
+  progress: 0.7,  // 70%
+)
+
+// Custom
+AppLinearLoader(
+  value: 0.5,
+  color: AppColors.tertiary,
+  backgroundColor: AppColors.surfaceVariant,
+  height: 8.0,
+)
+```
+
+#### `AppLoaderButton`
+Loader pequeño para usar dentro de botones.
+
+```dart
+AppButton.primary(
+  label: 'Loading...',
+  icon: AppLoaderButton(),
+  onPressed: null,
+)
+```
+
+#### `AppLoaderOverlay`
+Loader con overlay de pantalla completa.
+
+```dart
+AppLoaderOverlay(
+  loaderSize: LoaderSize.large,
+  message: 'Cargando datos...\nPor favor espera',
+  overlayColor: Colors.black,
+  overlayOpacity: 0.5,
+)
+```
+
+**Especificaciones:**
+- Tamaño base: 40px (Figma)
+- Stroke widths: 2px, 4px, 6px, 8px
+- Color por defecto: `primary` (#6BA034)
+- Modos: Indeterminate (animado) y Determinate (con progreso)
+
+**Casos de uso:**
+- Carga de datos (indeterminate)
+- Progreso de descarga/subida (determinate)
+- Estados de loading en botones
+- Pantallas de carga con overlay
+- Progress bars en cards
+
 ## 🎨 Design Tokens
 
 Los componentes utilizan los design tokens definidos en:
 - `lib/core/theme/app_colors.dart` - Colores sincronizados con Figma
-- `lib/core/theme/app_text_styles.dart` - Tipografía
+- `lib/core/theme/app_text_styles.dart` - Tipografía con Google Fonts
 - `lib/core/theme/app_spacing.dart` - Espaciado
 - `lib/core/theme/app_border_radius.dart` - Border radius
 - `lib/core/theme/app_shadows.dart` - Sombras
@@ -146,6 +445,11 @@ Los componentes utilizan los design tokens definidos en:
 ### Colores Principales
 - **Primary:** #6BA034 (verde) ✅ Sincronizado con Figma
 - **Secondary:** #66715B (verde oscuro) ✅ Sincronizado con Figma
+- **Base:** Syncfusion Flutter UI Kit - Material 3 Theme
+
+### Tipografía
+- **Display/Headline/Title:** Expletus Sans ✅ Google Fonts
+- **Label/Body:** Exo 2 ✅ Google Fonts
 - **Base:** Syncfusion Flutter UI Kit - Material 3 Theme
 
 ## 🔧 Uso del Sistema de Preview

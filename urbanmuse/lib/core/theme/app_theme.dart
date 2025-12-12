@@ -218,61 +218,58 @@ class AppTheme {
   
   static TextTheme _buildTextTheme(ColorScheme colorScheme) {
     return TextTheme(
-      // Display
-      displayLarge: AppTextStyles.display.copyWith(
+      // Display (Expletus Sans)
+      displayLarge: AppTextStyles.displayLarge.copyWith(
         color: colorScheme.onSurface,
       ),
-      displayMedium: AppTextStyles.h1.copyWith(
+      displayMedium: AppTextStyles.displayMedium.copyWith(
         color: colorScheme.onSurface,
       ),
-      displaySmall: AppTextStyles.h2.copyWith(
-        color: colorScheme.onSurface,
-      ),
-      
-      // Headline
-      headlineLarge: AppTextStyles.h1.copyWith(
-        color: colorScheme.onSurface,
-      ),
-      headlineMedium: AppTextStyles.h2.copyWith(
-        color: colorScheme.onSurface,
-      ),
-      headlineSmall: AppTextStyles.h3.copyWith(
+      displaySmall: AppTextStyles.displaySmall.copyWith(
         color: colorScheme.onSurface,
       ),
       
-      // Title
-      titleLarge: AppTextStyles.h3.copyWith(
+      // Headline (Expletus Sans)
+      headlineLarge: AppTextStyles.headlineLarge.copyWith(
         color: colorScheme.onSurface,
       ),
-      titleMedium: AppTextStyles.bodyLarge.copyWith(
+      headlineMedium: AppTextStyles.headlineMedium.copyWith(
         color: colorScheme.onSurface,
-        fontWeight: FontWeight.w600,
       ),
-      titleSmall: AppTextStyles.body.copyWith(
+      headlineSmall: AppTextStyles.headlineSmall.copyWith(
         color: colorScheme.onSurface,
-        fontWeight: FontWeight.w600,
       ),
       
-      // Body
+      // Title (Expletus Sans)
+      titleLarge: AppTextStyles.titleLarge.copyWith(
+        color: colorScheme.onSurface,
+      ),
+      titleMedium: AppTextStyles.titleMedium.copyWith(
+        color: colorScheme.onSurface,
+      ),
+      titleSmall: AppTextStyles.titleSmall.copyWith(
+        color: colorScheme.onSurface,
+      ),
+      
+      // Body (Exo 2)
       bodyLarge: AppTextStyles.bodyLarge.copyWith(
         color: colorScheme.onSurface,
       ),
-      bodyMedium: AppTextStyles.body.copyWith(
+      bodyMedium: AppTextStyles.bodyMedium.copyWith(
         color: colorScheme.onSurface,
       ),
       bodySmall: AppTextStyles.bodySmall.copyWith(
         color: colorScheme.onSurfaceVariant,
       ),
       
-      // Label
-      labelLarge: AppTextStyles.label.copyWith(
+      // Label (Exo 2)
+      labelLarge: AppTextStyles.labelLarge.copyWith(
         color: colorScheme.onSurface,
       ),
-      labelMedium: AppTextStyles.caption.copyWith(
+      labelMedium: AppTextStyles.labelMedium.copyWith(
         color: colorScheme.onSurfaceVariant,
-        fontWeight: FontWeight.w500,
       ),
-      labelSmall: AppTextStyles.caption.copyWith(
+      labelSmall: AppTextStyles.labelSmall.copyWith(
         color: colorScheme.onSurfaceVariant,
       ),
     );

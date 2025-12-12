@@ -12,6 +12,13 @@ import '../pages/salida/salida_detail_page.dart';
 import '../pages/salida/create_salida_page.dart';
 import '../pages/preview/preview_home_page.dart';
 import '../pages/preview/buttons_preview_page.dart';
+import '../pages/preview/icons_preview_page.dart';
+import '../pages/preview/text_styles_preview_page.dart';
+import '../pages/preview/inputs_preview_page.dart';
+import '../pages/preview/badges_preview_page.dart';
+import '../pages/preview/avatars_preview_page.dart';
+import '../pages/preview/dividers_preview_page.dart';
+import '../pages/preview/loading_preview_page.dart';
 
 /// Configuración de rutas de la aplicación
 final appRouter = GoRouter(
@@ -29,6 +36,41 @@ final appRouter = GoRouter(
       path: '/preview/buttons',
       name: 'preview-buttons',
       builder: (context, state) => const ButtonsPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/icons',
+      name: 'preview-icons',
+      builder: (context, state) => const IconsPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/text-styles',
+      name: 'preview-text-styles',
+      builder: (context, state) => const TextStylesPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/inputs',
+      name: 'preview-inputs',
+      builder: (context, state) => const InputsPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/badges',
+      name: 'preview-badges',
+      builder: (context, state) => const BadgesPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/avatars',
+      name: 'preview-avatars',
+      builder: (context, state) => const AvatarsPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/dividers',
+      name: 'preview-dividers',
+      builder: (context, state) => const DividersPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/loading',
+      name: 'preview-loading',
+      builder: (context, state) => const LoadingPreviewPage(),
     ),
 
     // ============================================

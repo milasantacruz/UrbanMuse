@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /// Tipos de botón según Material 3 y Figma
 enum AppButtonType {
@@ -90,7 +91,7 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final isDisabled = onPressed == null && !isLoading;
+    final isDisabled = onPressed == null || isLoading;
 
     // Mostrar loading si está cargando
     final effectiveLeftIcon = isLoading
@@ -118,12 +119,11 @@ class AppButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Text(
             label,
-            style: const TextStyle(
-              fontFamily: 'Roboto',
+            style: GoogleFonts.exo2(
               fontSize: 14,
               fontWeight: FontWeight.w500, // Medium = 500
               height: 20 / 14, // line-height 20px
-              letterSpacing: 0.014,
+              letterSpacing: 0.1,
             ),
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,

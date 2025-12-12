@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /// Floating Action Button personalizado siguiendo Material 3 y Figma
 class AppFAB extends StatelessWidget {
@@ -59,12 +60,11 @@ class AppFAB extends StatelessWidget {
         icon: icon,
         label: Text(
           label!,
-          style: const TextStyle(
-            fontFamily: 'Roboto',
+          style: GoogleFonts.exo2(
             fontSize: 14,
             fontWeight: FontWeight.w600,
             height: 20 / 14,
-            letterSpacing: 0.014,
+            letterSpacing: 0.1,
           ),
         ),
         backgroundColor: backgroundColor,

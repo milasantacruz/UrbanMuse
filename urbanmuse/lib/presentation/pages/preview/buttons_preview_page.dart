@@ -42,7 +42,6 @@ class _ButtonsPreviewPageState extends State<ButtonsPreviewPage> {
             Text(
               'Componentes de botones basados en Material 3 y sincronizados con Figma UI Kit',
               style: AppTextStyles.bodySmall.copyWith(
-                color: AppColors.onSurfaceVariant,
               ),
             ),
             SizedBox(height: AppSpacing.space6),
@@ -229,7 +228,6 @@ class _ButtonsPreviewPageState extends State<ButtonsPreviewPage> {
                 Text(
                   'Regular FAB / Large FAB / Extended FAB',
                   style: AppTextStyles.caption.copyWith(
-                    color: AppColors.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -350,7 +348,6 @@ class _ButtonsPreviewPageState extends State<ButtonsPreviewPage> {
         Text(
           description,
           style: AppTextStyles.bodySmall.copyWith(
-            color: AppColors.onSurfaceVariant,
           ),
         ),
         SizedBox(height: AppSpacing.space4),
@@ -373,7 +370,6 @@ class _ButtonsPreviewPageState extends State<ButtonsPreviewPage> {
               title,
               style: AppTextStyles.bodySmall.copyWith(
                 fontWeight: FontWeight.w600,
-                color: AppColors.onSurfaceVariant,
               ),
             ),
             SizedBox(height: AppSpacing.space3),
@@ -386,7 +382,6 @@ class _ButtonsPreviewPageState extends State<ButtonsPreviewPage> {
 
   Widget _buildColorInfo() {
     return Card(
-      color: AppColors.primaryContainer,
       child: Padding(
         padding: EdgeInsets.all(AppSpacing.space4),
         child: Column(
@@ -396,7 +391,6 @@ class _ButtonsPreviewPageState extends State<ButtonsPreviewPage> {
               children: [
                 Icon(
                   Icons.palette,
-                  color: AppColors.onPrimaryContainer,
                   size: 20,
                 ),
                 SizedBox(width: AppSpacing.space2),
@@ -404,7 +398,6 @@ class _ButtonsPreviewPageState extends State<ButtonsPreviewPage> {
                   'Colores Sincronizados con Figma',
                   style: AppTextStyles.label.copyWith(
                     fontWeight: FontWeight.w600,
-                    color: AppColors.onPrimaryContainer,
                   ),
                 ),
               ],
@@ -413,7 +406,6 @@ class _ButtonsPreviewPageState extends State<ButtonsPreviewPage> {
             Text(
               'Primary: #6BA034 (verde)\nSecondary: #66715B (verde oscuro)\nBasado en: Syncfusion Flutter UI Kit - Material 3 Theme',
               style: AppTextStyles.caption.copyWith(
-                color: AppColors.onPrimaryContainer,
               ),
             ),
           ],

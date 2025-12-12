@@ -12,12 +12,14 @@
 │   └── directrices-proyecto.md # Directrices principales del proyecto
 │
 ├── 🎨 design/                   # UX/UI y Diseño
-│   ├── design-system.md        # Design tokens, colores, tipografía
-│   ├── personas.md             # User personas
 │   ├── research.md             # Research completo (empatizar/definir)
+│   ├── personas.md             # User personas
 │   ├── ux-flows.md             # User flows y task flows
+│   ├── design-system.md        # Design tokens, colores, tipografía
+│   ├── atomic-design-checklist.md # 🔬 Atomic Design - Checklist completo
 │   ├── figma-prototype-plan.md # Plan de prototipo Figma
 │   ├── figma-variables-structure.md # Estructura variables Figma
+│   ├── color-sync-report.md    # ✅ Reporte sincronización colores Figma ↔ Flutter
 │   └── figma-mcp-setup.md      # Setup MCP Figma
 │
 ├── 🏗️ arquitectura/            # Arquitectura técnica
@@ -37,11 +39,13 @@
 
 ### 👤 Designer
 **Documentos principales:**
-- `diseño/research.md` - Comenzar aquí
-- `diseño/personas.md` - User personas
-- `diseño/ux-flows.md` - Flujos de usuario
-- `diseño/design-system.md` - Design tokens
-- `diseño/figma-prototype-plan.md` - Plan de prototipo
+- `design/research.md` - Comenzar aquí
+- `design/personas.md` - User personas
+- `design/ux-flows.md` - Flujos de usuario
+- `design/design-system.md` - Design tokens
+- `design/atomic-design-checklist.md` - 🔬 Checklist Atomic Design (seguir paso a paso)
+- `design/figma-prototype-plan.md` - Plan de prototipo
+- `design/color-sync-report.md` - Colores sincronizados ✅
 
 ### 🏗️ Architect
 **Documentos principales:**
@@ -92,8 +96,10 @@
 - **personas.md**: 4 user personas (María, Carlos, Ana, Diego)
 - **ux-flows.md**: 5 user flows principales, task flows, user journey
 - **design-system.md**: Tokens completos (colores, tipografía, espaciado, componentes)
+- **atomic-design-checklist.md**: 🔬 Checklist completo Atomic Design (Atoms → Pages) + Plan de implementación
 - **figma-prototype-plan.md**: Plan para prototipo en Figma con UI Kit
 - **figma-variables-structure.md**: Estructura de variables de Figma
+- **color-sync-report.md**: ✅ Reporte de sincronización colores Figma ↔ Flutter
 - **figma-mcp-setup.md**: Configuración del servidor MCP
 
 ### 🏗️ Arquitectura

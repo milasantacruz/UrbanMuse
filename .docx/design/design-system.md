@@ -14,30 +14,68 @@
 
 #### Paleta Principal
 
+> **✅ SINCRONIZADO con Syncfusion Flutter UI Kit - Material 3 Theme (Figma)**
+> Link: https://www.figma.com/design/cxkiJjAyXUVKmjwvj3GY0g/Syncfusion-Flutter-UI-Kit---Material-3-Theme--Community-
+
 ```css
-/* Colores Primarios - Inspirados en arte urbano */
---primary-500: #FF6B35;        /* Naranja vibrante - CTA principal */
---primary-600: #E55A2B;        /* Hover/Active */
---primary-400: #FF8C5A;        /* Light variant */
+/* ============================================ */
+/* Colores Primarios (desde Figma: primary) */
+/* ============================================ */
+--primary: #6BA034;                  /* Verde principal - CTA principal */
+--primary-container: #ECFFDD;        /* Primary Container */
+--on-primary: #FFFFFF;               /* Texto sobre primary */
+--on-primary-container: #79F500;     /* Texto sobre primary container */
+--primary-fixed-dim: #E8FFBC;        /* Primary Fixed Dim (dark mode) */
 
-/* Colores Secundarios */
---secondary-500: #2D3142;      /* Gris oscuro - Textos, fondos */
---secondary-600: #1A1D29;      /* Más oscuro */
---secondary-400: #4A5068;      /* Más claro */
+/* Variantes para compatibilidad */
+--primary-600: #5A8A2A;              /* Más oscuro */
+--primary-400: #85B84D;              /* Más claro */
 
-/* Colores de Acento */
---accent-blue: #4A90E2;        /* Links, información */
---accent-purple: #9B59B6;      /* Categorías especiales */
---accent-green: #27AE60;       /* Éxito, confirmación */
+/* ============================================ */
+/* Colores Secundarios (desde Figma: secondary) */
+/* ============================================ */
+--secondary: #66715B;                /* Verde oscuro secundario */
+--secondary-container: #E8F8DE;      /* Secondary Container */
+--on-secondary: #FFFFFF;             /* Texto sobre secondary */
+--on-secondary-container: #1F2B19;   /* Texto sobre secondary container */
 
-/* Colores de Categorías */
---category-graffiti: #E74C3C;  /* Rojo - Grafitis */
---category-mural: #3498DB;     /* Azul - Murales */
---category-escultura: #F39C12; /* Naranja - Esculturas */
---category-performance: #9B59B6; /* Morado - Performances */
+/* Variantes para compatibilidad */
+--secondary-600: #4F5947;            /* Más oscuro */
+--secondary-400: #7F8A74;            /* Más claro */
 
+/* ============================================ */
+/* Colores Terciarios (desde Figma: tertiary) */
+/* ============================================ */
+--tertiary: #5D7D52;                 /* Verde terciario */
+
+/* ============================================ */
+/* Colores Adicionales del Sistema (desde Figma) */
+/* ============================================ */
+--gray-secondary: #253341;           /* Gray (Secondary Color) */
+--black-color: #1D1617;              /* Black-color */
+--gray-1: #7B6F72;                   /* Gray 1 */
+--dark: #15202B;                     /* Dark */
+--white: #F5F8FA;                    /* White */
+
+/* ============================================ */
+/* Colores de Acento (Custom) */
+/* ============================================ */
+--accent-blue: #4A90E2;              /* Links, información */
+--accent-purple: #9B59B6;            /* Categorías especiales */
+--accent-green: #27AE60;             /* Éxito, confirmación */
+
+/* ============================================ */
+/* Colores de Categorías (Custom) */
+/* ============================================ */
+--category-graffiti: #E74C3C;        /* Rojo - Grafitis */
+--category-mural: #3498DB;           /* Azul - Murales */
+--category-escultura: #F39C12;       /* Naranja - Esculturas */
+--category-performance: #9B59B6;     /* Morado - Performances */
+
+/* ============================================ */
 /* Colores Neutros */
---neutral-50: #FAFAFA;         /* Fondo claro */
+/* ============================================ */
+--neutral-50: #FAFAFA;               /* Fondo claro */
 --neutral-100: #F5F5F5;
 --neutral-200: #EEEEEE;
 --neutral-300: #E0E0E0;
@@ -46,27 +84,52 @@
 --neutral-600: #757575;
 --neutral-700: #616161;
 --neutral-800: #424242;
---neutral-900: #212121;        /* Texto principal */
+--neutral-900: #212121;
 
+/* ============================================ */
 /* Estados */
+/* ============================================ */
 --success: #27AE60;
 --warning: #F39C12;
 --error: #E74C3C;
 --info: #3498DB;
 
+/* ============================================ */
 /* Fondos */
---bg-primary: #FFFFFF;
---bg-secondary: #FAFAFA;
---bg-dark: #2D3142;
---bg-overlay: rgba(0, 0, 0, 0.6); /* Overlay para modales */
+/* ============================================ */
+--bg-primary: #F5F8FA;               /* Fondo principal (White de Figma) */
+--bg-secondary: #E8F8DE;             /* Fondo secundario (Secondary Container) */
+--bg-dark: #15202B;                  /* Fondo oscuro (Dark de Figma) */
+--bg-overlay: rgba(0, 0, 0, 0.6);    /* Overlay para modales */
+
+/* ============================================ */
+/* Surface Colors (desde Figma variables) */
+/* ============================================ */
+--surface: #FEF7FF;
+--surface-1: #F7F2FB;
+--surface-2: #F3EDF7;
+--surface-5: #E4ECE0;
+--on-surface: #1D1617;               /* Black-color de Figma */
+--on-surface-variant: #4A4F45;
+
+/* ============================================ */
+/* Outline */
+/* ============================================ */
+--outline-variant: #CAC4D0;
+--border-color: #CAC4D0;
+--border-color-dark: #7B6F72;        /* Gray 1 de Figma */
 ```
 
 #### Uso de Colores
 
-- **Primario:** Botones principales, CTAs, elementos interactivos destacados
-- **Secundario:** Textos, fondos de secciones, barras de navegación
-- **Categorías:** Pins en mapa, badges, filtros
-- **Neutros:** Textos secundarios, bordes, separadores
+- **Primario (#6BA034 - Verde):** Botones principales, CTAs, elementos interactivos destacados, FloatingActionButtons
+- **Secundario (#66715B - Verde oscuro):** Fondos de secciones, barras de navegación, elementos de soporte
+- **Terciario (#5D7D52):** Elementos de acento adicionales, variaciones
+- **Categorías (Custom):** Pins en mapa, badges de categoría, filtros de obras
+- **Neutros:** Textos secundarios, bordes, separadores, fondos neutros
+- **Surface & Background:** Superficies de contenido, fondos de pantalla
+
+**Nota:** Los colores están sincronizados con el Syncfusion Flutter UI Kit - Material 3 Theme de Figma, garantizando consistencia total entre diseño y desarrollo.
 
 ---
 

@@ -4,6 +4,9 @@
 
 **Referencia:** [Syncfusion Flutter UI Kit - Material 3 Theme](https://www.figma.com/design/cxkiJjAyXUVKmjwvj3GY0g/Syncfusion-Flutter-UI-Kit---Material-3-Theme--Community-?node-id=3917-829&m=dev&t=y1ykPsJ878ZyRkH5-1)
 
+> **📍 NOTA:** Este documento explica la **estructura conceptual** de las variables de Figma en Material Design 3.  
+> Para los **valores específicos sincronizados** del proyecto UrbanMuse, consulta [`color-sync-report.md`](./color-sync-report.md)
+
 ---
 
 ## 🏗️ Estructura de Variables en Material Design 3

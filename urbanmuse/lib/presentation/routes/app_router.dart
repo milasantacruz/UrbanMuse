@@ -10,11 +10,30 @@ import '../pages/top10/top10_page.dart';
 import '../pages/salida/salida_list_page.dart';
 import '../pages/salida/salida_detail_page.dart';
 import '../pages/salida/create_salida_page.dart';
+import '../pages/preview/preview_home_page.dart';
+import '../pages/preview/buttons_preview_page.dart';
 
 /// Configuración de rutas de la aplicación
 final appRouter = GoRouter(
   initialLocation: '/',
   routes: [
+    // ============================================
+    // Preview Routes (para desarrollo/testing)
+    // ============================================
+    GoRoute(
+      path: '/preview',
+      name: 'preview-home',
+      builder: (context, state) => const PreviewHomePage(),
+    ),
+    GoRoute(
+      path: '/preview/buttons',
+      name: 'preview-buttons',
+      builder: (context, state) => const ButtonsPreviewPage(),
+    ),
+
+    // ============================================
+    // Main App Routes
+    // ============================================
     GoRoute(
       path: '/',
       name: 'mapa',

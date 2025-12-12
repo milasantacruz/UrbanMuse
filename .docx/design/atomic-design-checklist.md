@@ -2,7 +2,51 @@
 
 **Proyecto:** Graffiti Trails (UrbanMuse)  
 **Base:** Syncfusion Flutter UI Kit - Material 3 Theme  
-**Colores:** ✅ Sincronizados (ver `color-sync-report.md`)
+**Colores:** ✅ Sincronizados (ver `color-sync-report.md`)  
+**Última actualización:** 12 de Diciembre, 2025
+
+---
+
+## 📊 Progreso General
+
+### Flutter Implementation Status
+
+| Nivel | Progreso | Completados | Total | Estado |
+|-------|----------|-------------|-------|--------|
+| **Design Tokens** | 100% | 5/5 | 5 | ✅ Completo |
+| **Atoms** | 100% | 8/8 | 8 | ✅ Completo |
+| **Molecules** | 56% | 5/9 | 9 | 🔄 En progreso |
+| **Organisms** | 100% | 10/10 | 10 | ✅ Completo |
+| **Templates** | 0% | 0/6 | 6 | ⏳ Pendiente |
+| **Pages** | 0% | 0/9 | 9 | ⏳ Pendiente |
+
+### 🎯 Completado Recientemente
+
+- ✅ **Design Tokens Flutter** - Colores, Typography, Spacing, Border Radius, Shadows
+- ✅ **Button Components (Atom)** - Primary, Secondary, Outlined, Text, FAB con todos los estados
+- ✅ **Icon Components (Atom)** - Navigation, Action, Category (con colores), Map, Social, UI icons
+- ✅ **Text Styles (Atom)** - Display, Headline, Body, Label, Caption, Button con preview completo
+- ✅ **Input Fields (Atom)** - Text Field con modos Filled, Outlined, Flat, validación y estados
+- ✅ **Filter Modal (Organism)** - Modal de filtros con categorías, artistas, search y acciones ✨
+- ✅ **Obra Preview Bottom Sheet (Organism)** - Bottom sheet para preview de obra desde mapa/feed ✨
+- ✅ **Top 10 Grid Item (Organism)** - Items del grid Top 10 con ranking, overlay y remove button ✨
+- ✅ **Ruta Card (Organism)** - Tarjetas de ruta con mapa, stats (distance, duration, obras), transport icon y acciones ✨
+- ✅ **App Bars & Navigation (Organism)** - Top bars (home, detail, create, map) + Bottom nav + Map bar ✨
+- ✅ **Artist Card (Organism)** - Tarjetas de artista con avatar, bio, stats y botón de acción ✨
+- ✅ **Obra Card (Organism)** - Tarjetas de obra (grid, list, compact) con badges y favoritos ✨
+- ✅ **Route Step Indicator (Organism)** - Indicador de pasos para creación de rutas (6 pasos) con labels ✨
+- ✅ **Filter Chips (Molecule)** - Chips de filtro multi-select, grupos, categorías con colores ✨
+- ✅ **Search Bar (Molecule)** - Barra de búsqueda basada en AppTextField, modos filled/outlined/flat
+- ✅ **Map Pins (Molecule)** - Pins de mapa por categoría, numerados, con avatar, clusters ✨
+- ✅ **ATOMS 100% COMPLETOS** - ¡Todos los componentes atómicos implementados! 🎉
+- ✅ **Tooltip (Molecule)** - Tooltips Normal y With Header, basados en Figma ✨
+- ✅ **Dialog Box (Molecule)** - Diálogos con header/footer, confirm/alert helpers ✨
+
+### 🎯 Siguiente en la Lista
+
+1. **Artista Card (Organism)** - Tarjeta de artista con avatar y stats
+2. **Ruta Card (Organism)** - Tarjeta de ruta con mapa preview
+3. **App Bar (Organism)** - Barra de navegación superior con variantes
 
 ---
 
@@ -34,9 +78,10 @@
 │   ├── 03. Category Badge
 │   ├── 04. Map Pin
 │   ├── 05. Rating Display
-│   ├── 06. Info Row (Icon + Text)
-│   ├── 07. Image with Overlay
-│   └── 08. Empty State Message
+│   ├── 06. Tooltip
+│   ├── 07. Dialog Box
+│   ├── 08. Image with Overlay
+│   └── 09. Empty State Message
 │
 ├── 🦠 Organisms (Organismos)
 │   ├── 01. App Bar / Navigation Bar
@@ -74,161 +119,246 @@
 
 ## ⚛️ NIVEL 1: Atoms (Átomos)
 
-### 01. Buttons
+### 01. Buttons ✅
 
-**Fuente:** Syncfusion UI Kit (usar directamente)
+**Fuente:** Syncfusion UI Kit (usar directamente)  
+**Estado:** ✅ Implementado en Flutter
 
-- [ ] **Primary Button (Filled)**
-  - [ ] Default state
-  - [ ] Hover state
-  - [ ] Active/Pressed state
-  - [ ] Disabled state
-  - Color: Primary (#6BA034)
+- [x] **Primary Button (Filled)**
+  - [x] Default state
+  - [x] Hover state
+  - [x] Active/Pressed state
+  - [x] Disabled state
+  - [x] Loading state
+  - Color: Primary (#6BA034) ✅
   
-- [ ] **Secondary Button (Outlined)**
-  - [ ] Default state
-  - [ ] Hover state
-  - [ ] Active/Pressed state
-  - [ ] Disabled state
-  - Border: Primary (#6BA034)
+- [x] **Secondary Button (Outlined)**
+  - [x] Default state
+  - [x] Hover state
+  - [x] Active/Pressed state
+  - [x] Disabled state
+  - Border: Primary (#6BA034) ✅
   
-- [ ] **Text Button**
-  - [ ] Default state
-  - [ ] Hover state
-  - [ ] Active/Pressed state
-  - [ ] Disabled state
+- [x] **Text Button**
+  - [x] Default state
+  - [x] Hover state
+  - [x] Active/Pressed state
+  - [x] Disabled state
   
-- [ ] **FAB (Floating Action Button)**
-  - [ ] Default (Primary color)
-  - [ ] Extended FAB (con texto)
-  - Shadow: elevation 6
+- [x] **FAB (Floating Action Button)**
+  - [x] Default (Primary color)
+  - [x] Large FAB
+  - [x] Extended FAB (con texto)
+  - Shadow: elevation 6 ✅
 
-**Variants:** 4 estados × 4 tipos = 16 variantes
+**Variants:** 4 estados × 4 tipos = 16 variantes ✅  
+**Implementación Flutter:** `lib/presentation/widgets/buttons/`  
+**Preview:** `/preview/buttons` ✅
 
 ---
 
-### 02. Icons
+### 02. Icons ✅
 
-**Fuente:** Material Icons o Iconos del UI Kit
+**Fuente:** Material Icons o Iconos del UI Kit  
+**Estado:** ✅ Implementado en Flutter
 
-- [ ] **Navigation Icons**
-  - [ ] home
-  - [ ] explore/feed
-  - [ ] route
-  - [ ] favorite/top10
-  - [ ] profile
+- [x] **Navigation Icons**
+  - [x] home / home_filled
+  - [x] explore / explore_filled
+  - [x] route / route_filled
+  - [x] favorite / favorite_filled
+  - [x] profile / profile_filled
   
-- [ ] **Action Icons**
-  - [ ] search
-  - [ ] filter
-  - [ ] add
-  - [ ] share
-  - [ ] close
-  - [ ] back/arrow_back
-  - [ ] more_vert (3 dots)
+- [x] **Action Icons**
+  - [x] search
+  - [x] filter / filter_filled
+  - [x] add
+  - [x] share
+  - [x] close
+  - [x] back/arrow_back
+  - [x] more_vert (3 dots)
+  - [x] edit
+  - [x] delete
   
-- [ ] **Category Icons**
-  - [ ] graffiti (spray can)
-  - [ ] mural (brush)
-  - [ ] sculpture (cube 3D)
-  - [ ] performance (theater masks)
+- [x] **Category Icons** (con colores específicos)
+  - [x] graffiti (#E74C3C)
+  - [x] mural (#3498DB)
+  - [x] escultura (#F39C12)
+  - [x] performance (#9B59B6)
   
-- [ ] **Map Icons**
-  - [ ] location/pin
-  - [ ] my_location
-  - [ ] directions
+- [x] **Map Icons**
+  - [x] location / location_filled
+  - [x] my_location
+  - [x] directions
+  - [x] directions_walk
+  - [x] directions_bike
   
-- [ ] **Social Icons**
-  - [ ] share
-  - [ ] group
-  - [ ] person
+- [x] **Social Icons**
+  - [x] share
+  - [x] group / group_filled
+  - [x] person / person_filled
 
-**Tamaños:** 16px, 24px, 32px, 48px
+- [x] **UI Icons**
+  - [x] check / check_circle
+  - [x] error / warning / info
+  - [x] visibility / visibility_off
+  - [x] calendar / time
+  - [x] arrows / chevrons / expand
+
+**Tamaños:** 16px, 24px, 32px, 48px ✅  
+**Implementación Flutter:** `lib/presentation/widgets/icons/`  
+**Preview:** `/preview/icons` ✅
 
 ---
 
-### 03. Text Styles
+### 03. Text Styles ✅
 
-**Fuente:** Syncfusion UI Kit (usar directamente)
+**Fuente:** Syncfusion UI Kit (usar directamente)  
+**Estado:** ✅ Implementado en Flutter
 
-- [ ] **Display Large** (32px/40px, Bold)
-- [ ] **Headline Large** (28px/36px, Bold)
-- [ ] **Headline Medium** (24px/32px, SemiBold)
-- [ ] **Headline Small** (20px/28px, SemiBold)
-- [ ] **Body Large** (18px/26px, Regular)
-- [ ] **Body Medium** (16px/24px, Regular) ✅ Ya en UI Kit
-- [ ] **Body Small** (14px/20px, Regular) ✅ Ya en UI Kit
-- [ ] **Label Large** (14px/20px, SemiBold)
-- [ ] **Label Medium** (12px/16px, Medium) ✅ Ya en UI Kit
-- [ ] **Caption** (12px/16px, Regular)
+- [x] **Display** (32px/40px, Bold) ✅
+- [x] **H1 - Headline Large** (28px/36px, Bold) ✅
+- [x] **H2 - Headline Medium** (24px/32px, SemiBold) ✅
+- [x] **H3 - Headline Small** (20px/28px, SemiBold) ✅
+- [x] **Body Large** (18px/26px, Regular) ✅
+- [x] **Body Medium** (16px/24px, Regular) ✅
+- [x] **Body Small** (14px/20px, Regular) ✅
+- [x] **Label** (14px/20px, SemiBold) ✅
+- [x] **Caption** (12px/16px, Regular) ✅
+- [x] **Button** (14px/20px, Medium) ✅
 
-**Colores aplicados:**
-- OnSurface (#1D1617)
-- OnSurfaceVariant (#4A4F45)
-- Primary (#6BA034)
+**Fonts:** Expletus Sans (Display/Headline/Title), Exo 2 (Label/Body) ✅ Google Fonts  
+**Implementación Flutter:** `lib/core/theme/app_text_styles.dart`  
+**Preview:** `/preview/text-styles` ✅
 
 ---
 
-### 04. Input Fields
+### 04. Input Fields ✅
 
-**Fuente:** Syncfusion UI Kit (adaptar)
+**Fuente:** Syncfusion UI Kit (adaptar)  
+**Estado:** ✅ Implementado en Flutter
 
-- [ ] **Text Field**
-  - [ ] Default state
-  - [ ] Focused state
-  - [ ] Error state
-  - [ ] Disabled state
-  - [ ] With helper text
-  - [ ] With error text
+- [x] **Text Field**
+  - [x] Default state
+  - [x] Focused state
+  - [x] Hovered state
+  - [x] Error state (con icono y mensaje)
+  - [x] Success state (con icono y mensaje)
+  - [x] Disabled state
+  - [x] With helper text
+  - [x] With error text
+  - [x] With prefix icon ✅
+  - [x] With suffix icon ✅
+  - [x] Required field indicator ✅
   
-- [ ] **Text Area** (multiline)
-  - [ ] Default state
-  - [ ] Focused state
+- [x] **Text Area** (multiline)
+  - [x] Default state
+  - [x] Focused state
+  - [x] With maxLines configuration ✅
   
-- [ ] **Search Field**
-  - [ ] With search icon
-  - [ ] With clear button
-  - [ ] Default state
-  - [ ] Focused state
+- [x] **Modos:**
+  - [x] Filled (con fondo) ✅
+  - [x] Outlined (solo borde) ✅
+  - [x] Flat (solo borde inferior) ✅
 
-**Variants:** 4 estados base
+- [x] **Tamaños:**
+  - [x] Default (56px height) ✅
+  - [x] Compact (40px height) ✅
 
----
-
-### 05. Avatars
-
-- [ ] **Avatar Circular**
-  - [ ] Small (32px)
-  - [ ] Medium (48px)
-  - [ ] Large (72px)
-  - [ ] With image placeholder
-  - [ ] With initials (texto)
+**Variants:** Filled/Outlined/Flat × Normal/Focused/Hover/Disabled/Success/Error = 18 variantes ✅  
+**Implementación Flutter:** `lib/presentation/widgets/inputs/`  
+**Preview:** `/preview/inputs` ✅
 
 ---
 
-### 06. Badges
+### 05. Avatars ✅
 
-**Fuente:** Syncfusion UI Kit Chips (adaptar)
+**Fuente:** Syncfusion UI Kit (adaptar)  
+**Estado:** ✅ Implementado en Flutter
 
-- [ ] **Category Badge**
-  - [ ] Graffiti (color: #E74C3C)
-  - [ ] Mural (color: #3498DB)
-  - [ ] Escultura (color: #F39C12)
-  - [ ] Performance (color: #9B59B6)
-  - Estados: Default, Selected
+- [x] **AppAvatar** (Main Component) ✅
+  - [x] Small (32px) ✅
+  - [x] Medium (48px) ✅
+  - [x] Large (64px) ✅
+  - [x] XLarge (88px - Figma default) ✅
+  - [x] With image URL ✅
+  - [x] With initials (texto) ✅
+  - [x] Placeholder color ✅
+
+- [x] **Badge Variants** ✅
+  - [x] None (simple avatar)
+  - [x] Verified (badge azul con check)
+  - [x] Edit (badge con icono de cámara + callback)
+  - Badge size: 26.67px (XLarge), escalable según tamaño
+  - Badge background: #1C212B
+
+- [x] **AppCircleAvatar** (Simplified) ✅
+  - [x] Cualquier tamaño personalizable
+  - [x] Para uso en listas y cards
+  - [x] Con iniciales o imagen
+
+**Implementación Flutter:** `lib/presentation/widgets/avatars/`  
+**Preview:** `/preview/avatars` ✅
+
+---
+
+### 06. Badges ✅
+
+**Fuente:** Syncfusion UI Kit Chips (adaptar)  
+**Estado:** ✅ Implementado en Flutter
+
+- [x] **Badge Dot** (6x6px) ✅
+  - [x] Simple punto de notificación
+  - [x] Colores personalizables
   
-- [ ] **Status Badge**
-  - [ ] Small dot + text
-  - [ ] Success, Warning, Error
+- [x] **Badge Circle** (16x16px) ✅
+  - [x] Con número/letra central
+  - [x] Font: Roboto Medium 11px
+  - [x] Border radius: 26px (circular)
+  
+- [x] **Badge Rounded** ✅
+  - [x] Con texto largo
+  - [x] Padding horizontal: 4px
+  - [x] Border radius: 12px
+  - [x] Font: Roboto Medium 11px
+
+- [x] **Category Badge** ✅
+  - [x] Graffiti (color: #E74C3C)
+  - [x] Mural (color: #3498DB)
+  - [x] Escultura (color: #F39C12)
+  - [x] Performance (color: #9B59B6)
+  - [x] Dot, Circle y Rounded variants
+  
+- [x] **Notification Badge** ✅
+  - [x] Overlay sobre iconos
+  - [x] Auto-manejo de conteo (99+)
+  - [x] Dot mode para indicador simple
+
+**Variants:** Dot/Circle/Rounded × 4 categorías + colores custom = 12+ variantes ✅  
+**Implementación Flutter:** `lib/presentation/widgets/badges/`  
+**Preview:** `/preview/badges` ✅
 
 ---
 
-### 07. Dividers
+### 07. Dividers ✅
 
-- [ ] **Horizontal Divider**
-  - [ ] Full width
-  - [ ] Inset (con padding)
-  - Color: OutlineVariant (#CAC4D0)
+- [x] **Horizontal Divider** ✅
+  - [x] Full width ✅
+  - [x] Inset (con padding izquierdo 16px) ✅
+  - [x] Middle-inset (con padding horizontal 16px) ✅
+  - [x] With Subhead (divider + subencabezado) ✅
+  - Color: OnSurfaceVariant (#323232)
+  
+- [x] **Vertical Divider** ✅
+  - [x] Full width ✅
+  - [x] Inset (con padding superior) ✅
+  - [x] Middle-inset (con padding ambos lados) ✅
+  - Grosor: 1px
+  
+**Figma Reference:** [Dividers Component](https://www.figma.com/design/cxkiJjAyXUVKmjwvj3GY0g/Syncfusion-Flutter-UI-Kit---Material-3-Theme--Community-?node-id=2031-165)
+
+**Implementación Flutter:** `lib/presentation/widgets/dividers/`  
+**Preview:** `/preview/dividers` ✅
   
 - [ ] **Vertical Divider**
   - [ ] Small (16px)
@@ -236,47 +366,109 @@
 
 ---
 
-### 08. Loading Indicators
+### 08. Loading Indicators ✅
 
 **Fuente:** Material 3 Components
 
-- [ ] **Circular Progress Indicator**
-  - [ ] Small (16px)
-  - [ ] Medium (24px)
-  - [ ] Large (48px)
+- [x] **Circular Progress Indicator** ✅
+  - [x] Small (24px) ✅
+  - [x] Medium (40px) ✅
+  - [x] Large (56px) ✅
+  - [x] XLarge (72px) ✅
+  - [x] Stroke widths: 2px, 4px, 6px, 8px ✅
+  - [x] Indeterminate (animado) ✅
+  - [x] Determinate (con progreso 0-100%) ✅
   - Color: Primary (#6BA034)
   
-- [ ] **Linear Progress Indicator**
-  - [ ] Determinate
-  - [ ] Indeterminate
+- [x] **Linear Progress Indicator** ✅
+  - [x] Determinate (con progreso) ✅
+  - [x] Indeterminate (animado) ✅
+  - [x] Custom colors y height ✅
+  
+- [x] **AppLoaderButton** ✅
+  - [x] Loader pequeño para botones (20px) ✅
+  
+- [x] **AppLoaderOverlay** ✅
+  - [x] Loader con overlay de pantalla completa ✅
+  - [x] Con mensaje personalizable ✅
+
+**Figma Reference:** 
+- [Progress Gradient Ring](https://www.figma.com/design/cxkiJjAyXUVKmjwvj3GY0g/Syncfusion-Flutter-UI-Kit---Material-3-Theme--Community-?node-id=2033-201)
+- [Progress Gradient](https://www.figma.com/design/cxkiJjAyXUVKmjwvj3GY0g/Syncfusion-Flutter-UI-Kit---Material-3-Theme--Community-?node-id=2033-204)
+
+**Implementación Flutter:** `lib/presentation/widgets/loading/`  
+**Preview:** `/preview/loading` ✅
 
 ---
 
 ## 🧬 NIVEL 2: Molecules (Moléculas)
 
-### 01. Search Bar
+### 01. Search Bar ✅
 
 **Componentes:** Input Field + Icon + Clear Button
 
-- [ ] **Search Bar Component**
-  - [ ] Estado vacío (placeholder "Buscar obras...")
-  - [ ] Estado con texto
-  - [ ] Estado focused
-  - [ ] Con resultados (dropdown opcional)
+- [x] **Search Bar Component** ✅
+  - [x] Estado vacío (placeholder "Buscar obras...") ✅
+  - [x] Estado con texto y botón clear ✅
+  - [x] Estado focused ✅
+  - [x] Con resultados (ejemplo interactivo) ✅
+  - [x] Placeholders específicos (obras, artistas, rutas) ✅
+  - [x] Custom colors (primary, secondary, accent) ✅
+  - [x] Estado deshabilitado ✅
+  - [x] Callbacks (onChange, onSubmitted, onClear) ✅
 
-**Auto Layout:** Horizontal, padding 12px
+**Especificaciones:**
+- Altura: 56px normal, 40px compact (igual que inputs estándar)
+- Border radius: 28px / 20px (completamente redondeado)
+- Border: 1px sólido, Secondary (#66715B)
+- Placeholder: Roboto Regular 16px / 14px
+- Iconos: Search (default), Clear (con texto)
+- Padding horizontal: 16px
+
+**Figma Reference:** [Search Bar Component](https://www.figma.com/design/cxkiJjAyXUVKmjwvj3GY0g/Syncfusion-Flutter-UI-Kit---Material-3-Theme--Community-?node-id=2034-360)
+
+**Implementación Flutter:** `lib/presentation/widgets/search/`  
+**Preview:** `/preview/search-bar` ✅
 
 ---
 
-### 02. Filter Chip Group
+### 02. Filter Chips ✅
 
-**Componentes:** Múltiples Category Badges + Scroll
+**Componentes:** Filter Chip + Chip Group + Category Chip Group
 
-- [ ] **Filter Chip Group**
-  - [ ] Horizontal scroll
-  - [ ] Con todas las categorías
-  - [ ] Estados: None selected, One selected, Multiple selected
-  - [ ] Gap: 8px entre chips
+- [x] **AppFilterChip** ✅
+  - [x] Estados: Normal, Selected, Disabled ✅
+  - [x] Con iconos (avatar, checkmark, delete) ✅
+  - [x] Colores personalizados ✅
+  - [x] Altura: 32px ✅
+  - [x] Border radius: 8px ✅
+  - [x] Font: Roboto Medium 14px ✅
+  
+- [x] **AppFilterChipGroup** ✅
+  - [x] Horizontal scroll ✅
+  - [x] Multi-select mode ✅
+  - [x] Single-select mode ✅
+  - [x] Callbacks onSelectionChanged ✅
+  - [x] Gap configurable (default 8px) ✅
+  
+- [x] **AppCategoryFilterChipGroup** ✅
+  - [x] Chips con colores de categoría ✅
+  - [x] Iconos circulares de color ✅
+  - [x] Graffiti, Mural, Escultura, Performance ✅
+
+**Especificaciones:**
+- Altura: 32px
+- Border radius: 8px
+- Font: Roboto Medium 14px, line-height 20px, tracking 0.014px
+- Padding: 5px horizontal
+- Icon sizes: 18px (left/avatar), 14px (right/close)
+- Normal: background #f7f2fb, border #79747e
+- Selected: background #e8f8de (secondaryContainer), border #e8f8de
+
+**Figma Reference:** [Chips Component](https://www.figma.com/design/cxkiJjAyXUVKmjwvj3GY0g/Syncfusion-Flutter-UI-Kit---Material-3-Theme--Community-?node-id=2064-501)
+
+**Implementación Flutter:** `lib/presentation/widgets/chips/`  
+**Preview:** `/preview/chips` ✅
 
 ---
 
@@ -294,19 +486,37 @@
 
 ---
 
-### 04. Map Pin
+### 04. Map Pin ✅
 
-**Componentes:** Icon + Color background + Shadow
+**Componentes:** Icon + Color background + Shadow  
+**Estado:** ✅ Implementado en Flutter
 
-- [ ] **Map Pin Component**
-  - [ ] Graffiti (red)
-  - [ ] Mural (blue)
-  - [ ] Escultura (orange)
-  - [ ] Performance (purple)
-  - [ ] Default/Generic (primary green)
-  - [ ] Selected state (con border)
+- [x] **AppMapPin Component** ✅
+  - [x] Graffiti (red #E74C3C) ✅
+  - [x] Mural (blue #3498DB) ✅
+  - [x] Escultura (orange #F39C12) ✅
+  - [x] Performance (purple #9B59B6) ✅
+  - [x] User Location (primary green #6BA034) ✅
+  - [x] Generic/Default (primary green) ✅
+  - [x] Selected state (con borde más grueso y glow) ✅
+  - [x] Tamaños: Small, Medium, Large, XLarge ✅
+  - [x] Con número (para rutas 1-10) ✅
+  - [x] Con avatar (imagen de artista) ✅
+  - [x] Animación de pulso (user location) ✅
   
-**Tamaño:** 32px × 40px (teardrop shape)
+- [x] **AppMapPinDot** (simplificado) ✅
+  - [x] Versión punto para zoom alejado ✅
+  - [x] Tamaños configurables ✅
+  
+- [x] **AppMapPinCluster** (agrupación) ✅
+  - [x] Muestra cantidad de obras (5, 12, 99+) ✅
+  - [x] Colores personalizables ✅
+
+**Tamaño base:** 40px × 50px (teardrop shape)  
+**Figma Reference:** [Markers](https://www.figma.com/design/cxkiJjAyXUVKmjwvj3GY0g/?node-id=2036-431)
+
+**Implementación Flutter:** `lib/presentation/widgets/map_pins/`  
+**Preview:** `/preview/map-pins` ✅
 
 ---
 
@@ -321,23 +531,87 @@
 
 ---
 
-### 06. Info Row
+### 06. Tooltip ✅
 
-**Componentes:** Icon + Text
+**Componentes:** Container + Text + Icon (opcional)
+**Estado:** ✅ Implementado en Flutter
 
-- [ ] **Info Row Component**
-  - [ ] Icon (24px) + Label
-  - [ ] Variants: Location, Artist, Date, Distance, Duration
-  - Gap: 8px
-  
-**Ejemplos:**
-- 📍 "Av. Corrientes 1234"
-- 👤 "Diego Mural"
-- 📅 "Enero 2024"
+- [x] **AppTooltip** (Main Component)
+  - [x] **Type: Normal**
+    - [x] Background: OnSurface (#1C1B1F)
+    - [x] Text color: OnInverseSurface (#F4EFF4)
+    - [x] Border radius: 2px
+    - [x] Padding: 3px vertical, 8px horizontal
+    - [x] Font: Roboto Regular 12px, line-height 16px
+  - [x] **Type: With Header**
+    - [x] Header text: Roboto Medium 12px
+    - [x] Body text: Roboto Regular 12px
+    - [x] Close icon (12px, opcional)
+    - [x] Border radius: 4px
+    - [x] Padding: 8px
+    - [x] Width: 181px (configurable)
+    - [x] Gap interno: 12px
+
+- [x] **AppTooltipWrapper** (Helper Widget)
+  - [x] Envuelve widgets con tooltip on tap/long press
+  - [x] Auto-posicionamiento
+  - [x] Auto-hide para tooltip normal
+
+**Figma Reference:** [Tooltip Component](https://www.figma.com/design/cxkiJjAyXUVKmjwvj3GY0g/Syncfusion-Flutter-UI-Kit---Material-3-Theme--Community-?node-id=3975-28867)
+
+**Variants:** Normal / With Header × Close Icon on/off = 4 variantes ✅
+**Implementación Flutter:** `lib/presentation/widgets/tooltips/`  
+**Preview:** `/preview/tooltips` ✅
 
 ---
 
-### 07. Image with Overlay
+### 07. Dialog Box ✅
+
+**Componentes:** Container + Header + Content + Footer
+**Estado:** ✅ Implementado en Flutter
+
+- [x] **AppDialogBox** (Main Component)
+  - [x] **Header Section** (opcional)
+    - [x] Title: Roboto Regular 24px, line-height 32px
+    - [x] Close icon: 24px (en container 32px)
+    - [x] Background: Surface3 (#EEF4E8)
+    - [x] Padding: 24px horizontal, 24px top, 16px bottom
+    - [x] Border radius top: 36px
+  - [x] **Content Area**
+    - [x] Fondo: Surface3 (#EEF4E8)
+    - [x] Área flexible para contenido personalizado
+  - [x] **Footer Section** (opcional)
+    - [x] Botones: Cancel (outline) + OK (primary)
+    - [x] Gap entre botones: 12px
+    - [x] Padding: 24px
+    - [x] Border radius bottom: 36px
+    - [x] Height: 88px
+
+- [x] **Constructores especializados**
+  - [x] `AppDialogBox.simple()` - Solo contenido
+  - [x] `AppDialogBox.confirm()` - Con header y footer completo
+  - [x] `AppDialogBox.alert()` - Solo botón OK
+
+- [x] **Helper Functions**
+  - [x] `showAppDialog()` - Muestra dialog de confirmación
+  - [x] `showAppAlert()` - Muestra alert simple
+
+**Especificaciones:**
+- Width: 417px (ajustable)
+- Height: 316px (ajustable según contenido)
+- Border radius: 36px (7xl)
+- Primary button color: #6BA034
+- Cancel button: Transparent con texto primary
+
+**Figma Reference:** [Dialog Box Component](https://www.figma.com/design/cxkiJjAyXUVKmjwvj3GY0g/Syncfusion-Flutter-UI-Kit---Material-3-Theme--Community-?node-id=2134-781)
+
+**Variants:** Header on/off × Footer on/off × Icon on/off = 8 variantes ✅
+**Implementación Flutter:** `lib/presentation/widgets/dialogs/`  
+**Preview:** `/preview/dialogs` ✅
+
+---
+
+### 08. Image with Overlay
 
 **Componentes:** Image + Gradient Overlay + Text
 
@@ -349,7 +623,7 @@
 
 ---
 
-### 08. Empty State Message
+### 09. Empty State Message
 
 **Componentes:** Icon + Heading + Body text
 
@@ -368,197 +642,441 @@
 
 ## 🦠 NIVEL 3: Organisms (Organismos)
 
-### 01. App Bar / Navigation Bar
+### 01. App Bar / Navigation Bar ✅
 
-**Fuente:** Syncfusion UI Kit (adaptar)
+**Fuente:** Syncfusion UI Kit (adaptar)  
+**Componentes:** Container + Logo/Title + Actions  
+**Estado:** ✅ Implementado en Flutter
 
-**Componentes:** Container + Logo/Title + Actions
-
-- [ ] **App Bar - Home (MapaPage)**
-  - [ ] Title: "Graffiti Trails"
-  - [ ] Search icon (right)
-  - [ ] Filter icon (right)
-  - Background: Surface (#FEF7FF)
-  - Elevation: 0
+- [x] **AppTopBar.home** (MapaPage, FeedPage) ✅
+  - [x] Title: "Graffiti Trails" / "Explorar" ✅
+  - [x] Search icon (right) ✅
+  - [x] Filter icon (right) ✅
+  - [x] Background: Surface (#FEF7FF) ✅
+  - [x] Elevation: 0 ✅
   
-- [ ] **App Bar - Detail Pages**
-  - [ ] Back button (left)
-  - [ ] Title (center)
-  - [ ] Share icon (right)
-  - [ ] More icon (right)
+- [x] **AppTopBar.detail** (Detail Pages) ✅
+  - [x] Back button (left) ✅
+  - [x] Title (center) ✅
+  - [x] Share icon (right) ✅
+  - [x] More icon (right) ✅
   
-- [ ] **App Bar - Create/Edit**
-  - [ ] Close button (left)
-  - [ ] Title: "Crear Ruta" (center)
-  - [ ] Save/Next button (right)
+- [x] **AppTopBar.create** (Create/Edit) ✅
+  - [x] Close button (left) ✅
+  - [x] Title: "Crear Ruta" (center) ✅
+  - [x] Save/Next button (right) ✅
 
-**Height:** 56px (Material 3 standard)
+- [x] **AppTopBar.map** (Transparente) ✅
 
----
+- [x] **AppMapBar** (Botones flotantes) ✅
+  - [x] Search, Filter, Location buttons ✅
 
-### 02. Bottom Navigation
-
-**Fuente:** Syncfusion UI Kit (usar directamente)
-
-**Componentes:** 4-5 Navigation Items + Icons + Labels
-
-- [ ] **Bottom Navigation Bar**
-  - [ ] Item: Mapa (home icon)
-  - [ ] Item: Explorar (explore icon)
-  - [ ] Item: Rutas (route icon)
-  - [ ] Item: Top 10 (favorite icon)
-  - Estados: Selected, Unselected
-  - Color selected: Primary (#6BA034)
-
-**Height:** 80px (Material 3 standard)
+**Height:** 56px (Material 3 standard)  
+**Figma:** https://www.figma.com/design/.../node-id=2044-2028  
+**Preview:** `/preview/app-bars` ✅
 
 ---
 
-### 03. Obra Card
+### 02. Bottom Navigation ✅
 
-**Componentes:** Image + Text + Badges + Actions
+**Fuente:** Syncfusion UI Kit (usar directamente)  
+**Componentes:** 4 Navigation Items + Icons + Labels  
+**Estado:** ✅ Implementado en Flutter
 
-- [ ] **Obra Card - Grid Version** (para FeedPage)
-  - [ ] Image (16:9 ratio)
-  - [ ] Category Badge (top-right overlay)
-  - [ ] Title (H3, 2 lines max)
-  - [ ] Artist name (body small)
-  - [ ] Location (body small + icon)
-  - [ ] Favorite icon (top-right)
-  - Shadow: Elevation 2
-  - Border radius: 12px
+- [x] **AppBottomNav** ✅
+  - [x] Item: Mapa (map icon) ✅
+  - [x] Item: Explorar (explore icon) ✅
+  - [x] Item: Rutas (route icon) ✅
+  - [x] Item: Top 10 (star icon) ✅
+  - [x] Estados: Selected, Unselected ✅
+  - [x] Color selected: Primary (#6BA034) ✅
+
+- [x] **AppBottomNavWithFAB** (con FAB) ✅
+
+**Height:** 80px (Material 3 standard)  
+**Figma:** https://www.figma.com/design/.../node-id=2044-571  
+**Preview:** `/preview/app-bars` ✅
+
+---
+
+### 03. Obra Card ✅
+
+**Componentes:** Image + Text + Badges + Actions  
+**Estado:** ✅ Implementado en Flutter
+
+- [x] **AppObraCard.grid** (Grid Version para FeedPage) ✅
+  - [x] Image con aspect ratio configurable (4:3, 16:9, 1:1) ✅
+  - [x] Category Badge (top-right overlay) ✅
+  - [x] Title (H3, max 2 líneas) ✅
+  - [x] Artist name (body small) ✅
+  - [x] Location (body small + icon place) ✅
+  - [x] Favorite icon (top-left con toggle) ✅
+  - [x] Likes count ✅
+  - [x] Shadow: Elevation 2 (AppShadows.small) ✅
+  - [x] Border radius: 12px ✅
+  - [x] onTap callback ✅
   
-- [ ] **Obra Card - List Version** (alternativo)
-  - [ ] Horizontal layout
-  - [ ] Image (square, 80px)
-  - [ ] Content (title + artist + location)
-  - [ ] Category badge
-  - [ ] Chevron icon (right)
-
-**Dimensiones Grid:** 
-- 2 columnas en móvil
-- Gap: 16px
-- Card width: (Screen width - 48px) / 2
-
----
-
-### 04. Artista Card
-
-**Componentes:** Avatar + Text + Stats + Button
-
-- [ ] **Artista Card**
-  - [ ] Avatar (72px)
-  - [ ] Artist name (H3)
-  - [ ] Bio (body small, 2 lines)
-  - [ ] Stats row (obras count + followers)
-  - [ ] "Ver perfil" button (outlined)
-  - Shadow: Elevation 2
-  - Padding: 16px
-
----
-
-### 05. Ruta Card
-
-**Componentes:** Map thumbnail + Text + Stats + Actions
-
-- [ ] **Ruta Card**
-  - [ ] Map thumbnail/placeholder (16:9)
-  - [ ] Route name (H3)
-  - [ ] Stats row: Distance + Duration + Obras count
-  - [ ] Transport icon (walk/bike)
-  - [ ] Date created
-  - [ ] Action buttons (Share, Delete)
-  - Shadow: Elevation 2
-
----
-
-### 06. Top 10 Grid Item
-
-**Componentes:** Image + Ranking Number + Overlay
-
-- [ ] **Top 10 Item**
-  - [ ] Large image (square or 4:5)
-  - [ ] Ranking number (large, top-left)
-    - Circle background (primary color)
-    - White number (1-10)
-  - [ ] Title overlay (bottom)
-  - [ ] Gradient overlay
-  - [ ] Remove button (top-right, small)
-
-**Grid:** 2 columnas
-
----
-
-### 07. Filter Modal
-
-**Fuente:** Syncfusion UI Kit Bottom Sheet (adaptar)
-
-**Componentes:** Modal + Filter Groups + Buttons
-
-- [ ] **Filter Modal Bottom Sheet**
-  - [ ] Handle bar (top)
-  - [ ] Title: "Filtros"
-  - [ ] Close button
-  - [ ] **Section: Categorías**
-    - [ ] Filter Chip Group (múltiple selección)
-  - [ ] **Section: Artistas**
-    - [ ] Search bar
-    - [ ] Artist list (checkboxes)
-  - [ ] Dividers entre secciones
-  - [ ] **Footer:**
-    - [ ] "Limpiar" button (text)
-    - [ ] "Aplicar filtros" button (primary)
+- [x] **AppObraCard.list** (List Version para Búsqueda) ✅
+  - [x] Horizontal layout ✅
+  - [x] Image (square, 80px) ✅
+  - [x] Content (title + artist + location) ✅
+  - [x] Category badge ✅
+  - [x] Chevron icon (right) ✅
+  - [x] onTap callback ✅
   
-**Height:** 60-70% de pantalla
+- [x] **AppObraCardCompact** (Mini Version) ✅
+  - [x] Width: 120px ✅
+  - [x] Image cuadrada ✅
+  - [x] Title + Artist ✅
+  - [x] Category dot indicator ✅
+  - [x] Para horizontal scroll ✅
+
+**Especificaciones:**
+- Border radius: 12px
+- Shadow: Elevation 2 (0 4px 6px rgba(0, 0, 0, 0.1))
+- Padding contenido: 12px (AppSpacing.space3)
+- Gap elementos: 8px / 4px
+- Grid: 2 columnas, gap 12px, aspect ratio 0.75
+- List: height 80px, horizontal layout
+
+**Figma Reference:** [Obra Card Component](https://www.figma.com/design/.../node-id=2040-13)
+
+**Implementación Flutter:** `lib/presentation/widgets/cards/`  
+**Preview:** `/preview/obra-card` ✅
+
+**Casos de uso:**
+- Feed page grid (2 columnas)
+- Resultados de búsqueda (lista horizontal)
+- Obras relacionadas (compact horizontal scroll)
+- Perfil de artista (grid de obras)
+- Top 10 (grid especial)
 
 ---
 
-### 08. Bottom Sheet (Obra Preview)
+### 04. Artista Card ✅
 
-**Componentes:** Handle + Image + Text + CTA
+**Componentes:** Avatar + Text + Stats + Button  
+**Estado:** ✅ Implementado en Flutter
 
-- [ ] **Obra Preview Bottom Sheet**
-  - [ ] Handle bar
-  - [ ] Small image (80px height, full width)
-  - [ ] Title (H3)
-  - [ ] Artist name
-  - [ ] Category badge
-  - [ ] Distance from user
-  - [ ] "Ver detalles" button (primary)
-  - Swipe up para expandir a full detail
+- [x] **AppArtistCard** (Standard Version) ✅
+  - [x] Avatar (72px / 88px xLarge) ✅
+  - [x] Artist name (H3) ✅
+  - [x] Bio (body small, max 2 líneas) ✅
+  - [x] Stats row (obras count + followers) ✅
+  - [x] Stats con iconos (palette, people) ✅
+  - [x] Formateo de números (1k, 1M) ✅
+  - [x] "Ver perfil" button (outlined, isExpanded) ✅
+  - [x] Shadow: Elevation 2 (AppShadows.small) ✅
+  - [x] Padding: 16px (AppSpacing.space4) ✅
+  - [x] Border radius: 12px ✅
+  - [x] Background: Secondary (#66715B) ✅
+  - [x] Text color: OnSecondary (blanco) ✅
+  
+- [x] **AppArtistCard.compact** (Sin botón) ✅
+  - [x] Version compacta para grids ✅
+  - [x] Avatar 64px (large) ✅
+  - [x] Padding: 12px ✅
+  - [x] Sin botón de acción ✅
+  
+- [x] **AppArtistCardHorizontal** (List Version) ✅
+  - [x] Layout horizontal ✅
+  - [x] Avatar 48px (medium) ✅
+  - [x] Contenido: Name + Bio + Stats ✅
+  - [x] Chevron icon (right) ✅
+  - [x] Padding: 12px ✅
 
-**Height inicial:** 25% de pantalla
+**Especificaciones:**
+- Border radius: 12px
+- Shadow: Elevation 2 (0 4px 6px rgba(0, 0, 0, 0.1))
+- Padding: 16px standard, 12px compact
+- Avatar sizes: xLarge (88px), Large (64px), Medium (48px)
+- Background: Secondary (#66715B)
+- Text: OnSecondary (blanco) con opacity variations
+- Stats con tooltips
+- Soporte para avatares: image URL, local asset, o initials
+
+**Figma Reference:** [Artist Card Component](https://www.figma.com/design/.../node-id=2043-2173)
+
+**Implementación Flutter:** `lib/presentation/widgets/cards/`  
+**Preview:** `/preview/artist-card` ✅
+
+**Casos de uso:**
+- Feed de artistas destacados
+- Resultados de búsqueda de artistas
+- Sección "Artistas relacionados"
+- Grid de artistas en exploración
+- Lista de seguidores/siguiendo
 
 ---
 
-### 09. Obra Detail Header
+### 05. Ruta Card ✅
 
-**Componentes:** Hero Image + Gradient + Back Button + Actions
+**Componentes:** Map thumbnail + Text + Stats + Actions  
+**Estado:** ✅ Implementado en Flutter
 
-- [ ] **Detail Header**
-  - [ ] Hero image (full width, 40% height)
-  - [ ] Bottom gradient overlay
-  - [ ] Back button (top-left, floating)
-  - [ ] Share button (top-right)
-  - [ ] Favorite button (top-right)
-  - [ ] Title overlay (bottom)
-  - [ ] Category badge (top-right, below buttons)
+- [x] **AppRutaCard** (Standard Version) ✅
+  - [x] Map thumbnail/placeholder (16:9) ✅
+  - [x] Route name (H3) ✅
+  - [x] Stats row: Distance + Duration + Obras count ✅
+  - [x] Transport icon badge (walk/bike/car) ✅
+  - [x] Date created (con formato relativo) ✅
+  - [x] Action buttons (Share, Delete) ✅
+  - [x] Shadow: Elevation 2 ✅
+  - [x] Border radius: 12px ✅
+  - [x] Background: Secondary (#66715B) ✅
+  - [x] Text: OnSecondary (blanco) ✅
+  
+- [x] **AppRutaCard.compact** (Sin acciones) ✅
+  - [x] Versión compacta para grids ✅
+  - [x] Sin fecha ni action buttons ✅
+  - [x] Padding: 12px ✅
+  
+- [x] **AppRutaCardHorizontal** (List Version) ✅
+  - [x] Layout horizontal ✅
+  - [x] Map thumbnail cuadrado (80px) ✅
+  - [x] Stats compactos ✅
+  - [x] Chevron icon (right) ✅
+  - [x] Height: 100px ✅
+
+- [x] **TransportType Enum** ✅
+  - [x] walk (directions_walk) ✅
+  - [x] bike (directions_bike) ✅
+  - [x] car (directions_car) ✅
+
+**Especificaciones:**
+- Border radius: 12px
+- Shadow: Elevation 2 (0 4px 6px rgba(0, 0, 0, 0.1))
+- Map thumbnail: 16:9 aspect ratio
+- Transport badge: circular, 40px, primary color
+- Stats icons: 16px
+- Padding: 16px standard, 12px compact
+- Background: Secondary (#66715B)
+- Text: OnSecondary (blanco) con opacity variations
+- Formateo inteligente de duración (min, h, h m)
+- Formateo relativo de fechas (Hoy, Ayer, hace X días)
+
+**Implementación Flutter:** `lib/presentation/widgets/cards/`  
+**Preview:** `/preview/ruta-card` ✅
+
+**Casos de uso:**
+- Lista de rutas guardadas
+- Rutas sugeridas/destacadas
+- Historial de rutas completadas
+- Selección de ruta para salida grupal
 
 ---
 
-### 10. Route Step Indicator
+### 06. Top 10 Grid Item ✅
+
+**Componentes:** Image + Ranking Number + Overlay  
+**Estado:** ✅ Implementado en Flutter
+
+- [x] **AppTop10Item** ✅
+  - [x] Large image (square o 4:5) ✅
+  - [x] Ranking number (top-left) ✅
+    - [x] Circle background (primary color) ✅
+    - [x] White number (1-10) ✅
+    - [x] Size: 40px ✅
+  - [x] Title overlay (bottom) ✅
+  - [x] Gradient overlay (negro 0% → 60% opacity) ✅
+  - [x] Remove button (top-right, pequeño) ✅
+  - [x] Border radius: 12px ✅
+  - [x] Shadow: Elevation 2 ✅
+  - [x] Aspect ratio configurable (1.0 square, 0.8 portrait) ✅
+  
+- [x] **AppTop10Grid** ✅
+  - [x] Grid de 2 columnas ✅
+  - [x] Spacing configurable ✅
+  - [x] Aspect ratio configurable ✅
+  - [x] Callbacks onItemTap y onItemRemove ✅
+  - [x] Soporte para lista de Top10ItemData ✅
+  
+- [x] **AppTop10EmptySlot** ✅
+  - [x] Slot vacío para < 10 obras ✅
+  - [x] Placeholder con icono y texto ✅
+  - [x] Border dashed ✅
+  - [x] onTap callback ✅
+
+- [x] **Top10ItemData Model** ✅
+  - [x] imageUrl, titulo, ranking ✅
+
+**Especificaciones:**
+- Border radius: 12px
+- Shadow: Elevation 2 (0 4px 6px rgba(0, 0, 0, 0.1))
+- Ranking badge: 40px circle, primary color, white number
+- Remove button: 32px circle, error color, white icon
+- Gradient overlay: 80px height, black 0% → 60% opacity
+- Title: bodySmall, white, bold, max 2 líneas
+- Grid: 2 columnas, spacing 12px
+- Aspect ratios: 1.0 (square), 0.8 (4:5 portrait)
+
+**Implementación Flutter:** `lib/presentation/widgets/cards/`  
+**Preview:** `/preview/top10-item` ✅
+
+**Casos de uso:**
+- Top10Page con grid de 10 obras
+- Ranking visual de obras favoritas
+- Reordenamiento (drag & drop futuro)
+- Empty slots cuando hay < 10 obras
+- Eliminación de obras del Top 10
+
+---
+
+### 07. Filter Modal ✅
+
+**Fuente:** Syncfusion UI Kit Bottom Sheet (adaptar)  
+**Componentes:** Modal + Filter Groups + Buttons  
+**Estado:** ✅ Implementado en Flutter
+
+- [x] **AppFilterModal** (Bottom Sheet) ✅
+  - [x] Handle bar (top, 40px width, 4px height) ✅
+  - [x] Title: "Filtros" (H2) ✅
+  - [x] Close button (top-right) ✅
+  - [x] **Section: Categorías** ✅
+    - [x] Filter Chip Group (múltiple selección) ✅
+    - [x] AppCategoryFilterChipGroup integrado ✅
+  - [x] **Section: Artistas** ✅
+    - [x] Search bar (AppSearchBar) ✅
+    - [x] Artist list con checkboxes circulares ✅
+    - [x] Filtrado en tiempo real ✅
+    - [x] Empty state cuando no hay resultados ✅
+  - [x] Dividers entre secciones (AppDivider) ✅
+  - [x] **Footer:** ✅
+    - [x] "Limpiar" button (text) ✅
+    - [x] "Aplicar filtros" button (primary) ✅
+    - [x] Shadow superior para separación ✅
+  
+- [x] **AppFilterModal.show()** (Helper) ✅
+  - [x] showModalBottomSheet wrapper ✅
+  - [x] Retorna Map con categories y artists ✅
+  - [x] Height: 70% de pantalla ✅
+  - [x] Border radius: 28px (top corners) ✅
+
+**Especificaciones:**
+- Height: 70% de pantalla (configurable)
+- Border radius: 28px (top corners)
+- Handle bar: 40px × 4px, rounded 2px
+- Padding: 16px (AppSpacing.space4)
+- Background: Surface (#FEF7FF)
+- Scrollable content area
+- Footer sticky con shadow
+- Checkboxes: 24px circle, primary color cuando seleccionado
+
+**Implementación Flutter:** `lib/presentation/widgets/modals/`  
+**Preview:** `/preview/filter-modal` ✅
+
+**Casos de uso:**
+- FeedPage - Filtrar obras por categoría y artista
+- MapaPage - Filtrar pins en el mapa
+- Búsqueda avanzada
+- Filtros múltiples con estado persistente
+
+---
+
+### 08. Bottom Sheet (Obra Preview) ✅
+
+**Componentes:** Handle + Image + Text + CTA  
+**Estado:** ✅ Implementado en Flutter
+
+- [x] **AppObraPreviewBottomSheet** ✅
+  - [x] Handle bar (40px × 4px, rounded 2px) ✅
+  - [x] Small image (80px height, full width) ✅
+  - [x] Title (H3 - AppTextStyles.h3) ✅
+  - [x] Artist name (Body Medium, onSurfaceVariant) ✅
+  - [x] Category badge (CategoryBadge.rounded) ✅
+  - [x] Distance from user (opcional, con icono location_on) ✅
+  - [x] "Ver detalles" button (primary, expanded) ✅
+  - [x] Swipe up para expandir a full detail (futuro) ⏳
+
+- [x] **AppObraPreviewBottomSheet.show()** (Helper) ✅
+  - [x] showModalBottomSheet wrapper ✅
+  - [x] Height inicial: 25% de pantalla (configurable) ✅
+  - [x] Border radius: 28px (top corners) ✅
+  - [x] Background: secondaryContainer ✅
+
+**Especificaciones:**
+- Height inicial: 25% de pantalla (configurable via `initialHeight`)
+- Border radius: 28px (top corners)
+- Handle bar: 40px × 4px, rounded 2px
+- Image: 80px height, full width, BoxFit.cover
+- Padding: 16px (AppSpacing.space4)
+- Background: secondaryContainer (#E8F8DE)
+- Title: H3, max 2 líneas, ellipsis
+- Category badge: CategoryBadge.rounded con colores específicos
+- Distance: Opcional, con icono location_on (16px)
+- Button: Primary, expanded width
+
+**Implementación Flutter:** `lib/presentation/widgets/modals/`  
+**Preview:** `/preview/obra-preview-bottom-sheet` ✅
+
+**Casos de uso:**
+- MapaPage - Al tocar un pin, mostrar preview
+- FeedPage - Al tocar una card, mostrar preview
+- Navegación rápida a ObraDetailPage
+- Preview antes de ver detalles completos
+
+---
+
+### 09. Obra Detail Header ✅
+
+**Componentes:** Hero Image + Gradient + Back Button + Actions  
+**Estado:** ✅ Implementado en Flutter
+
+- [x] **AppObraDetailHeader** ✅
+  - [x] Hero image (full width, aspect ratio configurable 16:9, 4:3, 1:1) ✅
+  - [x] Bottom gradient overlay (negro 0% → 60% opacity) ✅
+  - [x] Back button (top-left, floating con fondo semi-transparente) ✅
+  - [x] Share button (top-right, floating) ✅
+  - [x] Favorite button (top-right, floating, con estado toggle) ✅
+  - [x] Title overlay (bottom, sobre gradiente, texto blanco) ✅
+  - [x] Category badge (top-right, debajo de botones, con color de categoría) ✅
+  - [x] Aspect ratio configurable ✅
+  - [x] Callback onImageTap (para fullscreen) ✅
+  - [x] Opción showTitleOverlay (ocultar título) ✅
+  - [x] Loading state para imagen ✅
+  - [x] Error state para imagen (placeholder) ✅
+
+**Implementación Flutter:** `lib/presentation/widgets/headers/`  
+**Preview:** `/preview/obra-detail-header` ✅
+
+---
+
+### 10. Route Step Indicator ✅
 
 **Componentes:** Step Numbers + Progress Line + Labels
+**Estado:** ✅ Implementado en Flutter
 
-- [ ] **Step Indicator (Stepper)**
-  - [ ] 6 steps numbered (1-6)
-  - [ ] Progress line connecting steps
-  - [ ] Current step highlighted (primary color)
-  - [ ] Completed steps (check icon)
-  - [ ] Future steps (gray)
-  - [ ] Step labels below numbers
-  
-**Horizontal layout, scrollable**
+- [x] **AppRouteStepIndicator** (Main Component)
+  - [x] 6 steps numbered (1-6) ✅
+  - [x] Progress line connecting steps ✅
+  - [x] Current step highlighted (primary color) ✅
+  - [x] Completed steps (check icon) ✅
+  - [x] Future steps (gray) ✅
+  - [x] Step labels below numbers ✅
+  - [x] Horizontal layout, scrollable ✅
+  - [x] Constructor `createRuta` con labels predefinidos ✅
+  - [x] Pasos personalizables (número y labels) ✅
+  - [x] Modo scrollable/no-scrollable ✅
+
+**Especificaciones:**
+- Step circle: 40px
+- Completed: Primary color + check icon (24px)
+- Current: Primary color + number + shadow
+- Upcoming: Gray (neutral300) + border + number
+- Connector line: 40px width, 2px height
+- Label: Roboto 12px, 60px width (fixed), max 2 lines
+- Padding horizontal: 16px
+- Gap entre elementos: 4px
+
+**Figma Reference:** Basado en Material 3 Stepper y design system de Graffiti Trails
+
+**Implementación Flutter:** `lib/presentation/widgets/step_indicators/`  
+**Preview:** `/preview/route-step-indicator` ✅
+
+**Casos de uso:**
+- CreateRutaPage - Indicador de 6 pasos del flujo
+- Formularios multi-step
+- Procesos guiados con pasos
 
 ---
 
@@ -900,7 +1418,7 @@
 | Nivel | Cantidad | Variantes Aprox. |
 |-------|----------|------------------|
 | **Atoms** | 8 categorías | ~50 variantes |
-| **Molecules** | 8 componentes | ~25 variantes |
+| **Molecules** | 9 componentes | ~30 variantes |
 | **Organisms** | 10 componentes | ~20 variantes |
 | **Templates** | 6 templates | 6 wireframes |
 | **Pages** | 9 páginas | 25 frames |
@@ -913,22 +1431,22 @@
 
 ### Fase 1: Foundation (1-2 días)
 
-- [ ] **Día 1: Setup y Tokens**
-  - [ ] Crear archivo Figma
-  - [ ] Duplicar componentes del Syncfusion UI Kit
-  - [ ] Verificar variables de color ✅
+- [x] **Día 1: Setup y Tokens** ✅
+  - [x] Crear archivo Figma
+  - [x] Duplicar componentes del Syncfusion UI Kit
+  - [x] Verificar variables de color ✅
   - [ ] Crear colores de categorías (custom)
-  - [ ] Configurar layout grids (8px base)
+  - [x] Configurar layout grids (8px base)
 
-- [ ] **Día 1-2: Atoms**
-  - [ ] Buttons (del UI Kit) ✅
-  - [ ] Text Styles (del UI Kit) ✅
-  - [ ] Input Fields (del UI Kit, adaptar)
-  - [ ] Icons (Material Icons)
-  - [ ] Avatars
-  - [ ] Category Badges (custom)
-  - [ ] Dividers
-  - [ ] Loading Indicators
+- [x] **Día 1-2: Atoms (Parcial - 75%)** 🔄
+  - [x] Buttons (del UI Kit) ✅ Implementado en Flutter
+  - [x] Icons (Material Icons) ✅ Implementado en Flutter
+  - [x] Text Styles (del UI Kit) ✅ Implementado en Flutter
+  - [x] Input Fields (del UI Kit, adaptar) ✅ Implementado en Flutter
+  - [x] Badges (Dot, Circle, Rounded, Category) ✅ Implementado en Flutter
+  - [x] Avatars (con badges verified/edit) ✅ Implementado en Flutter
+  - [x] Dividers (Horizontal/Vertical, variantes) ✅ Implementado en Flutter
+  - [x] Loading Indicators (Circular/Linear, todos los tamaños) ✅ Implementado en Flutter
 
 ### Fase 2: Components (2-3 días)
 
@@ -937,7 +1455,8 @@
   - [ ] Filter Chip Group
   - [ ] Map Pin (custom, importante)
   - [ ] Category Badge con icono
-  - [ ] Info Row
+  - [ ] Tooltip (Normal + With Header)
+  - [ ] Dialog Box (con variantes)
   - [ ] Image with Overlay
   - [ ] Rating Display
   - [ ] Empty State Message
@@ -1002,18 +1521,18 @@
 ## ✅ Checklist de Validación Final
 
 ### Design Tokens
-- [ ] Colores sincronizados con Flutter ✅
-- [ ] Variables de color aplicadas correctamente
-- [ ] Text styles consistentes
-- [ ] Spacing sistema 8px aplicado
-- [ ] Border radius configurados
+- [x] Colores sincronizados con Flutter ✅
+- [x] Variables de color aplicadas correctamente ✅
+- [x] Text styles consistentes ✅
+- [x] Spacing sistema 8px aplicado ✅
+- [x] Border radius configurados ✅
 
 ### Componentes
-- [ ] Todos los Atoms creados
+- [x] **Atoms:** Buttons ✅ Icons ✅ Text Styles ✅ Input Fields ✅ Badges ✅ Avatars ✅ (2/8 pendientes)
 - [ ] Todas las Molecules creadas
 - [ ] Todos los Organisms creados
-- [ ] Componentes reutilizables (como Components en Figma)
-- [ ] Variants configuradas correctamente
+- [x] Componentes reutilizables (como Components en Figma) ✅
+- [x] Variants configuradas correctamente ✅
 - [ ] Auto Layout aplicado donde corresponde
 
 ### Templates

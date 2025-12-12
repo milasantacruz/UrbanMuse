@@ -20,6 +20,7 @@
 │   ├── figma-prototype-plan.md # Plan de prototipo Figma
 │   ├── figma-variables-structure.md # Estructura variables Figma
 │   ├── color-sync-report.md    # ✅ Reporte sincronización colores Figma ↔ Flutter
+│   ├── fonts-setup.md          # ✅ Configuración tipografías (Expletus Sans, Exo 2)
 │   └── figma-mcp-setup.md      # Setup MCP Figma
 │
 ├── 🏗️ arquitectura/            # Arquitectura técnica

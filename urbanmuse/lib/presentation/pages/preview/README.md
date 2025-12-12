@@ -78,12 +78,42 @@ Todos los componentes atómicos han sido implementados y están disponibles para
 
 ---
 
-### Próximos Componentes (Molecules)
-- `/preview/loading` - Loading indicators
-- `/preview/search-bar` - Search bar component
-- `/preview/filter-chips` - Filter chip group
-- `/preview/map-pins` - Map pins por categoría
-- `/preview/obra-card` - Obra cards (grid y list)
+## 🧬 Molecules (Componentes Moleculares)
+
+### Search Bar
+- **Ruta:** `/preview/search-bar`
+- **Componente:** `SearchBarPreviewPage`
+- **Descripción:** Barra de búsqueda con placeholders específicos, iconos, callbacks y ejemplo interactivo
+
+### Filter Chips
+- **Ruta:** `/preview/chips`
+- **Componente:** `ChipsPreviewPage`
+- **Descripción:** Chips de filtro con multi-select, single-select, categorías con colores
+
+## 🦠 Organisms (Organismos)
+
+Componentes organizacionales complejos que combinan átomos y moléculas.
+
+### Obra Card
+- **Ruta:** `/preview/obra-card`
+- **Componente:** `ObraCardPreviewPage`
+- **Descripción:** Tarjetas de obra con 3 variantes (grid, list, compact)
+
+**Variantes:**
+- `AppObraCard.grid` - Vertical para grids 2 columnas
+- `AppObraCard.list` - Horizontal para listas/búsqueda
+- `AppObraCardCompact` - Mini para horizontal scroll
+
+**Características:**
+- Aspect ratios configurables (4:3, 16:9, 1:1)
+- Category badge overlay
+- Favorite toggle con contador de likes
+- Title (max 2 líneas), Artist, Location
+- Shadow elevation 2, border radius 12px
+
+### Próximos Componentes (Organisms)
+- `/preview/artista-card` - Artista cards con avatar y stats
+- `/preview/ruta-card` - Ruta cards con mapa preview
 - `/preview/app-bar` - App bar variations
 - `/preview/bottom-nav` - Bottom navigation
 
@@ -432,6 +462,174 @@ AppLoaderOverlay(
 - Estados de loading en botones
 - Pantallas de carga con overlay
 - Progress bars en cards
+
+---
+
+## 🧬 Molecules (Componentes Moleculares)
+
+### ✅ Search Bar (Barra de Búsqueda)
+
+#### `AppSearchBar`
+Barra de búsqueda siguiendo Material 3 y sincronizada con Figma.
+
+**Constructores:**
+```dart
+// Básico
+AppSearchBar()
+
+// Con placeholders específicos
+AppSearchBar.obras()      // "Buscar obras de arte urbano..."
+AppSearchBar.artistas()   // "Buscar artistas..."
+AppSearchBar.rutas()      // "Buscar rutas..."
+
+// Con controller y callbacks
+AppSearchBar(
+  controller: _searchController,
+  placeholder: 'Buscar...',
+  onChanged: (value) {
+    // Búsqueda en tiempo real
+  },
+  onSubmitted: (value) {
+    // Búsqueda al presionar enter
+  },
+  onClear: () {
+    // Acción al limpiar
+  },
+)
+
+// Custom colors
+AppSearchBar(
+  borderColor: AppColors.primary,
+  textColor: AppColors.primary,
+  iconColor: AppColors.primary,
+  backgroundColor: Colors.white,
+)
+
+// Deshabilitado
+AppSearchBar(
+  placeholder: 'Búsqueda deshabilitada...',
+  enabled: false,
+)
+```
+
+**Especificaciones:**
+- Altura: 56px normal, 40px compact (igual que inputs)
+- Border radius: 28px / 20px (completamente redondeado)
+- Border: 1px sólido, Secondary (#66715B)
+- Placeholder: Roboto Regular 16px / 14px
+- Iconos: Search (default), Clear (cuando hay texto)
+- Padding horizontal: 16px
+
+**Casos de uso:**
+- Búsqueda de obras en feed
+- Búsqueda de artistas
+- Búsqueda de rutas
+- Filtrado en listas
+- Búsqueda en app bar
+
+### ✅ Filter Chips (Chips de Filtro)
+
+#### `AppFilterChip`
+Chip de filtro individual siguiendo Material 3 y sincronizado con Figma.
+
+**Constructores:**
+```dart
+// Básico
+AppFilterChip(
+  label: 'Graffiti',
+  isSelected: true,
+  onSelected: (selected) { },
+)
+
+// Con avatar
+AppFilterChip(
+  label: 'Popular',
+  avatar: Icon(Icons.star, size: 18),
+  onSelected: (selected) { },
+)
+
+// Con checkmark
+AppFilterChip(
+  label: 'Reciente',
+  isSelected: true,
+  showCheckmark: true,
+  onSelected: (selected) { },
+)
+
+// Con delete
+AppFilterChip(
+  label: 'Tag',
+  isSelected: true,
+  onSelected: (selected) { },
+  onDeleted: () {
+    // Borrar chip
+  },
+)
+
+// Custom colors
+AppFilterChip(
+  label: 'Mural',
+  isSelected: true,
+  selectedColor: AppColors.categoryMural.withOpacity(0.2),
+  textColor: AppColors.categoryMural,
+  onSelected: (selected) { },
+)
+```
+
+#### `AppFilterChipGroup`
+Grupo de chips con scroll horizontal y selección múltiple/única.
+
+```dart
+// Multi-select
+AppFilterChipGroup(
+  labels: ['Graffiti', 'Mural', 'Escultura'],
+  selectedLabels: _selectedCategories,
+  onSelectionChanged: (selected) {
+    setState(() => _selectedCategories = selected);
+  },
+  multiSelect: true,
+)
+
+// Single-select
+AppFilterChipGroup(
+  labels: ['A pie', 'En bici', 'En auto'],
+  selectedLabels: [_selectedTransport],
+  onSelectionChanged: (selected) {
+    setState(() => _selectedTransport = selected.first);
+  },
+  multiSelect: false,
+)
+```
+
+#### `AppCategoryFilterChipGroup`
+Grupo especializado para categorías de obras con iconos de color.
+
+```dart
+AppCategoryFilterChipGroup(
+  selectedCategories: _selectedCategories,
+  onSelectionChanged: (selected) {
+    setState(() => _selectedCategories = selected);
+  },
+)
+```
+
+**Especificaciones:**
+- Altura: 32px
+- Border radius: 8px
+- Font: Roboto Medium 14px, line-height 20px, tracking 0.014px
+- Padding: 5px horizontal
+- Icon sizes: 18px (left/avatar), 14px (right/close)
+- Normal: background #f7f2fb, border #79747e, text #49454f
+- Selected: background #e8f8de, border #e8f8de, text #1d1b20
+
+**Casos de uso:**
+- Filtros de categorías en feed/mapa
+- Selección de tags
+- Filtros de transporte en rutas
+- Búsquedas recientes
+- Opciones de ordenamiento
+
+---
 
 ## 🎨 Design Tokens
 

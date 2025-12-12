@@ -19,6 +19,20 @@ import '../pages/preview/badges_preview_page.dart';
 import '../pages/preview/avatars_preview_page.dart';
 import '../pages/preview/dividers_preview_page.dart';
 import '../pages/preview/loading_preview_page.dart';
+import '../pages/preview/search_bar_preview_page.dart';
+import '../pages/preview/chips_preview_page.dart';
+import '../pages/preview/map_pins_preview_page.dart';
+import '../pages/preview/tooltips_preview_page.dart';
+import '../pages/preview/dialogs_preview_page.dart';
+import '../pages/preview/obra_card_preview_page.dart';
+import '../pages/preview/artist_card_preview_page.dart';
+import '../pages/preview/app_bars_preview_page.dart';
+import '../pages/preview/ruta_card_preview_page.dart';
+import '../pages/preview/top10_item_preview_page.dart';
+import '../pages/preview/filter_modal_preview_page.dart';
+import '../pages/preview/obra_preview_bottom_sheet_preview_page.dart';
+import '../pages/preview/route_step_indicator_preview_page.dart';
+import '../pages/preview/obra_detail_header_preview_page.dart';
 
 /// Configuración de rutas de la aplicación
 final appRouter = GoRouter(
@@ -71,6 +85,76 @@ final appRouter = GoRouter(
       path: '/preview/loading',
       name: 'preview-loading',
       builder: (context, state) => const LoadingPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/search-bar',
+      name: 'preview-search-bar',
+      builder: (context, state) => const SearchBarPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/chips',
+      name: 'preview-chips',
+      builder: (context, state) => const ChipsPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/map-pins',
+      name: 'preview-map-pins',
+      builder: (context, state) => const MapPinsPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/tooltips',
+      name: 'preview-tooltips',
+      builder: (context, state) => const TooltipsPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/dialogs',
+      name: 'preview-dialogs',
+      builder: (context, state) => const DialogsPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/obra-card',
+      name: 'preview-obra-card',
+      builder: (context, state) => const ObraCardPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/artist-card',
+      name: 'preview-artist-card',
+      builder: (context, state) => const ArtistCardPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/app-bars',
+      name: 'preview-app-bars',
+      builder: (context, state) => const AppBarsPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/ruta-card',
+      name: 'preview-ruta-card',
+      builder: (context, state) => const RutaCardPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/top10-item',
+      name: 'preview-top10-item',
+      builder: (context, state) => const Top10ItemPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/filter-modal',
+      name: 'preview-filter-modal',
+      builder: (context, state) => const FilterModalPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/obra-preview-bottom-sheet',
+      name: 'preview-obra-preview-bottom-sheet',
+      builder: (context, state) => const ObraPreviewBottomSheetPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/route-step-indicator',
+      name: 'preview-route-step-indicator',
+      builder: (context, state) => const RouteStepIndicatorPreviewPage(),
+    ),
+    GoRoute(
+      path: '/preview/obra-detail-header',
+      name: 'preview-obra-detail-header',
+      builder: (context, state) => const ObraDetailHeaderPreviewPage(),
     ),
 
     // ============================================

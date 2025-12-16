@@ -8,6 +8,7 @@ import '../../widgets/common/error_widget.dart';
 import '../../widgets/common/loading_indicator.dart';
 import '../../widgets/app_bars/app_top_bar.dart';
 import '../../widgets/buttons/app_button.dart';
+import '../../widgets/avatars/app_avatar.dart';
 import '../../../core/theme/theme.dart';
 import '../../../core/utils/rrule_helper.dart';
 
@@ -58,15 +59,20 @@ class EncuentroDetailPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Artista
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: CircleAvatar(
-                        child: Text(encuentro.artistaNombre[0].toUpperCase()),
-                      ),
-                      title: Text(
-                        encuentro.artistaNombre,
-                        style: AppTextStyles.titleLarge,
-                      ),
+                    Row(
+                      children: [
+                        AppAvatar(
+                          initials: encuentro.artistaNombre[0].toUpperCase(),
+                          size: AvatarSize.medium,
+                        ),
+                        SizedBox(width: AppSpacing.space3),
+                        Expanded(
+                          child: Text(
+                            encuentro.artistaNombre,
+                            style: AppTextStyles.titleLarge,
+                          ),
+                        ),
+                      ],
                     ),
                     
                     SizedBox(height: AppSpacing.space5),

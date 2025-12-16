@@ -12,6 +12,7 @@ import '../../widgets/modals/app_filter_modal.dart';
 import '../../widgets/common/loading_indicator.dart';
 import '../../widgets/common/error_widget.dart';
 import '../../widgets/common/empty_state.dart';
+import '../../widgets/buttons/app_button.dart';
 
 /// Página de feed de obras
 class FeedPage extends StatefulWidget {
@@ -80,17 +81,17 @@ class _FeedPageState extends State<FeedPage> {
         title: 'Obras',
         currentBottomNavIndex: 1, // Mapa/Explorar (página principal)
         appBarActions: [
-          IconButton(
-            icon: Icon(_isGridView ? Icons.view_list : Icons.grid_view),
+          AppButton.text(
+            label: '',
+            leftIcon: Icon(_isGridView ? Icons.view_list : Icons.grid_view, size: 20),
             onPressed: () {
               setState(() => _isGridView = !_isGridView);
             },
-            tooltip: _isGridView ? 'Vista de lista' : 'Vista de grid',
           ),
-          IconButton(
-            icon: const Icon(Icons.filter_list),
+          AppButton.text(
+            label: '',
+            leftIcon: const Icon(Icons.filter_list, size: 20),
             onPressed: _showFilterModal,
-            tooltip: 'Filtrar',
           ),
         ],
         child: Column(
@@ -130,14 +131,14 @@ class _FeedPageState extends State<FeedPage> {
                       return EmptyState(
                         icon: Icons.image_not_supported,
                         message: 'No se encontraron obras',
-                        action: TextButton(
+                        action: AppButton.text(
+                          label: 'Limpiar filtros',
                           onPressed: () {
                             _searchController.clear();
                             _filteredCategories = null;
                             _filteredArtistas = null;
                             context.read<ObraBloc>().add(LoadObras());
                           },
-                          child: const Text('Limpiar filtros'),
                         ),
                       );
                     }

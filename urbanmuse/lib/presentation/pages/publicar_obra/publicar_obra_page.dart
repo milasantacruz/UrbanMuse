@@ -9,6 +9,7 @@ import '../../bloc/publicar_obra/publicar_obra_state.dart';
 import '../../widgets/app_bars/app_top_bar.dart';
 import '../../widgets/publicar_obra/publicar_obra.dart';
 import '../../widgets/common/loading_indicator.dart';
+import '../../widgets/buttons/app_button.dart';
 import '../../../core/theme/theme.dart';
 
 /// Página para publicar una obra (multi-step, solo artistas)
@@ -132,14 +133,14 @@ class _PublicarObraPageState extends State<PublicarObraPage> {
             onClose: () => context.pop(),
             actions: [
               if (_currentStep < 4)
-                TextButton(
+                AppButton.text(
+                  label: 'Siguiente',
                   onPressed: _canProceedToNextStep() ? _nextStep : null,
-                  child: const Text('Siguiente'),
                 )
               else
-                TextButton(
+                AppButton.text(
+                  label: 'Publicar',
                   onPressed: _canProceedToNextStep() ? _publicarObra : null,
-                  child: const Text('Publicar'),
                 ),
             ],
           ),

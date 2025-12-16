@@ -9,6 +9,8 @@ import '../../bloc/encuentro/encuentro_state.dart';
 import '../../widgets/common/loading_indicator.dart';
 import '../../widgets/app_bars/app_top_bar.dart';
 import '../../widgets/inputs/app_text_field.dart';
+import '../../widgets/buttons/app_button.dart';
+import '../../widgets/common/app_clickable_container.dart';
 import '../../../core/theme/theme.dart';
 import '../../../core/utils/rrule_helper.dart';
 import '../../../core/constants/app_constants.dart';
@@ -73,7 +75,7 @@ class _CreateEncuentroPageState extends State<CreateEncuentroPage> {
     if (!_formKey.currentState!.validate()) return;
     if (_selectedDate == null || _selectedTime == null || _selectedUbicacion == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Completa todos los campos requeridos')),
+        const SnackBar(content: Text('Completa todos los campos requer  idos')),
       );
       return;
     }
@@ -133,9 +135,9 @@ class _CreateEncuentroPageState extends State<CreateEncuentroPage> {
             title: 'Crear Encuentro',
             onClose: () => Navigator.of(context).pop(),
             actions: [
-              TextButton(
+              AppButton.text(
+                label: 'Crear',
                 onPressed: _createEncuentro,
-                child: const Text('Crear'),
               ),
             ],
           ),
@@ -155,26 +157,22 @@ class _CreateEncuentroPageState extends State<CreateEncuentroPage> {
                       // Fecha
                       _buildSection(
                         title: 'Fecha',
-                        child: InkWell(
+                        child: AppClickableContainer(
                           onTap: _selectDate,
-                          child: Container(
-                            padding: EdgeInsets.all(AppSpacing.space4),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: colorScheme.outline),
-                              borderRadius: AppBorderRadius.medium,
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(Icons.calendar_today, color: colorScheme.onSurfaceVariant),
-                                SizedBox(width: AppSpacing.space2),
-                                Text(
-                                  _selectedDate != null
-                                      ? DateFormat('EEEE, d MMMM yyyy', 'es_AR').format(_selectedDate!)
-                                      : 'Seleccionar fecha',
-                                  style: AppTextStyles.bodyLarge,
-                                ),
-                              ],
-                            ),
+                          padding: EdgeInsets.all(AppSpacing.space4),
+                          border: Border.all(color: colorScheme.outline),
+                          borderRadius: AppBorderRadius.medium,
+                          child: Row(
+                            children: [
+                              Icon(Icons.calendar_today, color: colorScheme.onSurfaceVariant),
+                              SizedBox(width: AppSpacing.space2),
+                              Text(
+                                _selectedDate != null
+                                    ? DateFormat('EEEE, d MMMM yyyy', 'es_AR').format(_selectedDate!)
+                                    : 'Seleccionar fecha',
+                                style: AppTextStyles.bodyLarge,
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -184,26 +182,22 @@ class _CreateEncuentroPageState extends State<CreateEncuentroPage> {
                       // Hora
                       _buildSection(
                         title: 'Hora',
-                        child: InkWell(
+                        child: AppClickableContainer(
                           onTap: _selectTime,
-                          child: Container(
-                            padding: EdgeInsets.all(AppSpacing.space4),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: colorScheme.outline),
-                              borderRadius: AppBorderRadius.medium,
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(Icons.access_time, color: colorScheme.onSurfaceVariant),
-                                SizedBox(width: AppSpacing.space2),
-                                Text(
-                                  _selectedTime != null
-                                      ? _selectedTime!.format(context)
-                                      : 'Seleccionar hora',
-                                  style: AppTextStyles.bodyLarge,
-                                ),
-                              ],
-                            ),
+                          padding: EdgeInsets.all(AppSpacing.space4),
+                          border: Border.all(color: colorScheme.outline),
+                          borderRadius: AppBorderRadius.medium,
+                          child: Row(
+                            children: [
+                              Icon(Icons.access_time, color: colorScheme.onSurfaceVariant),
+                              SizedBox(width: AppSpacing.space2),
+                              Text(
+                                _selectedTime != null
+                                    ? _selectedTime!.format(context)
+                                    : 'Seleccionar hora',
+                                style: AppTextStyles.bodyLarge,
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -213,28 +207,24 @@ class _CreateEncuentroPageState extends State<CreateEncuentroPage> {
                       // Ubicación
                       _buildSection(
                         title: 'Ubicación',
-                        child: InkWell(
+                        child: AppClickableContainer(
                           onTap: _selectUbicacion,
-                          child: Container(
-                            padding: EdgeInsets.all(AppSpacing.space4),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: colorScheme.outline),
-                              borderRadius: AppBorderRadius.medium,
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(Icons.location_on, color: colorScheme.onSurfaceVariant),
-                                SizedBox(width: AppSpacing.space2),
-                                Expanded(
-                                  child: Text(
-                                    _selectedUbicacion?.direccion ?? 
-                                    _selectedUbicacion?.barrio ??
-                                    'Seleccionar ubicación',
-                                    style: AppTextStyles.bodyLarge,
-                                  ),
+                          padding: EdgeInsets.all(AppSpacing.space4),
+                          border: Border.all(color: colorScheme.outline),
+                          borderRadius: AppBorderRadius.medium,
+                          child: Row(
+                            children: [
+                              Icon(Icons.location_on, color: colorScheme.onSurfaceVariant),
+                              SizedBox(width: AppSpacing.space2),
+                              Expanded(
+                                child: Text(
+                                  _selectedUbicacion?.direccion ?? 
+                                  _selectedUbicacion?.barrio ??
+                                  'Seleccionar ubicación',
+                                  style: AppTextStyles.bodyLarge,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),

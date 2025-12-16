@@ -8,6 +8,7 @@ import '../../widgets/common/empty_state.dart';
 import '../../widgets/common/error_widget.dart';
 import '../../widgets/common/loading_indicator.dart';
 import '../../widgets/app_bars/app_top_bar.dart';
+import '../../widgets/buttons/app_button.dart';
 import 'encuentro_card.dart';
 
 /// Página de lista de encuentros
@@ -25,8 +26,9 @@ class EncuentroListPage extends StatelessWidget {
         appBar: AppTopBar.home(
           title: 'Encuentros',
           actions: [
-            IconButton(
-              icon: const Icon(Icons.add),
+            AppButton.text(
+              label: '',
+              leftIcon: const Icon(Icons.add, size: 20),
               onPressed: () {
                 context.push('/encuentro/create');
               },
@@ -51,11 +53,11 @@ class EncuentroListPage extends StatelessWidget {
                 return EmptyState(
                   icon: Icons.event,
                   message: 'No hay encuentros próximos\nLos artistas anunciarán cuando estarán pintando en vivo',
-                  action: TextButton(
-                      onPressed: () {
-                        context.push('/feed');
-                      },
-                    child: const Text('Explorar Obras'),
+                  action: AppButton.text(
+                    label: 'Explorar Obras',
+                    onPressed: () {
+                      context.push('/feed');
+                    },
                   ),
                 );
               }

@@ -20,6 +20,7 @@ import '../../widgets/modals/app_filter_modal.dart';
 import '../../widgets/common/loading_indicator.dart';
 import '../../widgets/common/error_widget.dart';
 import '../../widgets/buttons/app_fab.dart';
+import '../../widgets/buttons/app_button.dart';
 
 /// Página principal - Mapa de arte urbano
 class MapaPage extends StatefulWidget {
@@ -248,6 +249,7 @@ class _MapaPageState extends State<MapaPage> {
               },
               onFilterTap: _isCreatingRoute ? null : _showFilterModal,
               onLocationTap: _requestLocationPermission,
+              onPreviewTap: () => context.push('/preview'),
               puntoA: _puntoA,
               puntoB: _puntoB,
               puntoAController: _isCreatingRoute ? _puntoAController : null,
@@ -316,7 +318,8 @@ class _MapaPageState extends State<MapaPage> {
                         ),
                       ),
                       if (_puntoA != null || _puntoB != null)
-                        TextButton(
+                        AppButton.text(
+                          label: 'Cancelar',
                           onPressed: () {
                             setState(() {
                               _isCreatingRoute = false;
@@ -324,12 +327,6 @@ class _MapaPageState extends State<MapaPage> {
                               _puntoB = null;
                             });
                           },
-                          child: Text(
-                            'Cancelar',
-                            style: AppTextStyles.labelMedium.copyWith(
-                              color: AppColors.onPrimaryContainer,
-                            ),
-                          ),
                         ),
                     ],
                   ),

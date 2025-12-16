@@ -19,6 +19,8 @@ import '../../widgets/common/error_widget.dart';
 import '../../widgets/avatars/app_avatar.dart';
 import '../../widgets/cards/app_topn_item.dart';
 import '../../layouts/main_layout.dart';
+import '../../widgets/buttons/app_button.dart';
+import '../../widgets/common/app_clickable_container.dart';
 
 /// Página de perfil del usuario
 class PerfilPage extends StatelessWidget {
@@ -36,12 +38,12 @@ class PerfilPage extends StatelessWidget {
         title: 'Perfil',
         currentBottomNavIndex: 0, // Perfil
         appBarActions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
+          AppButton.text(
+            label: '',
+            leftIcon: const Icon(Icons.settings, size: 20),
             onPressed: () {
               // TODO: Navegar a configuración
             },
-            tooltip: 'Configuración',
           ),
         ],
         child: BlocBuilder<UsuarioCubit, UsuarioState>(
@@ -242,16 +244,11 @@ class PerfilPage extends StatelessWidget {
     required String label,
     required VoidCallback onTap,
   }) {
-    return SizedBox(
-      width: double.infinity,
-      child: OutlinedButton.icon(
-        onPressed: onTap,
-        icon: Icon(icon),
-        label: Text(label),
-        style: OutlinedButton.styleFrom(
-          padding: EdgeInsets.all(AppSpacing.space3),
-        ),
-      ),
+    return AppButton.primaryOutlined(
+      label: label,
+      leftIcon: Icon(icon, size: 20),
+      onPressed: onTap,
+      isExpanded: true,
     );
   }
 
@@ -287,34 +284,32 @@ class PerfilPage extends StatelessWidget {
     required String label,
     required VoidCallback onTap,
   }) {
-    return InkWell(
+    return AppClickableContainer(
       onTap: onTap,
+      padding: EdgeInsets.all(AppSpacing.space2),
       borderRadius: AppBorderRadius.small,
-      child: Padding(
-        padding: EdgeInsets.all(AppSpacing.space2),
-        child: Row(
-          children: [
-            Icon(
-              icon,
-              color: AppColors.primary,
-              size: 24,
-            ),
-            SizedBox(width: AppSpacing.space3),
-            Expanded(
-              child: Text(
-                label,
-                style: AppTextStyles.bodyLarge.copyWith(
-                  color: AppColors.primary,
-                ),
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            color: AppColors.primary,
+            size: 24,
+          ),
+          SizedBox(width: AppSpacing.space3),
+          Expanded(
+            child: Text(
+              label,
+              style: AppTextStyles.bodyLarge.copyWith(
+                color: AppColors.primary,
               ),
             ),
-            Icon(
-              Icons.open_in_new,
-              size: 16,
-              color: AppColors.onSurfaceVariant,
-            ),
-          ],
-        ),
+          ),
+          Icon(
+            Icons.open_in_new,
+            size: 16,
+            color: AppColors.onSurfaceVariant,
+          ),
+        ],
       ),
     );
   }
@@ -374,9 +369,9 @@ class PerfilPage extends StatelessWidget {
                         'Top N de Rutas',
                         style: AppTextStyles.titleMedium,
                       ),
-                      TextButton(
+                      AppButton.text(
+                        label: 'Agregar',
                         onPressed: () => context.push('/rutas'),
-                        child: const Text('Agregar'),
                       ),
                     ],
                   ),
@@ -403,9 +398,9 @@ class PerfilPage extends StatelessWidget {
                     'Top N de Rutas',
                     style: AppTextStyles.titleMedium,
                   ),
-                  TextButton(
+                  AppButton.text(
+                    label: 'Ver todas',
                     onPressed: () => context.push('/topn'),
-                    child: const Text('Ver todas'),
                   ),
                 ],
               ),
@@ -492,9 +487,9 @@ class PerfilPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: AppSpacing.space2),
-                TextButton(
+                AppButton.text(
+                  label: 'Reintentar',
                   onPressed: () => context.read<RutaBloc>().add(const LoadRutas()),
-                  child: const Text('Reintentar'),
                 ),
               ],
             ),
@@ -519,9 +514,9 @@ class PerfilPage extends StatelessWidget {
                         'Mis Rutas',
                         style: AppTextStyles.titleMedium,
                       ),
-                      TextButton(
+                      AppButton.text(
+                        label: 'Ver todas',
                         onPressed: () => context.push('/rutas'),
-                        child: const Text('Ver todas'),
                       ),
                     ],
                   ),
@@ -574,16 +569,12 @@ class PerfilPage extends StatelessWidget {
   }
 
   Widget _buildRutaCard(BuildContext context, Ruta ruta) {
-    return Container(
+    return AppClickableContainer(
+      onTap: () => context.push('/ruta/${ruta.id}'),
       padding: EdgeInsets.all(AppSpacing.space4),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceVariant,
-        borderRadius: AppBorderRadius.medium,
-        boxShadow: AppShadows.small,
-      ),
-      child: InkWell(
-        onTap: () => context.push('/ruta/${ruta.id}'),
-        borderRadius: AppBorderRadius.medium,
+      color: Theme.of(context).colorScheme.surfaceVariant,
+      borderRadius: AppBorderRadius.medium,
+      boxShadow: AppShadows.small,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -662,7 +653,6 @@ class PerfilPage extends StatelessWidget {
             ],
           ],
         ),
-      ),
     );
   }
 

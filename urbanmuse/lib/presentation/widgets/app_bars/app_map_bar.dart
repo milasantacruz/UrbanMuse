@@ -25,6 +25,7 @@ class AppMapBar extends StatelessWidget {
   final VoidCallback? onSearchTap;
   final VoidCallback? onFilterTap;
   final VoidCallback? onLocationTap;
+  final VoidCallback? onPreviewTap;
   final String? searchHint;
   
   // Puntos para mostrar cuando se está creando una ruta
@@ -44,6 +45,7 @@ class AppMapBar extends StatelessWidget {
     this.onSearchTap,
     this.onFilterTap,
     this.onLocationTap,
+    this.onPreviewTap,
     this.searchHint,
     this.puntoA,
     this.puntoB,
@@ -142,6 +144,17 @@ class AppMapBar extends StatelessWidget {
                   onPressed: onLocationTap,
                   tooltip: 'Mi ubicación',
                 ),
+                
+                if (onPreviewTap != null) ...[
+                  SizedBox(width: AppSpacing.space2), // 8px
+                  // Botón de preview de widgets
+                  _buildActionButton(
+                    context: context,
+                    icon: Icons.widgets,
+                    onPressed: onPreviewTap,
+                    tooltip: 'Preview Widgets',
+                  ),
+                ],
                 
                 const Spacer(),
               ],

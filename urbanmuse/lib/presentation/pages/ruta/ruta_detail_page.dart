@@ -17,6 +17,7 @@ import '../../widgets/cards/app_obra_card.dart';
 import '../../widgets/buttons/app_button.dart';
 import '../../widgets/common/loading_indicator.dart';
 import '../../widgets/common/error_widget.dart';
+import '../../widgets/chips/app_filter_chip.dart';
 import '../../../core/theme/theme.dart';
 
 /// Página de detalle de ruta
@@ -139,8 +140,10 @@ class RutaDetailPage extends StatelessWidget {
                               SizedBox(height: AppSpacing.space4),
 
                               // Tipo de ruta
-                              Chip(
-                                label: Text(_getTipoRutaLabel(ruta.tipo)),
+                              AppFilterChip(
+                                label: _getTipoRutaLabel(ruta.tipo),
+                                isSelected: true,
+                                onSelected: null, // Solo informativo
                               ),
                               SizedBox(height: AppSpacing.space5),
 

@@ -8,6 +8,7 @@ import '../../widgets/cards/app_topn_item.dart';
 import '../../widgets/common/empty_state.dart';
 import '../../widgets/common/error_widget.dart';
 import '../../widgets/common/loading_indicator.dart';
+import '../../widgets/buttons/app_button.dart';
 import '../../layouts/main_layout.dart';
 
 /// Página del Top N (Rutas Favoritas) del usuario
@@ -25,8 +26,9 @@ class TopNPage extends StatelessWidget {
         title: 'Mi Top N',
         currentBottomNavIndex: 3, // Favoritos
         appBarActions: [
-          IconButton(
-            icon: const Icon(Icons.add),
+          AppButton.text(
+            label: '',
+            leftIcon: const Icon(Icons.add, size: 20),
             onPressed: () {
               context.push('/rutas');
             },
@@ -50,11 +52,11 @@ class TopNPage extends StatelessWidget {
                 return EmptyState(
                   icon: Icons.route,
                   message: 'No tienes rutas en tu Top N\nAgrega rutas favoritas para acceder rápidamente a ellas',
-                  action: TextButton(
+                  action: AppButton.text(
+                    label: 'Explorar Rutas',
                     onPressed: () {
                       context.push('/rutas');
                     },
-                    child: const Text('Explorar Rutas'),
                   ),
                 );
               }
@@ -72,9 +74,9 @@ class TopNPage extends StatelessWidget {
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                         if (state.rutas.length < 10)
-                          TextButton.icon(
-                            icon: const Icon(Icons.add),
-                            label: const Text('Agregar Ruta'),
+                          AppButton.text(
+                            label: 'Agregar Ruta',
+                            leftIcon: const Icon(Icons.add, size: 20),
                             onPressed: () {
                               context.push('/rutas');
                             },

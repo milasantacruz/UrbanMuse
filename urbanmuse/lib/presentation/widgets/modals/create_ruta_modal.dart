@@ -14,6 +14,7 @@ import '../cards/app_obra_card.dart';
 import '../buttons/app_button.dart';
 import '../common/loading_indicator.dart';
 import '../common/error_widget.dart';
+import '../common/app_clickable_container.dart';
 import 'dart:math' as math;
 import '../../../domain/entities/obra.dart';
 import '../../../domain/entities/ruta.dart';
@@ -226,8 +227,9 @@ class _CreateRutaModalState extends State<CreateRutaModal> {
                             style: AppTextStyles.titleLarge,
                           ),
                         ),
-                        IconButton(
-                          icon: const Icon(Icons.close),
+                        AppButton.text(
+                          label: '',
+                          leftIcon: const Icon(Icons.close, size: 20),
                           onPressed: widget.onClose,
                         ),
                       ],
@@ -270,9 +272,9 @@ class _CreateRutaModalState extends State<CreateRutaModal> {
                       children: [
                         // Botón Atrás (visible desde paso 2 en adelante)
                         if (_currentStep > 1)
-                          TextButton(
+                          AppButton.text(
+                            label: 'Atrás',
                             onPressed: _previousStep,
-                            child: const Text('Atrás'),
                           ),
                         const Spacer(),
                         // Botón Siguiente o Crear
@@ -665,8 +667,9 @@ class _CreateRutaModalState extends State<CreateRutaModal> {
                   ),
                   title: Text('Usuario ${participanteId.substring(0, 8)}'),
                   subtitle: Text('ID: $participanteId'),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.remove_circle_outline),
+                  trailing: AppButton.text(
+                    label: '',
+                    leftIcon: const Icon(Icons.remove_circle_outline, size: 20),
                     onPressed: () {
                       setState(() {
                         _participantesIds.removeAt(index);
@@ -696,11 +699,12 @@ class _CreateRutaModalState extends State<CreateRutaModal> {
           ),
         ),
         actions: [
-          TextButton(
+          AppButton.text(
+            label: 'Cancelar',
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancelar'),
           ),
-          TextButton(
+          AppButton.text(
+            label: 'Agregar',
             onPressed: () {
               final userId = userIdController.text.trim();
               if (userId.isNotEmpty && !_participantesIds.contains(userId)) {
@@ -710,7 +714,6 @@ class _CreateRutaModalState extends State<CreateRutaModal> {
                 Navigator.of(context).pop();
               }
             },
-            child: const Text('Agregar'),
           ),
         ],
       ),
@@ -838,7 +841,7 @@ class _CreateRutaModalState extends State<CreateRutaModal> {
             SizedBox(height: AppSpacing.space4),
             
             // Fecha inicial
-            InkWell(
+            AppClickableContainer(
               onTap: () async {
                 final now = DateTime.now();
                 final picked = await showDatePicker(
@@ -851,32 +854,28 @@ class _CreateRutaModalState extends State<CreateRutaModal> {
                   setState(() => _fechaInicial = picked);
                 }
               },
-              child: Container(
-                padding: EdgeInsets.all(AppSpacing.space4),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Theme.of(context).colorScheme.outline,
+              padding: EdgeInsets.all(AppSpacing.space4),
+              border: Border.all(
+                color: Theme.of(context).colorScheme.outline,
+              ),
+              borderRadius: AppBorderRadius.medium,
+              child: Row(
+                children: [
+                  const Icon(Icons.calendar_today),
+                  SizedBox(width: AppSpacing.space2),
+                  Text(
+                    _fechaInicial != null
+                        ? '${_fechaInicial!.day}/${_fechaInicial!.month}/${_fechaInicial!.year}'
+                        : 'Seleccionar fecha inicial',
+                    style: AppTextStyles.bodyLarge,
                   ),
-                  borderRadius: AppBorderRadius.medium,
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.calendar_today),
-                    SizedBox(width: AppSpacing.space2),
-                    Text(
-                      _fechaInicial != null
-                          ? '${_fechaInicial!.day}/${_fechaInicial!.month}/${_fechaInicial!.year}'
-                          : 'Seleccionar fecha inicial',
-                      style: AppTextStyles.bodyLarge,
-                    ),
-                  ],
-                ),
+                ],
               ),
             ),
             SizedBox(height: AppSpacing.space4),
             
             // Hora
-            InkWell(
+            AppClickableContainer(
               onTap: () async {
                 final picked = await showTimePicker(
                   context: context,
@@ -886,26 +885,22 @@ class _CreateRutaModalState extends State<CreateRutaModal> {
                   setState(() => _hora = picked);
                 }
               },
-              child: Container(
-                padding: EdgeInsets.all(AppSpacing.space4),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Theme.of(context).colorScheme.outline,
+              padding: EdgeInsets.all(AppSpacing.space4),
+              border: Border.all(
+                color: Theme.of(context).colorScheme.outline,
+              ),
+              borderRadius: AppBorderRadius.medium,
+              child: Row(
+                children: [
+                  const Icon(Icons.access_time),
+                  SizedBox(width: AppSpacing.space2),
+                  Text(
+                    _hora != null
+                        ? _hora!.format(context)
+                        : 'Seleccionar hora',
+                    style: AppTextStyles.bodyLarge,
                   ),
-                  borderRadius: AppBorderRadius.medium,
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.access_time),
-                    SizedBox(width: AppSpacing.space2),
-                    Text(
-                      _hora != null
-                          ? _hora!.format(context)
-                          : 'Seleccionar hora',
-                      style: AppTextStyles.bodyLarge,
-                    ),
-                  ],
-                ),
+                ],
               ),
             ),
           ],

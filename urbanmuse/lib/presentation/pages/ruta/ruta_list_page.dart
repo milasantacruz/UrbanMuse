@@ -11,6 +11,7 @@ import '../../layouts/main_layout.dart';
 import '../../widgets/common/loading_indicator.dart';
 import '../../widgets/common/error_widget.dart';
 import '../../widgets/common/empty_state.dart';
+import '../../widgets/buttons/app_button.dart';
 import '../../../core/theme/theme.dart';
 
 /// Página de lista de rutas guardadas
@@ -25,10 +26,10 @@ class RutaListPage extends StatelessWidget {
         title: 'Mis Rutas',
         currentBottomNavIndex: 2, // Rutas
         appBarActions: [
-          IconButton(
-            icon: const Icon(Icons.add),
+          AppButton.text(
+            label: '',
+            leftIcon: const Icon(Icons.add, size: 20),
             onPressed: () => context.push('/ruta/create'),
-            tooltip: 'Crear ruta',
           ),
         ],
         child: BlocBuilder<RutaBloc, RutaState>(
@@ -49,9 +50,9 @@ class RutaListPage extends StatelessWidget {
                 return EmptyState(
                   icon: Icons.route,
                   message: 'No tienes rutas guardadas\nCrea tu primera ruta para comenzar',
-                  action: TextButton(
+                  action: AppButton.text(
+                    label: 'Crear Ruta',
                     onPressed: () => context.push('/ruta/create'),
-                    child: const Text('Crear Ruta'),
                   ),
                 );
               }

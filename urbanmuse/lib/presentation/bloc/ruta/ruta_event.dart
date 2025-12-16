@@ -49,16 +49,72 @@ class CalculateRuta extends RutaEvent {
   final String puntoAId;
   final String puntoBId;
   final List<String> obraIds;
-  final String transporte;
+  final String modoTransporte; // 'bici' o 'a_pie'
   
   const CalculateRuta({
     required this.puntoAId,
     required this.puntoBId,
     required this.obraIds,
-    required this.transporte,
+    required this.modoTransporte,
   });
   
   @override
-  List<Object?> get props => [puntoAId, puntoBId, obraIds, transporte];
+  List<Object?> get props => [puntoAId, puntoBId, obraIds, modoTransporte];
+}
+
+/// Evento para cargar rutas públicas
+class LoadRutasPublicas extends RutaEvent {
+  const LoadRutasPublicas();
+}
+
+/// Evento para cargar rutas públicas dinámicas
+class LoadRutasPublicasDinamicas extends RutaEvent {
+  const LoadRutasPublicasDinamicas();
+}
+
+/// Evento para convertir ruta a dinámica
+class ConvertirADinamica extends RutaEvent {
+  final String rutaId;
+  final String rrule;
+  final DateTime fechaInicial;
+  final String hora; // TimeOfDay como String "HH:mm"
+  
+  const ConvertirADinamica({
+    required this.rutaId,
+    required this.rrule,
+    required this.fechaInicial,
+    required this.hora,
+  });
+  
+  @override
+  List<Object?> get props => [rutaId, rrule, fechaInicial, hora];
+}
+
+/// Evento para unirse a una ruta dinámica
+class JoinRutaDinamica extends RutaEvent {
+  final String rutaId;
+  final String userId;
+  
+  const JoinRutaDinamica({
+    required this.rutaId,
+    required this.userId,
+  });
+  
+  @override
+  List<Object?> get props => [rutaId, userId];
+}
+
+/// Evento para salir de una ruta dinámica
+class LeaveRutaDinamica extends RutaEvent {
+  final String rutaId;
+  final String userId;
+  
+  const LeaveRutaDinamica({
+    required this.rutaId,
+    required this.userId,
+  });
+  
+  @override
+  List<Object?> get props => [rutaId, userId];
 }
 

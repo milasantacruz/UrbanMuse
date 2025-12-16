@@ -3,4 +3,5 @@
 /// Exporta todos los widgets de navegación
 export 'app_top_bar.dart';
 export 'app_bottom_nav.dart';
+export 'app_map_bar.dart';
 

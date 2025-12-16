@@ -42,9 +42,31 @@ class DistanceCalculator {
 
   /// Calcular tiempo estimado en bicicleta (metros a minutos)
   /// Velocidad promedio: 15 km/h = 250 m/min
+  /// **Principal:** Bici es el modo de transporte principal
   static double calculateBikingTime(double distanceInMeters) {
     const double bikingSpeed = 250.0; // metros por minuto
     return distanceInMeters / bikingSpeed;
+  }
+
+  /// Calcular tiempo estimado según modo de transporte
+  /// 
+  /// [distanceInMeters] es la distancia en metros
+  /// [modoTransporte] debe ser 'bici' o 'a_pie'
+  /// 
+  /// Retorna tiempo estimado en minutos
+  static double calculateTimeByTransport({
+    required double distanceInMeters,
+    required String modoTransporte,
+  }) {
+    switch (modoTransporte) {
+      case 'bici':
+        return calculateBikingTime(distanceInMeters);
+      case 'a_pie':
+        return calculateWalkingTime(distanceInMeters);
+      default:
+        // Por defecto, usar bici (principal)
+        return calculateBikingTime(distanceInMeters);
+    }
   }
 
   /// Formatear distancia para mostrar

@@ -57,31 +57,57 @@ Pantalla de detalle completo de una obra de arte urbano. Muestra toda la informa
 
 ## 🧩 Componentes Necesarios
 
-### App Bar
-| Elemento | Especificación |
-|----------|----------------|
-| Back button | ◀ o ← 24px |
-| Título | "Obra" - centrado (opcional, puede ser transparente) |
-| Like button | ❤️ 24px, toggle filled/outline |
-| More menu | ⋮ 24px (compartir, reportar) |
-| Estilo | Transparente sobre imagen, o sólido |
+### Header Hero (Imagen + Overlay)
+**Widget Implementado:** `AppObraDetailHeader` ✅  
+**Ubicación:** `lib/presentation/widgets/headers/app_obra_detail_header.dart`
 
-### Imagen Hero
-| Elemento | Especificación |
-|----------|----------------|
-| Ancho | 100% (full width) |
-| Aspect ratio | 16:9 o 4:3 |
-| Altura | ~210px (16:9) o ~280px (4:3) |
-| Tap action | Abre imagen en fullscreen/gallery |
-| Gradiente | Overlay degradado bottom para legibilidad |
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Imagen Hero | Full width, aspect 16:9 o 4:3 | `AppObraDetailHeader(imageUrl: ..., aspectRatio: 16/9)` |
+| Gradiente | Overlay degradado bottom (negro 0% → 60%) | Incluido en `AppObraDetailHeader` |
+| Back button | Flotante top-left | `onBack` callback |
+| Share button | Flotante top-right | `onShare` callback |
+| Favorite button | Flotante top-right, toggle | `onFavoriteToggle`, `isFavorite` prop |
+| Category badge | Top-right, debajo de botones | Integrado con colores de categoría |
+| Título overlay | Bottom, sobre gradiente | `showTitleOverlay: true` (default) |
+| Tap en imagen | Abre fullscreen | `onImageTap` callback |
+
+**Uso:**
+```dart
+AppObraDetailHeader(
+  imageUrl: obra.imageUrl,
+  titulo: obra.titulo,
+  categoria: obra.categoria,
+  isFavorite: obra.isFavorite,
+  onBack: () => Navigator.pop(context),
+  onShare: () => _shareObra(),
+  onFavoriteToggle: () => _toggleFavorite(),
+  onImageTap: () => _openFullscreen(),
+)
+```
+
+### App Bar (Opcional - si no se usa header)
+**Widget Implementado:** `AppTopBar.detail` ✅  
+**Ubicación:** `lib/presentation/widgets/app_bars/app_top_bar.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Back button | ◀ o ← 24px | `AppTopBar.detail(onBack: ...)` |
+| Título | "Obra" - centrado (opcional) | `title: "Obra"` |
+| Like button | ❤️ 24px, toggle filled/outline | `actions: [IconButton(...)]` |
+| More menu | ⋮ 24px (compartir, reportar) | `actions: [PopupMenuButton(...)]` |
+| Estilo | Transparente sobre imagen, o sólido | `transparent: true` o `backgroundColor` |
 
 ### Badge de Categoría
-| Elemento | Especificación |
-|----------|----------------|
-| Posición | Debajo de imagen, izquierda |
-| Estilo | Chip filled con color de categoría |
-| Altura | 28px |
-| Icono | 16px del tipo de categoría |
+**Widget Implementado:** `CategoryBadge.rounded` ✅  
+**Ubicación:** `lib/presentation/widgets/badges/app_badge.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Posición | Debajo de imagen, izquierda | Ya incluido en `AppObraDetailHeader` |
+| Estilo | Chip rounded con color de categoría | `CategoryBadge.rounded(categoria: ...)` |
+| Altura | 28px | Configurado en `CategoryBadge` |
+| Icono | 16px del tipo de categoría | `CategoryIcon` integrado |
 
 ### Contador de Likes
 | Elemento | Especificación |
@@ -137,16 +163,49 @@ Pantalla de detalle completo de una obra de arte urbano. Muestra toda la informa
 | Formato | "Marzo 2023" o "15 de marzo, 2023" |
 
 ### Action Buttons (Footer)
-| Elemento | Especificación |
-|----------|----------------|
-| Layout | Row, 2 botones 50% cada uno |
-| Botón 1 | "Agregar a Top 10" - Filled, Primary |
-| Botón 2 | "Ver en Mapa" - Outlined, Primary |
-| Altura | 48px cada botón |
-| Icono | 20px a la izquierda del texto |
-| Posición | Fixed bottom o en scroll |
-| Padding | 16px todos lados |
-| Fondo | Surface con shadow-lg si fixed |
+**Widget Implementado:** `AppButton` ✅  
+**Ubicación:** `lib/presentation/widgets/buttons/app_button.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Layout | Row, 2 botones 50% cada uno | `Row(children: [Expanded(...), Expanded(...)])` |
+| Botón 1 | "Agregar a Top 10" - Filled, Primary | `AppButton.primary(label: "Agregar a Top 10", icon: Icons.star)` |
+| Botón 2 | "Ver en Mapa" - Outlined, Primary | `AppButton.outlined(label: "Ver en Mapa", icon: Icons.map)` |
+| Altura | 48px cada botón | `AppButton` standard height |
+| Icono | 20px a la izquierda del texto | `icon` prop en `AppButton` |
+| Posición | Fixed bottom o en scroll | `Positioned` o en `Column` |
+| Padding | 16px todos lados | `AppSpacing.space4` |
+| Fondo | Surface con shadow-lg si fixed | `AppColors.surface` con `AppShadows.large` |
+
+**Uso:**
+```dart
+Container(
+  padding: EdgeInsets.all(AppSpacing.space4),
+  decoration: BoxDecoration(
+    color: AppColors.surface,
+    boxShadow: [AppShadows.large],
+  ),
+  child: Row(
+    children: [
+      Expanded(
+        child: AppButton.primary(
+          label: "Agregar a Top 10",
+          icon: Icons.star,
+          onPressed: () => _addToTop10(),
+        ),
+      ),
+      SizedBox(width: AppSpacing.space3),
+      Expanded(
+        child: AppButton.outlined(
+          label: "Ver en Mapa",
+          icon: Icons.map,
+          onPressed: () => _viewInMap(),
+        ),
+      ),
+    ],
+  ),
+)
+```
 
 ---
 
@@ -171,9 +230,9 @@ Pantalla de detalle completo de una obra de arte urbano. Muestra toda la informa
 └─────────────────────────────────┘
 ```
 
-### Ya en Top 10
+### Nota sobre Top N
 ```
-│ [✓ En tu Top 10]    [🗺️ Ver] │ ← Botón cambia a estado activo
+│ [🗺️ Ver en mapa]              │ ← Ya no hay "Agregar a Top N" para obras
 │                       en Mapa │
 ```
 - Botón cambia a outlined con check
@@ -217,7 +276,7 @@ Pantalla de detalle completo de una obra de arte urbano. Muestra toda la informa
 | Tap en nombre artista | Navega a ArtistaProfilePage |
 | Tap en "Ver más" (descripción) | Expande texto completo |
 | Tap en ubicación | (Opcional) Abre en Google Maps |
-| Tap en "Agregar a Top 10" | Agrega y muestra feedback |
+| Tap en "Ver en mapa" | Navega al mapa centrado en la obra |
 | Tap en "Ver en Mapa" | Navega a MapaPage centrado en esta obra |
 | Tap en ⋮ (more) | Abre menú: Compartir, Reportar |
 | Swipe horizontal en imagen | (Si hay galería) Cambia foto |

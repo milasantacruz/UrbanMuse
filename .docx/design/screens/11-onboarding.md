@@ -111,75 +111,91 @@ Secuencia de 3 pantallas de introducción que se muestran al abrir la app por pr
 ## 🧩 Componentes Necesarios
 
 ### Ilustración/Imagen
-| Elemento | Especificación |
-|----------|----------------|
-| Tamaño | ~280x280px o 60% del ancho |
-| Posición | Centro-superior |
-| Estilo | Ilustración vectorial o imagen |
-| Colores | Palette de la app (Primary, categorías) |
-| Animación | (Opcional) Lottie o entrada sutil |
+**Widget:** `Image` o `SvgPicture` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Tamaño | ~280x280px o 60% del ancho | `SizedBox(width: 280, height: 280)` o `AspectRatio` |
+| Posición | Centro-superior | `Center` o `Align` |
+| Estilo | Ilustración vectorial o imagen | `Image.asset` o `SvgPicture.asset` |
+| Colores | Palette de la app (Primary, categorías) | Usar `AppColors` |
+| Animación | (Opcional) Lottie o entrada sutil | `AnimatedOpacity` o `Lottie` package |
 
 ### Título
-| Elemento | Especificación |
-|----------|----------------|
-| Estilo | Headline Large (28px) |
-| Weight | Bold (700) |
-| Color | OnSurface (#1D1617) |
-| Icono | Emoji 24px antes del texto |
-| Alignment | Center |
+**Widget:** `Text` con `AppTextStyles.h1` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Estilo | Headline Large (28px) | `AppTextStyles.h1` |
+| Weight | Bold (700) | Incluido en `AppTextStyles.h1` |
+| Color | OnSurface (#1D1617) | `AppColors.onSurface` |
+| Icono | Emoji 24px antes del texto | `Text` con emoji o `AppIcon` |
+| Alignment | Center | `textAlign: TextAlign.center` |
 
 ### Subtítulo
-| Elemento | Especificación |
-|----------|----------------|
-| Estilo | Body Medium (16px) |
-| Color | OnSurface Variant (#4A4F45) |
-| Alignment | Center |
-| Max width | 280px |
-| Max líneas | 3 |
+**Widget:** `Text` con `AppTextStyles.bodyMedium` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Estilo | Body Medium (16px) | `AppTextStyles.bodyMedium` |
+| Color | OnSurface Variant (#4A4F45) | `AppColors.onSurfaceVariant` |
+| Alignment | Center | `textAlign: TextAlign.center` |
+| Max width | 280px | `SizedBox(width: 280)` o `ConstrainedBox` |
+| Max líneas | 3 | `maxLines: 3` |
 
 ### Page Indicator (Dots)
-| Elemento | Especificación |
-|----------|----------------|
-| Dots | 3 círculos |
-| Tamaño | 8px cada uno |
-| Gap | 12px |
-| Activo | Primary (#6BA034), filled |
-| Inactivo | Neutral 300, outlined o filled gris |
-| Posición | Centro, debajo del subtítulo |
+**Widget:** `Row` con `Container` circulares ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Dots | 3 círculos | `Row` con 3 `Container` |
+| Tamaño | 8px cada uno | `width: 8, height: 8` |
+| Gap | 12px | `AppSpacing.space3` |
+| Activo | Primary (#6BA034), filled | `AppColors.primary` con `BoxShape.circle` |
+| Inactivo | Neutral 300, outlined o filled gris | `AppColors.neutral300` |
+| Posición | Centro, debajo del subtítulo | `Center` widget |
 
 ### Botón "Siguiente"
-| Elemento | Especificación |
-|----------|----------------|
-| Estilo | Filled, Primary |
-| Texto | "Siguiente" (pantallas 1-2) |
-| Posición | Bottom-right |
-| Ancho | Auto o 50% |
-| Altura | 48px |
+**Widget Implementado:** `AppButton.primary` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Estilo | Filled, Primary | `AppButton.primary(label: "Siguiente")` |
+| Texto | "Siguiente" (pantallas 1-2) | `label: "Siguiente"` |
+| Posición | Bottom-right | `Align(alignment: Alignment.bottomRight)` |
+| Ancho | Auto o 50% | `SizedBox` o `Expanded` |
+| Altura | 48px | `AppButton` standard height |
 
 ### Botón "Anterior"
-| Elemento | Especificación |
-|----------|----------------|
-| Estilo | Text button |
-| Texto | "Anterior" |
-| Posición | Bottom-left |
-| Visibilidad | Solo pantallas 2-3 |
+**Widget Implementado:** `AppButton.text` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Estilo | Text button | `AppButton.text(label: "Anterior")` |
+| Texto | "Anterior" | `label: "Anterior"` |
+| Posición | Bottom-left | `Align(alignment: Alignment.bottomLeft)` |
+| Visibilidad | Solo pantallas 2-3 | Conditional rendering |
 
 ### Botón "Omitir"
-| Elemento | Especificación |
-|----------|----------------|
-| Estilo | Text button, Neutral 600 |
-| Texto | "Omitir" |
-| Posición | Centro-bottom o top-right |
-| Visibilidad | Pantallas 1-2 |
+**Widget Implementado:** `AppButton.text` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Estilo | Text button, Neutral 600 | `AppButton.text(label: "Omitir")` con `AppColors.neutral600` |
+| Texto | "Omitir" | `label: "Omitir"` |
+| Posición | Centro-bottom o top-right | `Center` o `Align` |
+| Visibilidad | Pantallas 1-2 | Conditional rendering |
 
 ### Botón "Comenzar" (Pantalla final)
-| Elemento | Especificación |
-|----------|----------------|
-| Estilo | Filled, Primary, más grande |
-| Texto | "¡Comenzar!" |
-| Posición | Bottom-right o full width |
-| Ancho | 50% o 100% |
-| Altura | 56px |
+**Widget Implementado:** `AppButton.primary` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Estilo | Filled, Primary, más grande | `AppButton.primary(label: "¡Comenzar!")` |
+| Texto | "¡Comenzar!" | `label: "¡Comenzar!"` |
+| Posición | Bottom-right o full width | `Expanded` para full width |
+| Ancho | 50% o 100% | `SizedBox` o `Expanded` |
+| Altura | 56px | `AppButton` large size |
 
 ---
 

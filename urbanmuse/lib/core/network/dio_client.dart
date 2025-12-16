@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import '../constants/app_constants.dart';
 import '../errors/exceptions.dart';
+import 'api_endpoints.dart';
 
 /// Cliente HTTP configurado con Dio
 class DioClient {
@@ -9,6 +10,7 @@ class DioClient {
   DioClient() {
     _dio = Dio(
       BaseOptions(
+        baseUrl: ApiEndpoints.baseUrl,
         connectTimeout: Duration(seconds: AppConstants.connectionTimeout),
         receiveTimeout: Duration(seconds: AppConstants.receiveTimeout),
         headers: {

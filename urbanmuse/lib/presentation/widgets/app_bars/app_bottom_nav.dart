@@ -8,7 +8,7 @@ import '../../../core/theme/theme.dart';
 /// 
 /// **Características:**
 /// - Height: 80px (Material 3 standard)
-/// - 4 items: Mapa, Explorar, Rutas, Top 10
+/// - 4 items: Perfil, Explorar, Rutas, Favoritos/Top Rutas
 /// - Selected color: Primary (#6BA034)
 /// - Unselected color: OnSurfaceVariant
 /// - Icons: 24px
@@ -56,9 +56,9 @@ class AppBottomNav extends StatelessWidget {
             children: [
               _buildNavItem(
                 context: context,
-                icon: Icons.map_outlined,
-                selectedIcon: Icons.map,
-                label: 'Mapa',
+                icon: Icons.person_outline,
+                selectedIcon: Icons.person,
+                label: 'Perfil',
                 index: 0,
                 isSelected: currentIndex == 0,
                 selectedColor: effectiveSelectedColor,
@@ -66,8 +66,8 @@ class AppBottomNav extends StatelessWidget {
               ),
               _buildNavItem(
                 context: context,
-                icon: Icons.explore_outlined,
-                selectedIcon: Icons.explore,
+                icon: Icons.home_outlined,
+                selectedIcon: Icons.home,
                 label: 'Explorar',
                 index: 1,
                 isSelected: currentIndex == 1,
@@ -86,9 +86,9 @@ class AppBottomNav extends StatelessWidget {
               ),
               _buildNavItem(
                 context: context,
-                icon: Icons.star_border,
-                selectedIcon: Icons.star,
-                label: 'Top 10',
+                icon: Icons.favorite_border,
+                selectedIcon: Icons.favorite,
+                label: 'Favoritos',
                 index: 3,
                 isSelected: currentIndex == 3,
                 selectedColor: effectiveSelectedColor,
@@ -152,10 +152,10 @@ class AppBottomNav extends StatelessWidget {
 /// Enum para los items del bottom navigation.
 /// Facilita la navegación y el manejo de estados.
 enum BottomNavItem {
-  mapa(0, 'Mapa', Icons.map_outlined, Icons.map),
-  explorar(1, 'Explorar', Icons.explore_outlined, Icons.explore),
+  perfil(0, 'Perfil', Icons.person_outline, Icons.person),
+  explorar(1, 'Explorar', Icons.home_outlined, Icons.home),
   rutas(2, 'Rutas', Icons.route_outlined, Icons.route),
-  top10(3, 'Top 10', Icons.star_border, Icons.star);
+  favoritos(3, 'Favoritos', Icons.favorite_border, Icons.favorite);
 
   const BottomNavItem(this.itemIndex, this.label, this.icon, this.selectedIcon);
 

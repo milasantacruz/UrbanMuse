@@ -71,85 +71,106 @@ Modal de filtros avanzados que permite filtrar obras por categoría y artista. S
 ## 🧩 Componentes Necesarios
 
 ### Modal Container
-| Elemento | Especificación |
-|----------|----------------|
-| Tipo | Bottom Sheet |
-| Handle | 4x40px, Neutral 300 |
-| Border radius | 16px top |
-| Max height | 80% de pantalla |
-| Padding | 16px |
-| Fondo | Surface |
-| Sombra | shadow-xl |
+**Widget Implementado:** `AppFilterModal` ✅  
+**Ubicación:** `lib/presentation/widgets/modals/app_filter_modal.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Tipo | Bottom Sheet | `showModalBottomSheet` con `AppFilterModal` |
+| Handle | 4x40px, Neutral 300 | Integrado en `AppFilterModal` |
+| Border radius | 16px top | `BorderRadius.vertical(top: Radius.circular(16))` |
+| Max height | 80% de pantalla | `maxHeight: MediaQuery.of(context).size.height * 0.8` |
+| Padding | 16px | `AppSpacing.space4` |
+| Fondo | Surface | `AppColors.surface` |
+| Sombra | shadow-xl | `AppShadows.xlarge` |
 
 ### Header
-| Elemento | Especificación |
-|----------|----------------|
-| Icono | 🔍 24px |
-| Título | "Filtros" - Headline Small |
-| Close (opcional) | ✕ top-right |
+**Widget:** Integrado en `AppFilterModal` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Icono | 🔍 24px | `AppIcon` con `AppIconSize.medium` |
+| Título | "Filtros" - Headline Small | `AppTextStyles.h3` |
+| Close (opcional) | ✕ top-right | `IconButton` con `Icons.close` |
 
 ### Tabs
-| Elemento | Especificación |
-|----------|----------------|
-| Items | "Categoría", "Artista" |
-| Estilo | Underline tabs |
-| Tab activo | Primary, underline 2px |
-| Tab inactivo | Neutral 600 |
-| Altura | 48px |
+**Widget:** `TabBar` de Material 3 ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Items | "Categoría", "Artista" | `TabBar(tabs: [Tab(text: "Categoría"), Tab(text: "Artista")])` |
+| Estilo | Underline tabs | `TabBar` default style |
+| Tab activo | Primary, underline 2px | `indicatorColor: AppColors.primary` |
+| Tab inactivo | Neutral 600 | `labelColor: AppColors.neutral600` |
+| Altura | 48px | `TabBar` default height |
 
 ### Tab Categoría
+**Widget Implementado:** `AppCategoryFilterChipGroup` integrado en `AppFilterModal` ✅
 
 #### Checkbox "Todos"
-| Elemento | Especificación |
-|----------|----------------|
-| Texto | "Todos" |
-| Comportamiento | Selecciona/deselecciona todas |
-| Estilo | Bold cuando activo |
+**Widget:** `Checkbox` con `ListTile` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Texto | "Todos" | `ListTile(title: Text("Todos"))` |
+| Comportamiento | Selecciona/deselecciona todas | `onTap` callback que toggle todos |
+| Estilo | Bold cuando activo | `fontWeight: FontWeight.bold` cuando `selected` |
 
 #### Checkbox de Categoría
-| Elemento | Especificación |
-|----------|----------------|
-| Layout | Row: checkbox + color dot + texto |
-| Checkbox | 24px, Primary cuando checked |
-| Color dot | 12px, color de categoría |
-| Texto | Body Medium, nombre de categoría |
-| Padding vertical | 12px |
-| Divider | Línea sutil entre items (opcional) |
+**Widget:** `ListTile` con `Checkbox` y `CategoryBadge` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Layout | Row: checkbox + color dot + texto | `ListTile` con `leading: Checkbox(...)` |
+| Checkbox | 24px, Primary cuando checked | `Checkbox(value: selected, activeColor: AppColors.primary)` |
+| Color dot | 12px, color de categoría | `CategoryBadge.dot` o `Container` con color |
+| Texto | Body Medium, nombre de categoría | `AppTextStyles.bodyMedium` |
+| Padding vertical | 12px | `AppSpacing.space3` |
+| Divider | Línea sutil entre items (opcional) | `AppDivider` entre items |
 
 ### Tab Artista
+**Widget:** Integrado en `AppFilterModal` con `TabBarView` ✅
 
 #### Search Input
-| Elemento | Especificación |
-|----------|----------------|
-| Placeholder | "Buscar artista..." |
-| Icono | 🔍 20px, izquierda |
-| Border | Outline Variant |
-| Altura | 44px |
-| Comportamiento | Filtra lista mientras escribe |
+**Widget Implementado:** `AppSearchBar` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Placeholder | "Buscar artista..." | `AppSearchBar(placeholder: "Buscar artista...")` |
+| Icono | 🔍 20px, izquierda | Integrado en `AppSearchBar` |
+| Border | Outline Variant | `AppColors.outlineVariant` |
+| Altura | 44px o 56px | `AppSearchBar` standard |
+| Comportamiento | Filtra lista mientras escribe | `onChanged` callback |
 
 #### Checkbox "Todos los artistas"
-| Elemento | Especificación |
-|----------|----------------|
-| Texto | "Todos los artistas" |
-| Comportamiento | Selecciona/deselecciona todos |
+**Widget:** `Checkbox` con `ListTile` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Texto | "Todos los artistas" | `ListTile(title: Text("Todos los artistas"))` |
+| Comportamiento | Selecciona/deselecciona todos | `onTap` callback que toggle todos |
 
 #### Lista de Artistas
-| Elemento | Especificación |
-|----------|----------------|
-| Layout | Row: checkbox + avatar + handle |
-| Checkbox | 24px, Primary cuando checked |
-| Avatar | 32x32px, circular |
-| Handle | @nombre, Body Medium |
-| Scroll | Vertical si hay muchos |
+**Widget:** `ListTile` con `Checkbox`, `AppAvatar` y `AppTextStyles` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Layout | Row: checkbox + avatar + handle | `ListTile` con `leading: Checkbox(...)`, `title: Row([Avatar, Text])` |
+| Checkbox | 24px, Primary cuando checked | `Checkbox(value: selected, activeColor: AppColors.primary)` |
+| Avatar | 32x32px, circular | `AppAvatar.small(imageUrl: artista.avatarUrl)` |
+| Handle | @nombre, Body Medium | `AppTextStyles.bodyMedium` con prefijo "@" |
+| Scroll | Vertical si hay muchos | `ListView` o `SingleChildScrollView` |
 
 ### Footer Actions
-| Elemento | Especificación |
-|----------|----------------|
-| Layout | Row, space-between |
-| "Limpiar filtros" | Text button, Neutral 600 |
-| "Aplicar" | Filled button, Primary |
-| Padding | 16px |
-| Border top | 1px Outline Variant |
+**Widgets Implementados:** `AppButton.text`, `AppButton.primary` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Layout | Row, space-between | `Row(mainAxisAlignment: MainAxisAlignment.spaceBetween)` |
+| "Limpiar filtros" | Text button, Neutral 600 | `AppButton.text(label: "Limpiar filtros")` con `AppColors.neutral600` |
+| "Aplicar" | Filled button, Primary | `AppButton.primary(label: "Aplicar")` |
+| Padding | 16px | `AppSpacing.space4` |
+| Border top | 1px Outline Variant | `Border(top: BorderSide(color: AppColors.outlineVariant))` |
 
 ---
 

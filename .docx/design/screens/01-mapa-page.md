@@ -51,23 +51,29 @@ Pantalla principal de la app. Muestra un mapa interactivo con pins de obras de a
 ## 🧩 Componentes Necesarios
 
 ### Header (App Bar)
-| Elemento | Especificación |
-|----------|----------------|
-| Título | "Graffiti Trails" - Body Medium, Bold |
-| Icono búsqueda | 24px, outline, tappable |
-| Icono menú | 24px, hamburger/drawer |
-| Fondo | Surface (#FEF7FF) |
-| Altura | 56px |
+**Widget Implementado:** `AppTopBar.home` ✅  
+**Ubicación:** `lib/presentation/widgets/app_bars/app_top_bar.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Título | "Graffiti Trails" - Body Medium, Bold | `AppTopBar.home(title: "Graffiti Trails")` |
+| Icono búsqueda | 24px, outline, tappable | `actions: [IconButton(icon: AppIcon.search)]` |
+| Icono menú | 24px, hamburger/drawer | `actions: [IconButton(icon: AppIcon.menu)]` |
+| Fondo | Surface (#FEF7FF) | `backgroundColor: AppColors.surface` |
+| Altura | 56px | Material 3 standard |
 
 ### Filter Chips (Categorías)
-| Elemento | Especificación |
-|----------|----------------|
-| Layout | Horizontal scroll |
-| Chip style | Outlined o Filled según selección |
-| Chips | Graffiti (#E74C3C), Mural (#3498DB), Escultura (#F39C12), Performance (#9B59B6) |
-| Tamaño | Height 32px, padding 12px horizontal |
-| Icono | 16px a la izquierda del texto |
-| Selección | Multiple (toggle) |
+**Widget Implementado:** `AppCategoryFilterChipGroup` ✅  
+**Ubicación:** `lib/presentation/widgets/chips/app_filter_chip.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Layout | Horizontal scroll | `AppCategoryFilterChipGroup` con `SingleChildScrollView` |
+| Chip style | Outlined o Filled según selección | `AppFilterChip` con `selected` state |
+| Chips | Graffiti (#E74C3C), Mural (#3498DB), Escultura (#F39C12), Performance (#9B59B6) | Colores desde `AppColors.category*` |
+| Tamaño | Height 32px, padding 12px horizontal | Configurado en `AppFilterChip` |
+| Icono | 16px a la izquierda del texto | `CategoryIcon` integrado |
+| Selección | Multiple (toggle) | `onSelected` callback con estado |
 
 ### Mapa
 | Elemento | Especificación |
@@ -78,59 +84,85 @@ Pantalla principal de la app. Muestra un mapa interactivo con pins de obras de a
 | Padding inferior | 80px (para bottom nav) |
 
 ### Pins de Mapa
-| Elemento | Especificación |
-|----------|----------------|
-| Tamaño | 32x32px |
-| Forma | Círculo con punto inferior (típico pin) |
-| Borde | 2px blanco |
-| Sombra | shadow-md |
-| Colores | Por categoría (ver palette) |
-| Estado activo | Scale 1.3x + elevación |
-| Icono interior | Icono de categoría 16px, blanco |
+**Widget Implementado:** `AppMapPin` ✅  
+**Ubicación:** `lib/presentation/widgets/map_pins/app_map_pin.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Tamaño | 32x40px (small), 40x50px (medium) | `AppMapPin(size: MapPinSize.small/medium)` |
+| Forma | Teardrop (lágrima) | Custom painter en `AppMapPin` |
+| Borde | 2px blanco | `borderWidth` configurable |
+| Sombra | shadow-md | `showShadow: true` |
+| Colores | Por categoría (ver palette) | `category: MapPinCategory.graffiti/mural/etc` |
+| Estado activo | Scale 1.3x + elevación | `isSelected: true` (borde más grueso + glow) |
+| Icono interior | Icono de categoría 16px, blanco | Icono automático según categoría |
 
 ### Pin de Ubicación del Usuario
-| Elemento | Especificación |
-|----------|----------------|
-| Tamaño | 24x24px |
-| Color | Primary (#6BA034) |
-| Efecto | Pulso animado (círculo expandiéndose) |
-| Centro | Punto sólido 8px |
+**Widget Implementado:** `AppMapPin` con `animate: true` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Tamaño | 40x50px (medium) | `AppMapPin(size: MapPinSize.medium)` |
+| Color | Primary (#6BA034) | `category: MapPinCategory.userLocation` |
+| Efecto | Pulso animado (círculo expandiéndose) | `animate: true` |
+| Centro | Icono de persona | Icono automático |
 
 ### FAB (Floating Action Button)
-| Elemento | Especificación |
-|----------|----------------|
-| Posición | Bottom-right, 16px margin |
-| Tamaño | 56x56px |
-| Color | Primary (#6BA034) |
-| Icono | "route" o "+" - 24px, blanco |
-| Sombra | shadow-lg |
-| Label (opcional) | "Crear Ruta" |
+**Widget Implementado:** `AppFAB` ✅  
+**Ubicación:** `lib/presentation/widgets/buttons/app_fab.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Posición | Bottom-right, 16px margin | `Positioned` o `FloatingActionButton` |
+| Tamaño | 56x56px | `AppFAB` standard size |
+| Color | Primary (#6BA034) | `AppFAB(color: AppColors.primary)` |
+| Icono | "route" o "add" - 24px, blanco | `AppFAB(icon: Icons.route)` |
+| Sombra | shadow-lg | Elevation 6 (Material 3) |
+| Label (opcional) | "Crear Ruta" | `AppFAB.extended(label: "Crear Ruta")` |
 
 ### Bottom Sheet (Preview de Obra)
-| Elemento | Especificación |
-|----------|----------------|
-| Handle | 4x40px, Neutral 300, centrado |
-| Border radius | 16px top |
-| Padding | 16px |
-| Sombra | shadow-xl |
-| Imagen | 100x100px, radius 8px |
-| Título obra | H3 (20px), max 2 líneas |
-| Nombre artista | Body Small, Neutral 600, clickable |
-| Badge categoría | Chip con color de categoría |
-| Ubicación | Body Small, icono 📍 16px |
-| Botón | Outlined, "Ver más detalles" |
-| Animación | Slide up desde bottom |
+**Widget Implementado:** `AppObraPreviewBottomSheet` ✅  
+**Ubicación:** `lib/presentation/widgets/modals/app_obra_preview_bottom_sheet.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Handle | 4x40px, Neutral 300, centrado | Incluido en `AppObraPreviewBottomSheet` |
+| Border radius | 28px top | `borderRadius: BorderRadius.vertical(top: Radius.circular(28))` |
+| Padding | 16px | `AppSpacing.space4` |
+| Sombra | shadow-xl | Elevation del modal |
+| Imagen | 80px height, full width | `imageUrl` prop |
+| Título obra | H3 (20px), max 2 líneas | `AppTextStyles.h3` |
+| Nombre artista | Body Medium, onSurfaceVariant | `AppTextStyles.bodyMedium` |
+| Badge categoría | CategoryBadge.rounded | `CategoryBadge.rounded` integrado |
+| Ubicación | Body Small, icono location_on 16px | Opcional `distance` prop |
+| Botón | Primary, "Ver detalles" | `AppButton.primary` integrado |
+| Animación | Slide up desde bottom | `showModalBottomSheet` estándar |
+
+**Uso:**
+```dart
+AppObraPreviewBottomSheet.show(
+  context: context,
+  imageUrl: obra.imageUrl,
+  titulo: obra.titulo,
+  artista: obra.artista,
+  categoria: obra.categoria,
+  onVerDetalles: () => Navigator.push(...),
+);
+```
 
 ### Bottom Navigation
-| Elemento | Especificación |
-|----------|----------------|
-| Items | Mapa, Feed, Top 10, Perfil |
-| Altura | 56-80px (incluir safe area) |
-| Item activo | Primary (#6BA034), filled icon |
-| Item inactivo | Neutral 600, outline icon |
-| Labels | Caption (12px) |
-| Fondo | Surface (#FEF7FF) |
-| Elevación | shadow-sm o border-top |
+**Widget Implementado:** `AppBottomNav` ✅  
+**Ubicación:** `lib/presentation/widgets/app_bars/app_bottom_nav.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Items | Mapa, Feed, Top N, Perfil | `AppBottomNav` con 4 items |
+| Altura | 80px (incluir safe area) | Material 3 standard |
+| Item activo | Primary (#6BA034), filled icon | `selectedIndex` prop |
+| Item inactivo | Neutral 600, outline icon | Automático |
+| Labels | Caption (12px) | `AppTextStyles.caption` |
+| Fondo | Surface (#FEF7FF) | `AppColors.surface` |
+| Elevación | shadow-sm o border-top | Material 3 elevation |
 
 ---
 
@@ -239,7 +271,7 @@ Pantalla principal de la app. Muestra un mapa interactivo con pins de obras de a
 - **ArtistaProfilePage:** Tap en nombre de artista
 - **CreateRutaPage:** Tap en FAB
 - **FeedPage:** Bottom Nav "Feed"
-- **Top10Page:** Bottom Nav "Top 10"
+- **TopNPage:** Bottom Nav "Top N" (rutas favoritas)
 - **PerfilPage:** Bottom Nav "Perfil"
 - **SearchModal:** Tap en icono búsqueda
 

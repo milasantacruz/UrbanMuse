@@ -6,10 +6,13 @@ import '../pages/artista/artista_profile_page.dart';
 import '../pages/ruta/ruta_list_page.dart';
 import '../pages/ruta/ruta_detail_page.dart';
 import '../pages/ruta/create_ruta_page.dart';
-import '../pages/top10/top10_page.dart';
-import '../pages/salida/salida_list_page.dart';
-import '../pages/salida/salida_detail_page.dart';
-import '../pages/salida/create_salida_page.dart';
+import '../../../domain/entities/ubicacion.dart';
+import '../pages/topn/topn_page.dart';
+import '../pages/perfil/perfil_page.dart';
+import '../pages/encuentro/encuentro_list_page.dart';
+import '../pages/encuentro/encuentro_detail_page.dart';
+import '../pages/encuentro/create_encuentro_page.dart';
+import '../pages/publicar_obra/publicar_obra_page.dart';
 import '../pages/preview/preview_home_page.dart';
 import '../pages/preview/buttons_preview_page.dart';
 import '../pages/preview/icons_preview_page.dart';
@@ -191,6 +194,22 @@ final appRouter = GoRouter(
       name: 'rutas',
       builder: (context, state) => const RutaListPage(),
     ),
+    // IMPORTANTE: La ruta específica '/ruta/create' debe ir ANTES de '/ruta/:id'
+    // para evitar que "create" sea interpretado como un ID
+    GoRoute(
+      path: '/ruta/create',
+      name: 'create-ruta',
+      builder: (context, state) {
+        // Leer puntos A y B del extra si están disponibles
+        final extra = state.extra as Map<String, dynamic>?;
+        final puntoA = extra?['puntoA'] as Ubicacion?;
+        final puntoB = extra?['puntoB'] as Ubicacion?;
+        return CreateRutaPage(
+          puntoA: puntoA,
+          puntoB: puntoB,
+        );
+      },
+    ),
     GoRoute(
       path: '/ruta/:id',
       name: 'ruta-detail',
@@ -200,35 +219,66 @@ final appRouter = GoRouter(
       },
     ),
     GoRoute(
-      path: '/ruta/create',
-      name: 'create-ruta',
-      builder: (context, state) => const CreateRutaPage(),
+      path: '/perfil',
+      name: 'perfil',
+      builder: (context, state) => const PerfilPage(),
     ),
+    GoRoute(
+      path: '/topn',
+      name: 'topn',
+      builder: (context, state) => const TopNPage(),
+    ),
+    // Mantener /top10 por compatibilidad (redirigir a /topn)
     GoRoute(
       path: '/top10',
       name: 'top10',
-      builder: (context, state) => const Top10Page(),
+      redirect: (context, state) => '/topn',
     ),
+    GoRoute(
+      path: '/encuentros',
+      name: 'encuentros',
+      builder: (context, state) => const EncuentroListPage(),
+    ),
+    GoRoute(
+      path: '/encuentro/:id',
+      name: 'encuentro-detail',
+      builder: (context, state) {
+        final encuentroId = state.pathParameters['id']!;
+        return EncuentroDetailPage(encuentroId: encuentroId);
+      },
+    ),
+    GoRoute(
+      path: '/encuentro/create',
+      name: 'create-encuentro',
+      builder: (context, state) => const CreateEncuentroPage(),
+    ),
+    // Mantener /salidas por compatibilidad (redirigir a /encuentros)
     GoRoute(
       path: '/salidas',
       name: 'salidas',
-      builder: (context, state) => const SalidaListPage(),
+      redirect: (context, state) => '/encuentros',
     ),
     GoRoute(
       path: '/salida/:id',
       name: 'salida-detail',
-      builder: (context, state) {
+      redirect: (context, state) {
         final salidaId = state.pathParameters['id']!;
-        return SalidaDetailPage(salidaId: salidaId);
+        return '/encuentro/$salidaId';
       },
     ),
     GoRoute(
       path: '/salida/create',
       name: 'create-salida',
-      builder: (context, state) {
-        final rutaId = state.uri.queryParameters['rutaId'];
-        return CreateSalidaPage(rutaId: rutaId);
-      },
+      redirect: (context, state) => '/encuentro/create',
+    ),
+    
+    // ============================================
+    // Nuevas Rutas (v2.0)
+    // ============================================
+    GoRoute(
+      path: '/obra/publicar',
+      name: 'publicar-obra',
+      builder: (context, state) => const PublicarObraPage(),
     ),
   ],
 );

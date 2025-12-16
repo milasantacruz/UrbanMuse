@@ -39,6 +39,7 @@ class AppObraCard extends StatelessWidget {
   final bool isGridView;
   final double? aspectRatio;
   final int? likes;
+  final bool showChevron; // Para ocultar el chevron en list view
 
   const AppObraCard({
     super.key,
@@ -53,6 +54,7 @@ class AppObraCard extends StatelessWidget {
     this.isGridView = true,
     this.aspectRatio,
     this.likes,
+    this.showChevron = true,
   });
 
   /// Constructor para Grid View (Feed/Galería)
@@ -68,6 +70,7 @@ class AppObraCard extends StatelessWidget {
     this.onFavoriteToggle,
     this.aspectRatio = 4 / 3,
     this.likes,
+    this.showChevron = true,
   }) : isGridView = true;
 
   /// Constructor para List View (Búsqueda/Lista)
@@ -82,6 +85,7 @@ class AppObraCard extends StatelessWidget {
     this.onTap,
     this.onFavoriteToggle,
     this.likes,
+    this.showChevron = true,
   })  : isGridView = false,
         aspectRatio = null;
 
@@ -298,15 +302,16 @@ class AppObraCard extends StatelessWidget {
               ),
             ),
             
-            // Chevron icon
-            Padding(
-              padding: EdgeInsets.only(right: AppSpacing.space2), // 8px
-              child: Icon(
-                Icons.chevron_right,
-                color: AppColors.onSurfaceVariant,
-                size: 24,
+            // Chevron icon (solo si showChevron es true)
+            if (showChevron)
+              Padding(
+                padding: EdgeInsets.only(right: AppSpacing.space2), // 8px
+                child: Icon(
+                  Icons.chevron_right,
+                  color: AppColors.onSurfaceVariant,
+                  size: 24,
+                ),
               ),
-            ),
           ],
         ),
       ),

@@ -24,11 +24,11 @@ class StepData {
 
 /// Route Step Indicator
 /// 
-/// Indicador de pasos para el flujo de creación de rutas (6 pasos).
+/// Indicador de pasos para el flujo de creación de rutas (7 pasos).
 /// Muestra el progreso del usuario a través de los pasos de creación.
 /// 
 /// **Características:**
-/// - 6 pasos numerados (1-6)
+/// - 7 pasos numerados (1-7)
 /// - Línea de progreso conectando pasos
 /// - Paso actual resaltado (primary color)
 /// - Pasos completados (check icon)
@@ -57,13 +57,14 @@ class AppRouteStepIndicator extends StatelessWidget {
     super.key,
     required this.currentStep,
     this.scrollable = true,
-  })  : totalSteps = 6,
+  })  : totalSteps = 7,
         stepLabels = const [
           'Punto A',
           'Punto B',
           'Obras',
           'Seleccionar',
           'Transporte',
+          'Participantes',
           'Generar',
         ];
 

@@ -21,24 +21,39 @@ Esta carpeta contiene toda la documentación relacionada con UX/UI y diseño del
 
 ---
 
-#### [`personas.md`](./personas.md)
-**Qué es:** 4 User Personas detalladas
-- La Exploradora Urbana (María)
-- El Turista Cultural (Carlos)
-- La Organizadora de Salidas (Ana)
-- El Artista Local (Diego)
+#### [`competitive-analysis.md`](./competitive-analysis.md) ⭐
+**Qué es:** Análisis de competencia y FODA (SWOT) detallado
+- Análisis de apps de street art existentes
+- Comparación con Google Arts & Culture
+- Análisis FODA completo (Fortalezas, Debilidades, Oportunidades, Amenazas)
+- Matriz de comparación competitiva
+- Oportunidades de diferenciación
+- Recomendaciones estratégicas
 
-**Cuándo usarlo:** Para tomar decisiones de diseño centradas en el usuario
+**Cuándo usarlo:** Para entender el posicionamiento competitivo y estrategia de diferenciación
+
+---
+
+#### [`personas.md`](./personas.md)
+**Qué es:** 4 User Personas detalladas con tipos de usuario
+- La Exploradora Urbana (María) - **Visitante**
+- El Turista Cultural (Carlos) - **Visitante**
+- La Organizadora de Salidas (Ana) - **Visitante**
+- El Artista Local (Diego) - **Artista**
+
+**Cuándo usarlo:** Para tomar decisiones de diseño centradas en el usuario  
+**Nota:** La app tiene dos tipos de usuario: **Visitante** y **Artista**. Los artistas pueden publicar obras y crear encuentros.
 
 ---
 
 #### [`ux-flows.md`](./ux-flows.md)
 **Qué es:** User Flows y Task Flows
-- 5 Main User Flows
+- 8 Main User Flows (incluye publicación de obras, encuentros, rutas dinámicas)
 - Task Flows detallados
 - User Journey (primera experiencia)
 - Matriz de navegación
 - Validaciones y casos edge
+- **Nuevos flows:** Publicar obra (Artista), Crear encuentro (Artista), Unirse a encuentro (Visitante)
 
 **Cuándo usarlo:** Para entender cómo navegan los usuarios por la app
 
@@ -147,11 +162,12 @@ Esta carpeta contiene toda la documentación relacionada con UX/UI y diseño del
 
 ### Para entender el proyecto (Onboarding):
 1. `research.md` (15 min)
-2. `personas.md` (10 min)
-3. `ux-flows.md` (15 min)
-4. `design-system.md` (20 min)
+2. `competitive-analysis.md` (20 min) ⭐
+3. `personas.md` (10 min)
+4. `ux-flows.md` (15 min)
+5. `design-system.md` (20 min)
 
-**Total:** ~1 hora
+**Total:** ~1.5 horas
 
 ### Para diseñar en Figma:
 1. `color-sync-report.md` (5 min) - Verificar colores
@@ -168,6 +184,7 @@ Esta carpeta contiene toda la documentación relacionada con UX/UI y diseño del
 | Tarea | Documentos a Consultar |
 |-------|------------------------|
 | **Entender el problema** | `research.md` |
+| **Análisis competitivo y estrategia** | `competitive-analysis.md` ⭐ |
 | **Conocer a los usuarios** | `personas.md` |
 | **Entender la navegación** | `ux-flows.md` |
 | **Conocer el design system** | `design-system.md`, `color-sync-report.md` |

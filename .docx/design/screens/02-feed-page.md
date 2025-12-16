@@ -46,49 +46,80 @@ Lista/grid de obras de arte urbano en formato visual. Permite explorar, buscar y
 ## 🧩 Componentes Necesarios
 
 ### App Bar
-| Elemento | Especificación |
-|----------|----------------|
-| Título | "Feed" - Headline Small |
-| Icono búsqueda | 24px, abre SearchBar expandida |
-| Icono filtros | 24px, abre Modal de Filtros |
-| Badge en filtros | Dot indicator si hay filtros activos |
-| Altura | 56px |
+**Widget Implementado:** `AppTopBar.home` ✅  
+**Ubicación:** `lib/presentation/widgets/app_bars/app_top_bar.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Título | "Feed" / "Explorar" - Headline Small | `AppTopBar.home(title: "Explorar")` |
+| Icono búsqueda | 24px, abre SearchBar expandida | `actions: [IconButton(icon: AppIcon.search)]` |
+| Icono filtros | 24px, abre Modal de Filtros | `actions: [IconButton(icon: AppIcon.filter)]` |
+| Badge en filtros | Dot indicator si hay filtros activos | `AppBadge.dot` sobre el icono |
+| Altura | 56px | Material 3 standard |
 
 ### Search Bar
-| Elemento | Especificación |
-|----------|----------------|
-| Placeholder | "Buscar obra, artista, barrio..." |
-| Icono izquierdo | 🔍 20px |
-| Clear button | X cuando hay texto |
-| Border | 1px Outline Variant (#CAC4D0) |
-| Border radius | 28px (pill shape) |
-| Altura | 48px |
-| Focus state | Border Primary (#6BA034) |
+**Widget Implementado:** `AppSearchBar` ✅  
+**Ubicación:** `lib/presentation/widgets/search/app_search_bar.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Placeholder | "Buscar obra, artista, barrio..." | `AppSearchBar(placeholder: "Buscar obra...")` |
+| Icono izquierdo | 🔍 20px | Integrado en `AppSearchBar` |
+| Clear button | X cuando hay texto | Integrado automático |
+| Border | 1px Outline Variant (#CAC4D0) | `AppColors.outlineVariant` |
+| Border radius | 28px (pill shape) | Configurado en `AppSearchBar` |
+| Altura | 48px o 56px | `AppSearchBar` standard |
+| Focus state | Border Primary (#6BA034) | Automático en `AppTextField` |
 
 ### Filter Chips
-| Elemento | Especificación |
-|----------|----------------|
-| Layout | Horizontal scroll |
-| Primer chip | "Todos" - siempre presente |
-| Otros chips | Por categoría |
-| Estilo seleccionado | Filled con color de categoría |
-| Estilo no seleccionado | Outlined |
-| Altura | 32px |
+**Widget Implementado:** `AppCategoryFilterChipGroup` ✅  
+**Ubicación:** `lib/presentation/widgets/chips/app_filter_chip.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Layout | Horizontal scroll | `AppCategoryFilterChipGroup` con `SingleChildScrollView` |
+| Primer chip | "Todos" - siempre presente | `AppCategoryFilterChipGroup` incluye "Todos" |
+| Otros chips | Por categoría | Chips automáticos por categoría |
+| Estilo seleccionado | Filled con color de categoría | `selected: true` |
+| Estilo no seleccionado | Outlined | `selected: false` |
+| Altura | 32px | Configurado en `AppFilterChip` |
 
 ### Obra Card (Grid Item)
-| Elemento | Especificación |
-|----------|----------------|
-| Ancho | 50% - 8px (gap) |
-| Imagen | Aspect ratio 4:3 (o 1:1), radius 12px top |
-| Padding contenido | 12px |
-| Título | Body Medium (16px), Bold, max 2 líneas |
-| Artista | Body Small (14px), Neutral 600, prefijo "@" |
-| Badge categoría | Chip pequeño con color de categoría |
-| Likes | Body Small, icono ❤️ 14px |
-| Fondo card | Surface (#FEF7FF) |
-| Sombra | shadow-sm |
-| Border radius | 12px |
-| Gap entre cards | 12px |
+**Widget Implementado:** `AppObraCard.grid` ✅  
+**Ubicación:** `lib/presentation/widgets/cards/app_obra_card.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Ancho | 50% - 8px (gap) | Grid 2 columnas con `AppObraCard.grid` |
+| Imagen | Aspect ratio 4:3 (o 1:1), radius 12px top | `aspectRatio: 4/3` prop |
+| Padding contenido | 12px | `AppSpacing.space3` |
+| Título | Body Medium (16px), Bold, max 2 líneas | `AppTextStyles.bodyMedium` |
+| Artista | Body Small (14px), Neutral 600, prefijo "@" | `AppTextStyles.bodySmall` |
+| Badge categoría | CategoryBadge en top-right overlay | Integrado en `AppObraCard` |
+| Likes | Body Small, icono ❤️ 14px | `likes` prop |
+| Fondo card | Surface (#FEF7FF) | `AppColors.surface` |
+| Sombra | shadow-sm | `AppShadows.small` |
+| Border radius | 12px | `AppBorderRadius.radiusLg` |
+| Gap entre cards | 12px | `AppSpacing.space3` |
+
+**Uso:**
+```dart
+GridView.builder(
+  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisCount: 2,
+    crossAxisSpacing: AppSpacing.space3,
+    mainAxisSpacing: AppSpacing.space3,
+  ),
+  itemBuilder: (context, index) => AppObraCard.grid(
+    imageUrl: obras[index].imageUrl,
+    titulo: obras[index].titulo,
+    artista: obras[index].artista,
+    categoria: obras[index].categoria,
+    likes: obras[index].likes,
+    onTap: () => _navigateToDetail(obras[index]),
+  ),
+)
+```
 
 ### Grid Layout
 | Elemento | Especificación |
@@ -194,7 +225,7 @@ Lista/grid de obras de arte urbano en formato visual. Permite explorar, buscar y
 | Tap en icono filtros | Abre Modal de Filtros (avanzado) |
 | Scroll down | Carga más obras (infinite scroll) |
 | Pull to refresh | Recarga feed desde inicio |
-| Long press en Card | (Opcional) Quick actions: Agregar a Top 10 |
+| Long press en Card | (Opcional) Quick actions: Ver detalles, Ver en mapa |
 
 ---
 
@@ -232,7 +263,7 @@ Lista/grid de obras de arte urbano en formato visual. Permite explorar, buscar y
 - **ArtistaProfilePage:** Tap en nombre de artista
 - **FiltrosModal:** Tap en icono de filtros
 - **MapaPage:** Bottom Nav "Mapa"
-- **Top10Page:** Bottom Nav "Top 10"
+- **TopNPage:** Bottom Nav "Top N" (rutas favoritas)
 - **PerfilPage:** Bottom Nav "Perfil"
 
 ---

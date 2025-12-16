@@ -54,14 +54,14 @@
 **Funcionalidades:**
 - RF-03.1: Mostrar imagen grande de la obra
 - RF-03.2: Mostrar información completa: título, artista, categoría, ubicación, fecha
-- RF-03.3: Permitir agregar/quitar obra del Top 10
+- RF-03.3: Navegar a ver obra en el mapa (removido: agregar a Top 10, ahora se agregan rutas al Top N)
 - RF-03.4: Navegar a perfil del artista
 - RF-03.5: Mostrar obra en el mapa (centrar y destacar)
 - RF-03.6: Mostrar contador de likes (si aplica)
 
 **Criterios de Aceptación:**
 - La imagen se carga con placeholder mientras carga
-- Las acciones (agregar a Top 10) tienen feedback visual inmediato
+- Las acciones tienen feedback visual inmediato
 - La navegación es bidireccional (obra ↔ artista ↔ mapa)
 
 ---
@@ -85,25 +85,29 @@
 
 ---
 
-### RF-05: Top 10 del Usuario
+### RF-05: Top N de Rutas del Usuario
 
-**Descripción:** La app debe permitir al usuario crear y gestionar su colección personal de 10 obras favoritas.
+> **IMPORTANTE:** Cambio fundamental - Ahora se guardan **rutas** (no obras) en el Top N.
+
+**Descripción:** La app debe permitir al usuario crear y gestionar su colección personal de hasta 10 rutas favoritas (Top N).
 
 **Funcionalidades:**
-- RF-05.1: Mostrar grid visual tipo galería de las obras del Top 10
-- RF-05.2: Mostrar contador "X/10 obras"
-- RF-05.3: Permitir agregar obra al Top 10 (máximo 10)
-- RF-05.4: Permitir eliminar obra del Top 10
-- RF-05.5: Permitir reordenar obras por drag & drop
-- RF-05.6: Persistir Top 10 localmente (offline)
-- RF-05.7: Validar que no se agreguen obras duplicadas
+- RF-05.1: Mostrar grid visual tipo galería de las rutas del Top N
+- RF-05.2: Mostrar contador "X/10 rutas"
+- RF-05.3: Permitir agregar ruta al Top N (máximo 10 rutas)
+- RF-05.4: Permitir eliminar ruta del Top N
+- RF-05.5: Permitir reordenar rutas por drag & drop
+- RF-05.6: Persistir Top N localmente (offline)
+- RF-05.7: Validar que no se agreguen rutas duplicadas
 - RF-05.8: Mostrar feedback visual al agregar/eliminar/reordenar
+- RF-05.9: Cada item muestra: preview de mapa, nombre de ruta, número de obras incluidas, distancia, modo de transporte
 
 **Criterios de Aceptación:**
-- El límite de 10 obras es claro y se valida
+- El límite de 10 rutas es claro y se valida
 - El drag & drop es intuitivo y fluido
 - Los datos persisten después de cerrar la app
 - Funciona completamente offline
+- Disponible para Visitantes y Artistas
 
 ---
 
@@ -117,18 +121,23 @@
 - RF-06.3: Calcular y mostrar obras que están en el camino entre A y B
 - RF-06.4: Permitir seleccionar obras deseadas de las encontradas (mínimo 1, máximo 15)
 - RF-06.5: Filtrar obras por categoría y artista durante la selección
-- RF-06.6: Permitir seleccionar medio de transporte (a pie o en bici)
+- RF-06.6: Permitir seleccionar medio de transporte (bici o a pie) - **Bici es el modo principal**
 - RF-06.7: Calcular distancia total y tiempo estimado según transporte
 - RF-06.8: Mostrar vista previa de la ruta en el mapa
 - RF-06.9: Permitir reordenar obras antes de generar la ruta
 - RF-06.10: Permitir nombrar la ruta (opcional, nombre automático si no se ingresa)
-- RF-06.11: Generar y guardar la ruta
-- RF-06.12: Mostrar ruta guardada en el mapa con línea conectando puntos y pins numerados
+- RF-06.11: Permitir seleccionar tipo de ruta: Privada, Pública estática, o Pública dinámica (evento repetitivo)
+- RF-06.12: Si es pública dinámica: Configurar repetición (diario/semanal/mensual/anual con rrule), fecha inicial, hora, punto de encuentro, tipo de lista de asistentes (libre/exclusiva)
+- RF-06.13: Generar y guardar la ruta
+- RF-06.14: Mostrar ruta guardada en el mapa con línea conectando puntos y pins numerados
 
 **Criterios de Aceptación:**
 - El flujo es claro y guiado (6 pasos)
 - La búsqueda de obras en el camino usa un radio configurable (ej: 200m)
-- El cálculo de tiempo es aproximado pero útil
+- El cálculo de tiempo es aproximado pero útil (bici: 4 min/km, a pie: 12 min/km)
+- El modo bici es el recomendado y aparece como opción principal
+- La ruta se puede guardar como privada, pública estática, o pública dinámica
+- Las rutas dinámicas se repiten automáticamente según configuración (rrule)
 - La ruta se puede guardar y recuperar después
 - Funciona offline para rutas ya creadas
 
@@ -136,44 +145,74 @@
 
 ### RF-07: Gestión de Rutas
 
-**Descripción:** La app debe permitir ver, editar y eliminar rutas guardadas.
+**Descripción:** La app debe permitir ver, editar y eliminar rutas guardadas (privadas, públicas estáticas y dinámicas).
 
 **Funcionalidades:**
-- RF-07.1: Mostrar lista de rutas guardadas del usuario
+- RF-07.1: Mostrar lista de rutas guardadas del usuario (privadas y públicas)
 - RF-07.2: Mostrar detalle de ruta con mapa, lista de obras y estadísticas
 - RF-07.3: Permitir editar nombre de la ruta
 - RF-07.4: Permitir eliminar ruta
 - RF-07.5: Permitir abrir ruta en el mapa
-- RF-07.6: Persistir rutas localmente
+- RF-07.6: Si es pública dinámica: Ver próximos eventos, lista de asistentes, convertir a estática
+- RF-07.7: Si es pública estática: Convertir a dinámica (evento repetitivo)
+- RF-07.8: Persistir rutas localmente
 
 **Criterios de Aceptación:**
 - Las rutas se guardan localmente y persisten
 - La edición es simple e intuitiva
 - La eliminación requiere confirmación
+- Las rutas públicas pueden ser vistas por otros usuarios
+- Las rutas dinámicas muestran próximos eventos según rrule
 
 ---
 
-### RF-08: Salidas Grupales ("Walk Together")
+### RF-08: Rutas Públicas Dinámicas (Eventos Repetitivos)
 
-**Descripción:** La app debe permitir crear y gestionar salidas grupales basadas en rutas.
+> **NOTA:** Las "Salidas Grupales" ahora son parte de las rutas públicas dinámicas (RF-06.11-12) y encuentros de artistas (RF-09).
+
+**Descripción:** La app debe permitir gestionar rutas públicas dinámicas que se repiten automáticamente según configuración.
 
 **Funcionalidades:**
-- RF-08.1: Crear salida grupal desde una ruta existente
-- RF-08.2: Definir fecha de la salida (date picker)
-- RF-08.3: Definir horario de salida (time picker)
-- RF-08.4: Definir punto de encuentro (input + mapa)
-- RF-08.5: Agregar descripción del recorrido (textarea)
-- RF-08.6: Generar código de invitación o link compartible
-- RF-08.7: Mostrar lista de participantes (si hay backend)
-- RF-08.8: Compartir salida por WhatsApp, Instagram, link o código
-- RF-08.9: Ver salidas próximas del usuario
-- RF-08.10: Cancelar o editar salida (solo creador)
+- RF-08.1: Ver rutas públicas dinámicas disponibles (de otros usuarios)
+- RF-08.2: Unirse a rutas dinámicas (si lista es libre)
+- RF-08.3: Ver próximos eventos de rutas dinámicas según rrule
+- RF-08.4: Ver lista de asistentes a eventos próximos
+- RF-08.5: Recibir notificaciones de eventos próximos (si hay backend)
+- RF-08.6: Cancelar asistencia a evento
+- RF-08.7: Compartir ruta dinámica por WhatsApp, Instagram, link o código
 
 **Criterios de Aceptación:**
-- El formulario valida fecha futura y hora válida
-- El punto de encuentro es requerido
+- Las rutas dinámicas se repiten automáticamente según configuración (rrule)
+- Los eventos futuros se calculan correctamente
+- La lista de asistentes se actualiza en tiempo real (si hay backend)
 - El compartir funciona con las opciones disponibles
-- Si no hay backend, simular participantes localmente
+- Si no hay backend, simular asistentes localmente
+
+---
+
+### RF-09: Encuentros de Artistas
+
+> **NUEVO:** Solo artistas pueden crear encuentros.
+
+**Descripción:** La app debe permitir a artistas crear encuentros para anunciar cuando van a pintar en vivo en un lugar específico.
+
+**Funcionalidades:**
+- RF-09.1: Artistas pueden crear encuentro con ubicación, fecha, hora y descripción
+- RF-09.2: Los encuentros pueden ser repetitivos (usando rrule: diario/semanal/mensual/anual)
+- RF-09.3: Visitantes pueden ver encuentros próximos en el mapa (pin especial)
+- RF-09.4: Visitantes pueden unirse a encuentros y recibir notificaciones
+- RF-09.5: Mostrar lista de asistentes al encuentro
+- RF-09.6: Compartir encuentro por WhatsApp, Instagram, link o código
+- RF-09.7: Artista puede cancelar o editar encuentro (solo creador)
+- RF-09.8: Si es repetitivo: Mostrar próximos eventos según rrule
+
+**Criterios de Aceptación:**
+- Solo usuarios tipo 'artista' pueden crear encuentros
+- El formulario valida fecha futura y hora válida
+- La ubicación es requerida y debe estar en Buenos Aires (CABA)
+- Los encuentros repetitivos se calculan correctamente
+- El compartir funciona con las opciones disponibles
+- Si no hay backend, simular asistentes localmente
 
 ---
 
@@ -198,14 +237,36 @@
 
 ---
 
-### RF-10: Modo Offline
+### RF-12: Tipos de Usuario
+
+> **NUEVO:** Sistema de tipos de usuario (Visitante y Artista).
+
+**Descripción:** La app debe soportar dos tipos de usuario con permisos diferenciados.
+
+**Funcionalidades:**
+- RF-12.1: Usuario selecciona tipo al registrarse: 'visitante' o 'artista'
+- RF-12.2: El tipo de usuario no puede cambiarse en MVP1
+- RF-12.3: Visitantes: Pueden explorar, crear rutas, unirse a rutas dinámicas, unirse a encuentros
+- RF-12.4: Artistas: Todas las funcionalidades de visitante + publicar obras + crear encuentros
+- RF-12.5: La UI muestra botones adicionales para artistas ("Agregar Obra", "Crear Encuentro")
+- RF-12.6: Validar permisos antes de permitir acciones restringidas
+
+**Criterios de Aceptación:**
+- La selección de tipo es clara y se hace al registrarse
+- Los permisos se validan correctamente
+- La UI refleja el tipo de usuario apropiadamente
+- No se puede cambiar el tipo después del registro en MVP1
+
+---
+
+### RF-13: Modo Offline
 
 **Descripción:** La app debe funcionar sin conexión a internet para funcionalidades core.
 
 **Funcionalidades:**
 - RF-10.1: Descargar y cachear datos de obras localmente
 - RF-10.2: Cachear tiles del mapa para uso offline
-- RF-10.3: Funcionar sin conexión: ver obras, mapas, rutas guardadas, Top 10
+- RF-13.3: Funcionar sin conexión: ver obras, mapas, rutas guardadas, Top N de rutas, encuentros guardados
 - RF-10.4: Sincronizar datos cuando hay conexión (si aplica)
 - RF-10.5: Mostrar indicador de estado offline
 - RF-10.6: Guardar cambios localmente y sincronizar después
@@ -266,7 +327,7 @@
 **Descripción:** La app debe persistir datos localmente de manera eficiente.
 
 **Requisitos:**
-- RT-04.1: Almacenar Top 10 del usuario
+- RT-04.1: Almacenar Top N de rutas del usuario (máximo 10 rutas)
 - RT-04.2: Almacenar rutas creadas
 - RT-04.3: Cachear datos de obras
 - RT-04.4: Cachear imágenes
@@ -390,13 +451,32 @@
 - Realidad aumentada
 - Audio tours
 - Sistema de autenticación completo (opcional básico)
-- Backend completo para salidas grupales (mock o básico)
+- Backend completo para rutas públicas dinámicas y encuentros (mock o básico)
 - Notificaciones push (opcional básico)
 
 ---
 
+---
+
+## 📝 Notas de Actualización
+
+**Última actualización:** 12 de Diciembre, 2025
+
+**Cambios principales:**
+- ✅ RF-05: Top 10 de obras → Top N de rutas (máximo 10 rutas)
+- ✅ RF-06: Agregadas opciones de guardado (privada/pública estática/pública dinámica con rrule)
+- ✅ RF-06: Modo de transporte actualizado (bici principal, a pie secundario)
+- ✅ RF-08: Reemplazado "Salidas Grupales" por "Rutas Públicas Dinámicas"
+- ✅ RF-09: Nuevo - Encuentros de Artistas
+- ✅ RF-10: Nuevo - Publicar Obra (solo artistas)
+- ✅ RF-12: Nuevo - Tipos de Usuario (Visitante/Artista)
+- ✅ RF-03.3: Removido "agregar a Top 10" (ahora se agregan rutas al Top N)
+
+---
+
 *Documento generado por: Architect*  
-*Basado en: research.md, personas.md, ux-flows.md, design-system.md*  
+*Basado en: research.md, personas.md, ux-flows.md, design-system.md, CHANGELOG-enfoques.md*  
 *Fecha: Inicio del proyecto*  
-*Estado: Pendiente validación del usuario*
+*Última actualización: 12 de Diciembre, 2025*  
+*Estado: Actualizado según CHANGELOG-enfoques.md*
 

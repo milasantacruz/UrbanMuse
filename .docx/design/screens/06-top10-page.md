@@ -1,9 +1,13 @@
-# ⭐ Top10Page
+# ⭐ TopNPage (Top N de Rutas)
+
+> **IMPORTANTE:** Esta página ahora muestra **rutas** (no obras). El Top N de rutas reemplaza al Top 10 de obras. Máximo 10 rutas para Visitantes y Artistas.
 
 ## 📋 Descripción
-Galería personal del usuario con sus 10 obras favoritas de arte urbano. Permite agregar, quitar y reordenar obras. Es una colección curada que representa los gustos del usuario.
+Galería personal del usuario con hasta 10 rutas favoritas (Top N). Permite agregar, quitar y reordenar rutas. Es una colección curada de rutas en bici (o a pie) para acceso rápido. Reemplaza el Top 10 de obras.
 
-**Persona principal:** María (Exploradora Urbana)
+**Persona principal:** María (Exploradora Urbana - Visitante)  
+**Tipo de usuario:** Disponible para Visitantes y Artistas  
+**Nota:** Muestra rutas, no obras. Cada item incluye preview de mapa, nombre, obras incluidas, distancia y modo de transporte.
 
 ---
 
@@ -12,11 +16,11 @@ Galería personal del usuario con sus 10 obras favoritas de arte urbano. Permite
 ### Estado Normal (con obras)
 ```
 ┌─────────────────────────────────┐
-│       Mi Top 10       [Editar] │ ← App Bar
+│    Mi Top N (Rutas)   [Editar] │ ← App Bar
 ├─────────────────────────────────┤
 │                                 │
-│ ⭐ Tu colección personal        │
-│    7 de 10 obras               │ ← Contador
+│ ⭐ Tus rutas favoritas          │
+│    7 de 10 rutas               │ ← Contador
 │                                 │
 ├─────────────────────────────────┤
 │ ┌───────────┐ ┌───────────┐   │
@@ -39,7 +43,7 @@ Galería personal del usuario con sus 10 obras favoritas de arte urbano. Permite
 │ └───────────┘ └───────────┘   │
 │         ...                    │
 ├─────────────────────────────────┤
-│ [+ Agregar obra]               │ ← Botón agregar (si < 10)
+│ [+ Agregar Ruta]               │ ← Botón agregar (si < 10)
 ├─────────────────────────────────┤
 │  🗺️     📱     ⭐     👤      │
 │  Mapa   Feed   Top10  Perfil   │
@@ -49,7 +53,7 @@ Galería personal del usuario con sus 10 obras favoritas de arte urbano. Permite
 ### Estado de Edición
 ```
 ┌─────────────────────────────────┐
-│ ✕ Editando Top 10     [Guardar]│
+│ ✕ Editando Top N      [Guardar]│
 ├─────────────────────────────────┤
 │                                 │
 │ Mantén presionado para          │
@@ -77,64 +81,86 @@ Galería personal del usuario con sus 10 obras favoritas de arte urbano. Permite
 ## 🧩 Componentes Necesarios
 
 ### App Bar
-| Elemento | Especificación |
-|----------|----------------|
-| Título | "Mi Top 10" - Headline Small |
-| Botón Editar | Text button, derecha |
-| Estado edición | Título "Editando Top 10", botón "Guardar" |
-| Altura | 56px |
+**Widget Implementado:** `AppTopBar.home` ✅  
+**Ubicación:** `lib/presentation/widgets/app_bars/app_top_bar.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Título | "Mi Top 10" - Headline Small | `AppTopBar.home(title: "Mi Top 10")` |
+| Botón Editar | Text button, derecha | `actions: [AppButton.text(label: "Editar")]` |
+| Estado edición | Título "Editando Top 10", botón "Guardar" | Cambiar `title` y `actions` dinámicamente |
+| Altura | 56px | Material 3 standard |
 
 ### Header Info
-| Elemento | Especificación |
-|----------|----------------|
-| Icono | ⭐ 24px |
-| Texto | "Tu colección personal" - Body Medium |
-| Contador | "X de 10 obras" - Body Small, Neutral 600 |
-| Padding | 16px |
+**Widget:** `Column` con `AppTextStyles` ✅
 
-### Top 10 Grid Item
-| Elemento | Especificación |
-|----------|----------------|
-| Tamaño | ~167px x ~200px |
-| Imagen | Aspect ratio 1:1 o 4:3 |
-| Border radius | 12px |
-| Sombra | shadow-sm |
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Icono | ⭐ 24px | `AppIcon` con `AppIconSize.medium` |
+| Texto | "Tu colección personal" - Body Medium | `AppTextStyles.bodyMedium` |
+| Contador | "X de 10 obras" - Body Small, Neutral 600 | `AppTextStyles.bodySmall` con `AppColors.neutral600` |
+| Padding | 16px | `AppSpacing.space4` |
+
+### Top N Grid Item (Rutas)
+**Widget Implementado:** `AppTop10Item` ✅ (Reutilizable para rutas)  
+**Ubicación:** `lib/presentation/widgets/cards/app_top10_item.dart`  
+**Nota:** Ahora muestra rutas en lugar de obras. Cada item debe mostrar:
+- Preview de mapa de la ruta
+- Nombre de la ruta
+- Número de obras incluidas
+- Distancia total
+- Modo de transporte (bici/a pie)
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Tamaño | ~167px x ~200px | Calculado por `AppTop10Grid` |
+| Imagen | Aspect ratio 1:1 o 4:3 | `AppTop10Item(aspectRatio: 1.0 o 0.75)` |
+| Border radius | 12px | `AppBorderRadius.radiusLg` |
+| Sombra | shadow-sm | `AppShadows.small` |
 
 #### Ranking Badge
-| Elemento | Especificación |
-|----------|----------------|
-| Posición | Top-left, overlap 8px |
-| Tamaño | 28x28px |
-| Forma | Círculo |
-| Fondo | Primary (#6BA034) para 1-3, Neutral 700 para 4-10 |
-| Texto | Bold, blanco, 14px |
-| Sombra | shadow-md |
+**Widget:** Integrado en `AppTop10Item` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Posición | Top-left, overlap 8px | `Positioned` en `AppTop10Item` |
+| Tamaño | 28x28px | Configurado en `AppTop10Item` |
+| Forma | Círculo | `BoxShape.circle` |
+| Fondo | Primary (#6BA034) para 1-3, Neutral 700 para 4-10 | `AppColors.primary` o `AppColors.neutral700` |
+| Texto | Bold, blanco, 14px | `AppTextStyles.bodySmall` con `fontWeight: FontWeight.bold` |
+| Sombra | shadow-md | `AppShadows.medium` |
 
 #### En Modo Edición
-| Elemento | Especificación |
-|----------|----------------|
-| Delete button | ✕ en círculo rojo, top-right |
-| Drag handle | ≡ centrado abajo, Neutral 400 |
-| Overlay | Sutil darkening |
+**Widget:** Integrado en `AppTop10Item` con `isEditing` prop ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Delete button | ✕ en círculo rojo, top-right | `IconButton` con `AppColors.error` |
+| Drag handle | ≡ centrado abajo, Neutral 400 | `Icon` con `AppColors.neutral400` |
+| Overlay | Sutil darkening | `Container` con `Colors.black.withValues(alpha: 0.2)` |
 
 ### Título de Obra (en card)
-| Elemento | Especificación |
-|----------|----------------|
-| Posición | Bottom, sobre imagen |
-| Fondo | Gradiente negro desde abajo |
-| Texto | Body Small, blanco, Bold |
-| Max líneas | 1-2 |
-| Padding | 8px |
+**Widget:** Integrado en `AppTop10Item` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Posición | Bottom, sobre imagen | `Positioned` bottom en `AppTop10Item` |
+| Fondo | Gradiente negro desde abajo | `LinearGradient` integrado |
+| Texto | Body Small, blanco, Bold | `AppTextStyles.bodySmall` con `color: Colors.white` |
+| Max líneas | 1-2 | `maxLines: 2` |
+| Padding | 8px | `AppSpacing.space2` |
 
 ### Botón Agregar Obra
-| Elemento | Especificación |
-|----------|----------------|
-| Visibilidad | Solo si < 10 obras |
-| Estilo | Outlined, full width |
-| Icono | + 20px |
-| Texto | "Agregar obra" |
-| Altura | 48px |
-| Margin | 16px |
+**Widget Implementado:** `AppButton.outlined` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Visibilidad | Solo si < 10 obras | Conditional rendering |
+| Estilo | Outlined, full width | `AppButton.outlined` con `Expanded` |
+| Icono | + 20px | `AppIcon` con `AppIconSize.small` |
+| Texto | "Agregar obra" | `label: "Agregar obra"` |
+| Altura | 48px | `AppButton` standard height |
+| Margin | 16px | `AppSpacing.space4` |
 
 ### Empty Slots (opcional)
 | Elemento | Especificación |
@@ -157,7 +183,7 @@ Galería personal del usuario con sus 10 obras favoritas de arte urbano. Permite
 │                                 │
 │          ⭐                     │
 │                                 │
-│    Tu Top 10 está vacío         │
+│   Tu Top N está vacío            │
 │                                 │
 │    Agrega tus obras favoritas   │
 │    para crear tu colección      │
@@ -191,22 +217,22 @@ Galería personal del usuario con sus 10 obras favoritas de arte urbano. Permite
 ```
 ┌─────────────────────────────────┐
 │  ✅ "Título Obra" agregada a   │ ← Toast/Snackbar
-│     tu Top 10                   │
+│     tu Top N                    │
 └─────────────────────────────────┘
 ```
 
 ### Feedback: Obra eliminada
 ```
 ┌─────────────────────────────────┐
-│  ✅ Obra eliminada de tu Top 10│
+│ ✅ Ruta eliminada de tu Top N  │
 │                      [Deshacer] │ ← Toast con acción
 └─────────────────────────────────┘
 ```
 
-### Top 10 Completo (intentar agregar más)
+### Top N Completo (intentar agregar más)
 ```
 ┌─────────────────────────────────┐
-│  ⚠️ Tu Top 10 está completo    │
+│ ⚠️ Tu Top N está completo      │
 │     Elimina una obra primero    │
 └─────────────────────────────────┘
 ```
@@ -220,7 +246,7 @@ Galería personal del usuario con sus 10 obras favoritas de arte urbano. Permite
 │         ━━━━━━━━━━             │ ← Handle
 ├─────────────────────────────────┤
 │                                 │
-│ Agregar a Top 10                │
+│ Agregar Ruta a Top N            │
 │                                 │
 │ ┌─────────────────────────────┐│
 ││ 🔍 Buscar obra...             ││
@@ -247,7 +273,7 @@ Galería personal del usuario con sus 10 obras favoritas de arte urbano. Permite
 | Search | Input de búsqueda |
 | Lista | Obras vistas recientemente o todas |
 | Item | Thumbnail + Título + Artista + Badge |
-| Tap action | Agrega al Top 10, cierra modal |
+| Tap action | Agrega ruta al Top N, cierra modal |
 
 ---
 
@@ -261,7 +287,7 @@ Galería personal del usuario con sus 10 obras favoritas de arte urbano. Permite
 | Tap en "Cancelar" | Sale de edición, descarta cambios |
 | Long press en obra | (Normal) Entra en modo edición |
 | Drag obra (edición) | Reordena posición |
-| Tap en ✕ (edición) | Elimina del Top 10 |
+| Tap en ✕ (edición) | Elimina ruta del Top N |
 | Tap en "Agregar obra" | Abre modal de selección |
 | Tap en empty slot | Abre modal de selección |
 | Tap en obra del modal | Agrega y cierra |
@@ -334,4 +360,5 @@ Galería personal del usuario con sus 10 obras favoritas de arte urbano. Permite
 
 ---
 
-*Relacionado con:* `ux-flows.md` > Flow 5: Gestionar Top 10
+*Relacionado con:* `ux-flows.md` > Flow 5: Gestionar Top N de Rutas  
+*Nota:* Disponible para Visitantes y Artistas. Muestra rutas (no obras).

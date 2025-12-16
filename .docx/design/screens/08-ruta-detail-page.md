@@ -58,41 +58,49 @@ Vista detallada de una ruta guardada. Muestra el mapa con el recorrido completo,
 ## 🧩 Componentes Necesarios
 
 ### App Bar
-| Elemento | Especificación |
-|----------|----------------|
-| Back button | ◀ 24px |
-| Título | Nombre de la ruta - Body Large, ellipsis |
-| More menu | ⋮ (Editar, Eliminar, Compartir) |
-| Estilo | Surface o transparente sobre mapa |
+**Widget Implementado:** `AppTopBar.detail` ✅  
+**Ubicación:** `lib/presentation/widgets/app_bars/app_top_bar.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Back button | ◀ 24px | `AppTopBar.detail(onBack: ...)` |
+| Título | Nombre de la ruta - Body Large, ellipsis | `title: ruta.nombre` con `overflow: TextOverflow.ellipsis` |
+| More menu | ⋮ (Editar, Eliminar, Compartir) | `actions: [PopupMenuButton(...)]` |
+| Estilo | Surface o transparente sobre mapa | `transparent: true` o `backgroundColor: AppColors.surface` |
 
 ### Mapa de Ruta
 | Elemento | Especificación |
 |----------|----------------|
-| Altura | 40% de la pantalla (~320px) |
-| Contenido | Ruta completa visible, pins numerados |
-| Interacción | Tap en pin abre preview de obra |
-| Zoom controls | Opcional, +/- buttons |
+| Altura | 40% de la pantalla (~320px) | `AspectRatio` o `Container` con height |
+| Contenido | Ruta completa visible, pins numerados | Mapa provider con `AppMapPin` numerados |
+| Interacción | Tap en pin abre preview de obra | `onTap` callback en `AppMapPin` |
+| Zoom controls | Opcional, +/- buttons | Mapa provider controls |
 
 ### Línea de Ruta (en mapa)
 | Elemento | Especificación |
 |----------|----------------|
-| Color | Primary (#6BA034) |
-| Ancho | 4px |
-| Estilo | Sólido o dotted |
+| Color | Primary (#6BA034) | `AppColors.primary` |
+| Ancho | 4px | `strokeWidth: 4` |
+| Estilo | Sólido o dotted | `strokeDashArray` para dotted |
 
 ### Pins Numerados
-| Elemento | Especificación |
-|----------|----------------|
-| Tamaño | 32x32px |
-| Fondo | Primary |
-| Número | Bold, blanco, centrado |
-| Borde | 2px blanco |
+**Widget Implementado:** `AppMapPin` con `number` prop ✅  
+**Ubicación:** `lib/presentation/widgets/map_pins/app_map_pin.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Tamaño | 40x50px (medium) | `AppMapPin(size: MapPinSize.medium)` |
+| Fondo | Primary | `category: MapPinCategory.generic` o custom color |
+| Número | Bold, blanco, centrado | `AppMapPin(number: 1, 2, 3...)` |
+| Borde | 2px blanco | Integrado en `AppMapPin` |
 
 ### Pin Inicio/Fin
-| Elemento | Especificación |
-|----------|----------------|
-| Inicio (A) | Pin Primary con "A" o flag |
-| Fin (B) | Pin Secondary con "B" o checkered flag |
+**Widget:** `AppMapPin` con labels personalizados ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Inicio (A) | Pin Primary con "A" o flag | `AppMapPin(category: MapPinCategory.userLocation)` con label "A" |
+| Fin (B) | Pin Secondary con "B" o checkered flag | `AppMapPin(category: MapPinCategory.generic, customColor: AppColors.secondary)` con label "B" |
 
 ### Stats Card
 | Elemento | Especificación |
@@ -138,14 +146,16 @@ Vista detallada de una ruta guardada. Muestra el mapa con el recorrido completo,
 | Texto | Body Small, Neutral 600 |
 
 ### Action Buttons (Footer)
-| Elemento | Especificación |
-|----------|----------------|
-| Layout | Row, 2 botones |
-| "Iniciar" | Filled Primary, icono 🚶 |
-| "Crear Salida" | Outlined Primary, icono 👥 |
-| Altura | 48px cada uno |
-| Posición | Fixed bottom o scroll |
-| Padding | 16px |
+**Widgets Implementados:** `AppButton.primary`, `AppButton.outlined` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Layout | Row, 2 botones | `Row` con `Expanded` para cada botón |
+| "Iniciar" | Filled Primary, icono 🚶 | `AppButton.primary(icon: Icons.directions_walk, label: "Iniciar")` |
+| "Crear Salida" | Outlined Primary, icono 👥 | `AppButton.outlined(icon: Icons.group, label: "Crear Salida")` |
+| Altura | 48px cada uno | `AppButton` standard height |
+| Posición | Fixed bottom o scroll | `Positioned` o en `Column` |
+| Padding | 16px | `AppSpacing.space4` |
 
 ---
 

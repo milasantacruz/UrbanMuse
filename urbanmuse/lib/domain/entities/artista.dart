@@ -18,6 +18,25 @@ class Artista extends Equatable {
     this.obrasCount = 0,
   });
 
+  /// Copiar con nuevos valores
+  Artista copyWith({
+    String? id,
+    String? nombre,
+    String? bio,
+    String? foto,
+    String? instagram,
+    int? obrasCount,
+  }) {
+    return Artista(
+      id: id ?? this.id,
+      nombre: nombre ?? this.nombre,
+      bio: bio ?? this.bio,
+      foto: foto ?? this.foto,
+      instagram: instagram ?? this.instagram,
+      obrasCount: obrasCount ?? this.obrasCount,
+    );
+  }
+
   @override
   List<Object?> get props => [
         id,

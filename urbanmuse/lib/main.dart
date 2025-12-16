@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'core/theme/app_theme.dart';
 import 'core/constants/app_constants.dart';
 import 'core/injection/injection_container.dart' as di;
+import 'data/datasources/local/mock_data_service.dart';
 import 'presentation/routes/app_router.dart';
 
 void main() async {
   // Asegurar que los bindings de Flutter estén inicializados
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Inicializar inyección de dependencias
+  // Inicializar inyección de dependencias (incluye Hive)
   await di.init();
+  
+  // Inicializar datos mock (solo si las cajas están vacías)
+  await MockDataService.initializeMockData();
   
   runApp(const GraffitiTrailsApp());
 }

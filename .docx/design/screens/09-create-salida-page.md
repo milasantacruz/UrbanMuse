@@ -61,84 +61,104 @@ Formulario para crear una salida grupal a partir de una ruta existente. Permite 
 ## 🧩 Componentes Necesarios
 
 ### App Bar
-| Elemento | Especificación |
-|----------|----------------|
-| Close button | ✕ 24px |
-| Título | "Nueva Salida Grupal" - Body Large, Bold |
-| Altura | 56px |
+**Widget Implementado:** `AppTopBar.create` ✅  
+**Ubicación:** `lib/presentation/widgets/app_bars/app_top_bar.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Close button | ✕ 24px | `AppTopBar.create(onClose: ..., title: "Nueva Salida Grupal")` |
+| Título | "Nueva Salida Grupal" - Body Large, Bold | `title: "Nueva Salida Grupal"` con `AppTextStyles.bodyLarge` |
+| Altura | 56px | Material 3 standard |
 
 ### Header
-| Elemento | Especificación |
-|----------|----------------|
-| Icono | 👥 24px |
-| Texto | "Organiza un recorrido grupal" - H3 |
-| Subtítulo | (Opcional) Body Small, Neutral 600 |
+**Widget:** `Column` con `AppTextStyles` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Icono | 👥 24px | `AppIcon` con `AppIconSize.medium` |
+| Texto | "Organiza un recorrido grupal" - H3 | `AppTextStyles.h3` |
+| Subtítulo | (Opcional) Body Small, Neutral 600 | `AppTextStyles.bodySmall` con `AppColors.neutral600` |
 
 ### Ruta Card (Seleccionada)
-| Elemento | Especificación |
-|----------|----------------|
-| Fondo | Surface 2 |
-| Border radius | 12px |
-| Padding | 16px |
-| Título | Body Medium, Bold |
-| Stats | Body Small, icono + valor |
-| Botón "Cambiar" | Text button, derecha |
-| Tap action (Cambiar) | Abre modal de selección de ruta |
+**Widget Implementado:** `AppRutaCard.compact` ✅  
+**Ubicación:** `lib/presentation/widgets/cards/app_ruta_card.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Fondo | Surface 2 | `AppColors.surface2` |
+| Border radius | 12px | `AppBorderRadius.radiusLg` |
+| Padding | 16px | `AppSpacing.space4` |
+| Título | Body Medium, Bold | `AppTextStyles.bodyMedium` con `fontWeight: FontWeight.bold` |
+| Stats | Body Small, icono + valor | `AppTextStyles.bodySmall` con iconos |
+| Botón "Cambiar" | Text button, derecha | `AppButton.text(label: "Cambiar")` |
+| Tap action (Cambiar) | Abre modal de selección de ruta | `onTap` callback |
 
 ### Form Fields
 
 #### Label
-| Elemento | Especificación |
-|----------|----------------|
-| Estilo | Body Small, Bold |
-| Icono | Antes del texto, 16px |
-| Requerido | * después del texto (Error color) |
-| Margin bottom | 8px |
+**Widget:** `Row` con `AppTextStyles` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Estilo | Body Small, Bold | `AppTextStyles.bodySmall` con `fontWeight: FontWeight.bold` |
+| Icono | Antes del texto, 16px | `AppIcon` con `AppIconSize.small` |
+| Requerido | * después del texto (Error color) | `Text` con `AppColors.error` para "*" |
+| Margin bottom | 8px | `AppSpacing.space2` |
 
 #### Date Picker
-| Elemento | Especificación |
-|----------|----------------|
-| Input | Readonly, tap abre picker |
-| Formato | "Día DD de mes, YYYY" |
-| Icono derecho | 📅 calendario |
-| Validación | Fecha futura |
-| Picker nativo | Modal o inline calendar |
+**Widget:** `AppTextField` con `readOnly: true` + Date picker modal ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Input | Readonly, tap abre picker | `AppTextField(readOnly: true, onTap: () => showDatePicker(...))` |
+| Formato | "Día DD de mes, YYYY" | Formatear con `DateFormat` |
+| Icono derecho | 📅 calendario | `suffixIcon: AppIcon(Icons.calendar_today)` |
+| Validación | Fecha futura | Validar en `onDateSelected` |
+| Picker nativo | Modal o inline calendar | `showDatePicker` de Flutter |
 
 #### Time Picker
-| Elemento | Especificación |
-|----------|----------------|
-| Input | Readonly, tap abre picker |
-| Formato | "HH:MM AM/PM" |
-| Icono derecho | 🕐 reloj |
-| Picker nativo | Modal con hours/minutes |
+**Widget:** `AppTextField` con `readOnly: true` + Time picker modal ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Input | Readonly, tap abre picker | `AppTextField(readOnly: true, onTap: () => showTimePicker(...))` |
+| Formato | "HH:MM AM/PM" | Formatear con `DateFormat` |
+| Icono derecho | 🕐 reloj | `suffixIcon: AppIcon(Icons.access_time)` |
+| Picker nativo | Modal con hours/minutes | `showTimePicker` de Flutter |
 
 #### Punto de Encuentro
-| Elemento | Especificación |
-|----------|----------------|
-| Tipo | Search input con autocomplete |
-| Placeholder | "Buscar lugar..." |
-| Icono izquierdo | 🔍 |
-| Autocomplete | Direcciones y lugares |
-| Validación | Requerido |
+**Widget Implementado:** `AppSearchBar` o `AppTextField` con autocomplete ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Tipo | Search input con autocomplete | `AppSearchBar` o `AppTextField` con `onChanged` |
+| Placeholder | "Buscar lugar..." | `placeholder: "Buscar lugar..."` |
+| Icono izquierdo | 🔍 | Integrado en `AppSearchBar` |
+| Autocomplete | Direcciones y lugares | Implementar con API de geocoding |
+| Validación | Requerido | Validar en `onSubmit` |
 
 #### Descripción (Textarea)
-| Elemento | Especificación |
-|----------|----------------|
-| Tipo | Textarea multiline |
-| Placeholder | "Describe la salida..." |
-| Min height | 100px |
-| Max chars | 500 |
-| Contador | "X/500" abajo derecha |
-| Opcional | Indicar en label |
+**Widget Implementado:** `AppTextField` con `maxLines` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Tipo | Textarea multiline | `AppTextField(maxLines: 4, minLines: 3)` |
+| Placeholder | "Describe la salida..." | `placeholder: "Describe la salida..."` |
+| Min height | 100px | `minLines: 3` (aproximado) |
+| Max chars | 500 | Validar con `maxLength: 500` |
+| Contador | "X/500" abajo derecha | `helperText` o `Text` debajo |
+| Opcional | Indicar en label | Label sin "*" |
 
 ### Botón Crear Salida
-| Elemento | Especificación |
-|----------|----------------|
-| Estilo | Filled, Primary, full width |
-| Texto | "Crear Salida" |
-| Altura | 48px |
-| Margin | 16px |
-| Disabled | Si faltan campos requeridos |
+**Widget Implementado:** `AppButton.primary` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Estilo | Filled, Primary, full width | `AppButton.primary(label: "Crear Salida")` con `Expanded` |
+| Texto | "Crear Salida" | `label: "Crear Salida"` |
+| Altura | 48px | `AppButton` standard height |
+| Margin | 16px | `AppSpacing.space4` |
+| Disabled | Si faltan campos requeridos | `enabled: _isFormValid` |
 
 ---
 

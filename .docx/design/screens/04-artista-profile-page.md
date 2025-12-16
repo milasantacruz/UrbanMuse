@@ -59,98 +59,121 @@ Perfil público de un artista de arte urbano. Muestra su información, biografí
 ## 🧩 Componentes Necesarios
 
 ### App Bar
-| Elemento | Especificación |
-|----------|----------------|
-| Back button | ◀ 24px |
-| Título | "Artista" - centrado |
-| Share button | ↗️ 24px (compartir perfil) |
-| More menu | ⋮ 24px (reportar) |
-| Fondo | Surface o transparente |
+**Widget Implementado:** `AppTopBar.detail` ✅  
+**Ubicación:** `lib/presentation/widgets/app_bars/app_top_bar.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Back button | ◀ 24px | `AppTopBar.detail(onBack: ...)` |
+| Título | "Artista" - centrado | `title: "Artista", centerTitle: true` |
+| Share button | ↗️ 24px (compartir perfil) | `actions: [IconButton(icon: AppIcon.share)]` |
+| More menu | ⋮ 24px (reportar) | `actions: [PopupMenuButton(...)]` |
+| Fondo | Surface o transparente | `backgroundColor: AppColors.surface` |
 
 ### Header del Artista
 | Elemento | Especificación |
 |----------|----------------|
 | Layout | Column, centrado |
-| Padding | 24px top, 16px sides |
-| Background | Surface o gradiente sutil |
+| Padding | 24px top, 16px sides | `AppSpacing.space5, AppSpacing.space4` |
+| Background | Surface o gradiente sutil | `AppColors.surface` |
 
 ### Avatar
-| Elemento | Especificación |
-|----------|----------------|
-| Tamaño | 120x120px |
-| Forma | Circular (border-radius: full) |
-| Borde | 4px, Primary (#6BA034) |
-| Fallback | Iniciales del nombre o icono genérico |
-| Tap action | (Opcional) Ver foto grande |
+**Widget Implementado:** `AppAvatar` ✅  
+**Ubicación:** `lib/presentation/widgets/avatars/app_avatar.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Tamaño | 120x120px | `AppAvatar.xlarge(size: 120)` o custom |
+| Forma | Circular (border-radius: full) | `AppAvatar` es circular por defecto |
+| Borde | 4px, Primary (#6BA034) | `border: Border.all(color: AppColors.primary, width: 4)` |
+| Fallback | Iniciales del nombre o icono genérico | `AppAvatar` con `initials` o `placeholder` |
+| Tap action | (Opcional) Ver foto grande | `GestureDetector` wrapper |
 
 ### Nombre del Artista
-| Elemento | Especificación |
-|----------|----------------|
-| Estilo | Headline Medium (H2), 24px |
-| Weight | Bold (700) |
-| Color | OnSurface (#1D1617) |
-| Alignment | Center |
-| Max líneas | 2 |
+**Widget:** `Text` con `AppTextStyles.h2` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Estilo | Headline Medium (H2), 24px | `AppTextStyles.h2` |
+| Weight | Bold (700) | Incluido en `AppTextStyles.h2` |
+| Color | OnSurface (#1D1617) | `AppColors.onSurface` |
+| Alignment | Center | `textAlign: TextAlign.center` |
+| Max líneas | 2 | `maxLines: 2` |
 
 ### Handle/Username
-| Elemento | Especificación |
-|----------|----------------|
-| Estilo | Body Medium, Neutral 600 |
-| Prefijo | "@" |
-| Alignment | Center |
-| Tap action | (Opcional) Copia al clipboard |
+**Widget:** `Text` con `AppTextStyles.bodyMedium` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Estilo | Body Medium, Neutral 600 | `AppTextStyles.bodyMedium` con `AppColors.neutral600` |
+| Prefijo | "@" | Concatenar "@" al inicio |
+| Alignment | Center | `textAlign: TextAlign.center` |
+| Tap action | (Opcional) Copia al clipboard | `GestureDetector` con `Clipboard.setData` |
 
 ### Biografía
-| Elemento | Especificación |
-|----------|----------------|
-| Estilo | Body Medium |
-| Color | OnSurface Variant (#4A4F45) |
-| Max líneas | 4 colapsado |
-| Alignment | Center |
-| "Ver más" | Text button si hay más texto |
-| Padding | 16px horizontal |
+**Widget:** `Text` con `AppTextStyles.bodyMedium` + `AppButton.text` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Estilo | Body Medium | `AppTextStyles.bodyMedium` |
+| Color | OnSurface Variant (#4A4F45) | `AppColors.onSurfaceVariant` |
+| Max líneas | 4 colapsado | `maxLines: 4, overflow: TextOverflow.ellipsis` |
+| Alignment | Center | `textAlign: TextAlign.center` |
+| "Ver más" | Text button si hay más texto | `AppButton.text(label: "Ver más")` |
+| Padding | 16px horizontal | `AppSpacing.space4` |
 
 ### Social Links
-| Elemento | Especificación |
-|----------|----------------|
-| Layout | Row, centrado, gap 12px |
-| Botones | Outlined, con icono + texto |
-| Iconos | 20px (Instagram, Web, Twitter, etc.) |
-| Altura | 36px |
-| Tap action | Abre link externo |
+**Widget:** `AppButton.outlined` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Layout | Row, centrado, gap 12px | `Row(mainAxisAlignment: MainAxisAlignment.center)` |
+| Botones | Outlined, con icono + texto | `AppButton.outlined(icon: ..., label: ...)` |
+| Iconos | 20px (Instagram, Web, Twitter, etc.) | `AppIcon` con `AppIconSize.small` |
+| Altura | 36px | `AppButton` compact size |
+| Tap action | Abre link externo | `url_launcher` package |
 
 ### Stats Row
-| Elemento | Especificación |
-|----------|----------------|
-| Layout | Row, 3 columnas iguales |
-| Separador | Divider vertical 1px |
-| Número | Headline Small (20px), Bold |
-| Label | Caption (12px), Neutral 600 |
-| Alignment | Center en cada columna |
-| Stats | Obras, Likes totales, Rutas |
+**Widget:** `Row` con `AppDivider.vertical` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Layout | Row, 3 columnas iguales | `Row` con `Expanded` para cada stat |
+| Separador | Divider vertical 1px | `AppDivider.vertical` |
+| Número | Headline Small (20px), Bold | `AppTextStyles.h3` |
+| Label | Caption (12px), Neutral 600 | `AppTextStyles.caption` con `AppColors.neutral600` |
+| Alignment | Center en cada columna | `Column(mainAxisAlignment: MainAxisAlignment.center)` |
+| Stats | Obras, Likes totales, Rutas | Custom widget con datos |
 
 ### Sección Obras
-| Elemento | Especificación |
-|----------|----------------|
-| Título | "Obras (24)" - Body Large, Bold |
-| Icono | 🎨 20px |
-| Padding | 16px |
+**Widget:** `Text` con `AppTextStyles.bodyLarge` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Título | "Obras (24)" - Body Large, Bold | `AppTextStyles.bodyLarge` con `fontWeight: FontWeight.bold` |
+| Icono | 🎨 20px | `AppIcon` con `AppIconSize.small` |
+| Padding | 16px | `AppSpacing.space4` |
 
 ### Grid de Obras
-| Elemento | Especificación |
-|----------|----------------|
-| Columnas | 2 o 3 |
-| Gap | 4px (estilo Instagram) o 12px |
-| Aspect ratio | 1:1 (cuadrado) |
-| Border radius | 0 (estilo Instagram) o 8px |
-| Tap action | Navega a ObraDetailPage |
+**Widget:** `AppObraCard.grid` en `GridView` ✅  
+**Ubicación:** `lib/presentation/widgets/cards/app_obra_card.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Columnas | 2 o 3 | `GridView.count(crossAxisCount: 2 o 3)` |
+| Gap | 4px (estilo Instagram) o 12px | `crossAxisSpacing` y `mainAxisSpacing` |
+| Aspect ratio | 1:1 (cuadrado) | `AppObraCard.grid(aspectRatio: 1.0)` |
+| Border radius | 0 (estilo Instagram) o 8px | Configurado en `AppObraCard` |
+| Tap action | Navega a ObraDetailPage | `onTap` callback en `AppObraCard` |
 
 ### Obra Thumbnail
-| Elemento | Especificación |
-|----------|----------------|
-| Tamaño | (375-32-8)/2 = ~167px si 2 cols |
-| Overlay | Badge de categoría (esquina) opcional |
-| Loading | Placeholder gris o shimmer |
+**Widget:** `AppObraCard.grid` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Tamaño | (375-32-8)/2 = ~167px si 2 cols | Calculado por `GridView` |
+| Overlay | Badge de categoría (esquina) opcional | Integrado en `AppObraCard` |
+| Loading | Placeholder gris o shimmer | `AppLoader` o `CircularProgressIndicator` |
 
 ---
 

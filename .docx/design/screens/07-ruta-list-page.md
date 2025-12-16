@@ -53,54 +53,68 @@ Lista de todas las rutas guardadas del usuario. Permite ver, editar y eliminar r
 ## 🧩 Componentes Necesarios
 
 ### App Bar
-| Elemento | Especificación |
-|----------|----------------|
-| Back button | ◀ 24px |
-| Título | "Mis Rutas" - Headline Small |
-| Nueva ruta | "+ Nueva" - Text button o icon |
-| Altura | 56px |
+**Widget Implementado:** `AppTopBar.detail` ✅  
+**Ubicación:** `lib/presentation/widgets/app_bars/app_top_bar.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Back button | ◀ 24px | `AppTopBar.detail(onBack: ...)` |
+| Título | "Mis Rutas" - Headline Small | `title: "Mis Rutas"` |
+| Nueva ruta | "+ Nueva" - Text button o icon | `actions: [AppButton.text(label: "+ Nueva")]` |
+| Altura | 56px | Material 3 standard |
 
 ### Header Info
-| Elemento | Especificación |
-|----------|----------------|
-| Icono | 🛣️ 24px |
-| Texto | "Tienes X rutas guardadas" - Body Medium |
-| Padding | 16px |
-| Fondo | Surface 2 |
+**Widget:** `Container` con `AppTextStyles` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Icono | 🛣️ 24px | `AppIcon` con `AppIconSize.medium` |
+| Texto | "Tienes X rutas guardadas" - Body Medium | `AppTextStyles.bodyMedium` |
+| Padding | 16px | `AppSpacing.space4` |
+| Fondo | Surface 2 | `AppColors.surface2` |
 
 ### Ruta Card
-| Elemento | Especificación |
-|----------|----------------|
-| Layout | Row (mapa mini + info) o Column |
-| Fondo | Surface |
-| Border radius | 12px |
-| Padding | 16px |
-| Sombra | shadow-sm |
-| Margin bottom | 12px |
+**Widget Implementado:** `AppRutaCard` ✅  
+**Ubicación:** `lib/presentation/widgets/cards/app_ruta_card.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Layout | Row (mapa mini + info) o Column | `AppRutaCard` con layout configurable |
+| Fondo | Surface | `AppColors.surface` |
+| Border radius | 12px | `AppBorderRadius.radiusLg` |
+| Padding | 16px | `AppSpacing.space4` |
+| Sombra | shadow-sm | `AppShadows.small` |
+| Margin bottom | 12px | `AppSpacing.space3` |
 
 ### Mapa Mini (Thumbnail)
-| Elemento | Especificación |
-|----------|----------------|
-| Tamaño | 80x80px |
-| Border radius | 8px |
-| Contenido | Preview de la ruta (estático) |
-| Fallback | Placeholder con icono 🗺️ |
+**Widget:** Integrado en `AppRutaCard` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Tamaño | 80x80px | Configurado en `AppRutaCard` |
+| Border radius | 8px | `AppBorderRadius.radiusMd` |
+| Contenido | Preview de la ruta (estático) | Mapa thumbnail o placeholder |
+| Fallback | Placeholder con icono 🗺️ | `AppIcon` con `Icons.map` |
 
 ### Info de Ruta
-| Elemento | Especificación |
-|----------|----------------|
-| Título | Body Large, Bold, max 2 líneas |
-| Puntos | "📍 A → B" - Body Small, Neutral 600 |
-| Stats row 1 | "🎨 X obras • X km" - Body Small |
-| Stats row 2 | "⏱️ ~X min [transporte]" - Body Small, Neutral 600 |
+**Widget:** Integrado en `AppRutaCard` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Título | Body Large, Bold, max 2 líneas | `AppTextStyles.bodyLarge` con `fontWeight: FontWeight.bold` |
+| Puntos | "📍 A → B" - Body Small, Neutral 600 | `AppTextStyles.bodySmall` con `AppColors.neutral600` |
+| Stats row 1 | "🎨 X obras • X km" - Body Small | `AppTextStyles.bodySmall` con iconos |
+| Stats row 2 | "⏱️ ~X min [transporte]" - Body Small, Neutral 600 | `AppTextStyles.bodySmall` con `AppColors.neutral600` |
 
 ### Action Buttons (en card)
-| Elemento | Especificación |
-|----------|----------------|
-| Layout | Row, gap 8px |
-| "Ver" | Text button, Primary |
-| "Crear Salida" | Outlined button, Primary |
-| More menu | ⋮ (Editar, Eliminar, Compartir) |
+**Widgets Implementados:** `AppButton.text`, `AppButton.outlined`, `PopupMenuButton` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Layout | Row, gap 8px | `Row` con `AppSpacing.space2` |
+| "Ver" | Text button, Primary | `AppButton.text(label: "Ver")` |
+| "Crear Salida" | Outlined button, Primary | `AppButton.outlined(label: "Crear Salida")` |
+| More menu | ⋮ (Editar, Eliminar, Compartir) | `PopupMenuButton` con items |
 
 ---
 

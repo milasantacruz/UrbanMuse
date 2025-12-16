@@ -29,7 +29,7 @@
 - ✅ **Input Fields (Atom)** - Text Field con modos Filled, Outlined, Flat, validación y estados
 - ✅ **Filter Modal (Organism)** - Modal de filtros con categorías, artistas, search y acciones ✨
 - ✅ **Obra Preview Bottom Sheet (Organism)** - Bottom sheet para preview de obra desde mapa/feed ✨
-- ✅ **Top 10 Grid Item (Organism)** - Items del grid Top 10 con ranking, overlay y remove button ✨
+- ✅ **Top N Grid Item (Organism)** - Items del grid Top N de rutas (máximo 10) con ranking, overlay y remove button ✨
 - ✅ **Ruta Card (Organism)** - Tarjetas de ruta con mapa, stats (distance, duration, obras), transport icon y acciones ✨
 - ✅ **App Bars & Navigation (Organism)** - Top bars (home, detail, create, map) + Bottom nav + Map bar ✨
 - ✅ **Artist Card (Organism)** - Tarjetas de artista con avatar, bio, stats y botón de acción ✨
@@ -47,6 +47,58 @@
 1. **Artista Card (Organism)** - Tarjeta de artista con avatar y stats
 2. **Ruta Card (Organism)** - Tarjeta de ruta con mapa preview
 3. **App Bar (Organism)** - Barra de navegación superior con variantes
+
+---
+
+## ⚠️ Notas Importantes del Proyecto
+
+### Enfoque Geográfico
+- **Ubicación:** Buenos Aires (CABA - Ciudad Autónoma de Buenos Aires)
+- **Alcance:** Área metropolitana completa
+- Todos los mapas, ubicaciones y referencias deben ser específicas de Buenos Aires
+
+### Tipos de Usuario
+- **Visitante:** Puede explorar obras, crear rutas, unirse a rutas públicas, seguir artistas, unirse a encuentros
+- **Artista:** Tiene todas las funcionalidades de Visitante + puede publicar obras, crear encuentros
+- Los usuarios eligen su tipo al registrarse (no pueden cambiarlo en MVP)
+- Las vistas son muy similares, pero Artistas tienen botones adicionales: "Agregar Obra", "Crear Encuentro"
+
+### Modo de Transporte
+- **Principal:** Rutas en bici (recomendado)
+- **Secundario:** Rutas a pie (también disponible)
+- El usuario selecciona el modo al crear la ruta (Paso 5 de CreateRutaPage)
+- Afecta el cálculo de tiempo estimado
+
+### Top N de Rutas
+- **Reemplaza:** Top 10 de obras (ya no existe)
+- **Máximo:** 10 rutas
+- **Disponible para:** Visitantes y Artistas
+- Cada item muestra: Preview de mapa, nombre de ruta, obras incluidas, distancia, modo transporte
+
+### Rutas Públicas y Dinámicas
+- **Privada:** Solo para el usuario
+- **Pública estática:** Compartida, sin fecha/horario (otros pueden verla y usarla)
+- **Pública dinámica:** Evento repetitivo con rrule
+  - Repetición: Diario / Semanal / Mensual / Anual
+  - Configuración: Fecha inicial, hora, punto de encuentro
+  - Lista de asistentes: Libre o exclusiva
+  - **Tecnología:** Usar librería `rrule` para manejo de fechas/calendario
+
+### Encuentros de Artistas
+- **Solo Artistas** pueden crear encuentros
+- **Propósito:** Anunciar cuando van a pintar en vivo en un lugar específico
+- **Características:**
+  - Pueden ser repetitivos (usando rrule)
+  - Visitantes pueden unirse y recibir notificaciones
+  - Pin especial en el mapa
+  - Lista de asistentes
+
+### Publicación de Obras
+- **Solo Artistas** pueden publicar obras
+- **Sin validación en MVP:** Cualquier artista puede publicar sin aprobación
+- **Proceso:** 4 pasos (Foto, Información, Ubicación, Revisar)
+- **Ubicación:** Buenos Aires (CABA) específicamente
+- Artista puede editar/eliminar sus obras después de publicarlas
 
 ---
 
@@ -89,7 +141,7 @@
 │   ├── 03. Obra Card
 │   ├── 04. Artista Card
 │   ├── 05. Ruta Card
-│   ├── 06. Top 10 Grid Item
+│   ├── 06. Top N Grid Item (Rutas)
 │   ├── 07. Filter Modal
 │   ├── 08. Bottom Sheet (Obra Preview)
 │   ├── 09. Obra Detail Header
@@ -109,10 +161,12 @@
     ├── 03. ObraDetailPage
     ├── 04. ArtistaProfilePage
     ├── 05. CreateRutaPage (6 pasos)
-    ├── 06. Top10Page
+    ├── 06. TopNPage (Top N de Rutas)
     ├── 07. RutaListPage
     ├── 08. RutaDetailPage
-    └── 09. CreateSalidaPage
+    ├── 10. PublicarObraPage (Solo Artistas)
+    ├── 11. CrearEncuentroPage (Solo Artistas)
+    └── 12. EncuentroDetailPage
 ```
 
 ---
@@ -635,7 +689,7 @@
   
 **Variantes:**
 - "No hay obras cerca"
-- "Top 10 vacío"
+- "Top N vacío" (rutas)
 - "Sin rutas guardadas"
 
 ---
@@ -687,7 +741,7 @@
   - [x] Item: Mapa (map icon) ✅
   - [x] Item: Explorar (explore icon) ✅
   - [x] Item: Rutas (route icon) ✅
-  - [x] Item: Top 10 (star icon) ✅
+  - [x] Item: Top N (star icon) ✅ - Ahora para rutas, no obras
   - [x] Estados: Selected, Unselected ✅
   - [x] Color selected: Primary (#6BA034) ✅
 
@@ -749,7 +803,7 @@
 - Resultados de búsqueda (lista horizontal)
 - Obras relacionadas (compact horizontal scroll)
 - Perfil de artista (grid de obras)
-- Top 10 (grid especial)
+- Top N de Rutas (grid especial)
 
 ---
 
@@ -866,7 +920,7 @@
 
 ---
 
-### 06. Top 10 Grid Item ✅
+### 06. Top N Grid Item (Rutas) ✅
 
 **Componentes:** Image + Ranking Number + Overlay  
 **Estado:** ✅ Implementado en Flutter
@@ -914,11 +968,12 @@
 **Preview:** `/preview/top10-item` ✅
 
 **Casos de uso:**
-- Top10Page con grid de 10 obras
-- Ranking visual de obras favoritas
+- TopNPage con grid de hasta 10 rutas
+- Ranking visual de rutas favoritas (Visitantes y Artistas)
 - Reordenamiento (drag & drop futuro)
-- Empty slots cuando hay < 10 obras
-- Eliminación de obras del Top 10
+- Empty slots cuando hay < 10 rutas
+- Eliminación de rutas del Top N
+- Preview de ruta (mapa, obras incluidas, distancia)
 
 ---
 
@@ -1237,7 +1292,7 @@
     - [ ] Section: Obras Relacionadas
       - [ ] Horizontal scroll de Obra Cards
   - [ ] **Sticky Bottom:**
-    - [ ] "Agregar a Top 10" button (primary)
+    - [ ] "Agregar a Top N" button (primary) - Solo si es ruta, no obra
     - [ ] "Ver en mapa" button (outlined)
 
 **Frames:** 1 estado completo
@@ -1305,41 +1360,55 @@
   - [ ] Step Indicator (5/6)
   - [ ] Instrucción: "¿Cómo vas a recorrer la ruta?"
   - [ ] Selector:
+    - [ ] En bici (icon + label) - **Recomendado/Principal**
     - [ ] A pie (icon + label)
-    - [ ] En bici (icon + label)
+  - [ ] Vista previa actualizada: Distancia + Tiempo estimado según transporte
   - [ ] Buttons "Atrás" + "Siguiente"
   
-- [ ] **Paso 6: Generar Ruta**
+- [ ] **Paso 6: Guardar y Configurar Ruta**
   - [ ] Step Indicator (6/6)
   - [ ] Mapa con ruta final
   - [ ] Obras seleccionadas (pins numerados)
   - [ ] Input: Nombre de la ruta
   - [ ] Resumen:
     - [ ] Distancia total
-    - [ ] Duración estimada
+    - [ ] Duración estimada (según modo de transporte)
     - [ ] Obras incluidas (count)
+  - [ ] **Opciones de guardado:**
+    - [ ] Radio "Privada" (solo para mí)
+    - [ ] Radio "Pública estática" (compartida, sin fecha)
+    - [ ] Radio "Pública dinámica" (evento repetitivo)
+  - [ ] **Si selecciona "Pública dinámica":**
+    - [ ] Selector de repetición: Diario / Semanal / Mensual / Anual (usar rrule)
+    - [ ] Date picker: Fecha inicial
+    - [ ] Time picker: Hora
+    - [ ] Input: Punto de encuentro
+    - [ ] Toggle: "Permitir que cualquiera se una" / "Lista exclusiva"
   - [ ] Buttons "Atrás" + "Guardar Ruta" (primary)
 
 **Frames:** 6 pasos completos
 
 ---
 
-### 06. Top10Page
+### 06. TopNPage (Top N de Rutas)
 
-**Template:** Feed/Grid Template
+**Template:** Feed/Grid Template  
+**Nota:** Reemplaza Top 10 de obras. Ahora es Top N de rutas (máximo 10) para Visitantes y Artistas.
 
-- [ ] **Top10Page - Con Obras**
-  - [ ] App Bar "Mi Top 10"
+- [ ] **TopNPage - Con Rutas**
+  - [ ] App Bar "Mi Top N" o "Mis Rutas Favoritas"
   - [ ] Grid 2 columnas
-  - [ ] 10 Top 10 Grid Items (con ranking 1-10)
+  - [ ] Hasta 10 Top N Grid Items (con ranking 1-10)
+  - [ ] Cada item muestra: Preview de mapa, nombre de ruta, obras incluidas, distancia, modo transporte
   - [ ] Drag handles (para reordenar)
-  - [ ] Empty slots (si < 10 obras)
-  - [ ] Bottom Navigation (Top 10 selected)
+  - [ ] Empty slots (si < 10 rutas)
+  - [ ] Bottom Navigation (Top N selected)
+  - [ ] Botón "+ Agregar Ruta"
   
-- [ ] **Top10Page - Vacío**
-  - [ ] Empty State: "Tu Top 10 está vacío"
-  - [ ] Descripción
-  - [ ] Button "Explorar obras"
+- [ ] **TopNPage - Vacío**
+  - [ ] Empty State: "Tu Top N está vacío"
+  - [ ] Descripción: "Guarda hasta 10 rutas favoritas para acceso rápido"
+  - [ ] Button "Explorar rutas" o "Crear ruta"
 
 **Frames:** 2 estados
 
@@ -1380,32 +1449,106 @@
     - [ ] Section: "Obras en esta ruta"
       - [ ] Lista numerada de Obra Cards (mini)
       - [ ] Orden de visita (1, 2, 3...)
-    - [ ] Section: "Convertir en salida grupal"
-      - [ ] Info text
-      - [ ] Button "Crear salida grupal"
+    - [ ] Section: "Hacer dinámica" (si es pública estática o privada)
+      - [ ] Info text: "Convierte esta ruta en un evento repetitivo"
+      - [ ] Button "Hacer dinámica" (abre configuración de repetición)
   - [ ] Sticky bottom: "Iniciar navegación" (primary)
 
 **Frames:** 1 estado completo
 
 ---
 
-### 09. CreateSalidaPage
+### 09. CreateSalidaPage (OBSOLETO - Reemplazado por Rutas Dinámicas)
 
-**Template:** Form Template
+**Nota:** Esta página ya no es necesaria. Las salidas grupales ahora se manejan como "Rutas Públicas Dinámicas" en el Paso 6 de CreateRutaPage. Las rutas pueden ser:
+- **Privadas:** Solo para el usuario
+- **Públicas estáticas:** Compartidas, sin fecha/horario
+- **Públicas dinámicas:** Eventos repetitivos con rrule (diario/semanal/mensual/anual)
 
-- [ ] **CreateSalidaPage**
-  - [ ] App Bar "Nueva Salida Grupal"
-  - [ ] **Form Fields:**
-    - [ ] Input: Nombre de la salida
-    - [ ] Input: Descripción
-    - [ ] Date Picker: Fecha y hora
-    - [ ] Input: Punto de encuentro
-    - [ ] Input: Cupo máximo (number)
-    - [ ] Ruta asociada (readonly, pre-filled)
-  - [ ] Preview de la ruta (mini map)
-  - [ ] Buttons:
-    - [ ] "Cancelar" (text)
-    - [ ] "Crear salida" (primary)
+---
+
+### 10. PublicarObraPage (NUEVO - Solo Artistas)
+
+**Template:** Form Template  
+**Tipo de usuario:** Solo Artistas  
+**Nota:** Sin validación en MVP. Cualquier artista puede publicar.
+
+- [ ] **PublicarObraPage - Paso 1: Foto**
+  - [ ] App Bar "Nueva Obra" + Close
+  - [ ] Step Indicator (1/4)
+  - [ ] Instrucción: "Toma o selecciona una foto"
+  - [ ] Camera button / Gallery picker
+  - [ ] Preview de imagen seleccionada
+  - [ ] Button "Siguiente"
+  
+- [ ] **Paso 2: Información Básica**
+  - [ ] Step Indicator (2/4)
+  - [ ] Input: Título (requerido)
+  - [ ] Selector: Categoría (Graffiti, Mural, Escultura, Performance)
+  - [ ] Textarea: Descripción (opcional)
+  - [ ] Buttons "Atrás" + "Siguiente"
+  
+- [ ] **Paso 3: Ubicación**
+  - [ ] Step Indicator (3/4)
+  - [ ] Mapa interactivo (Buenos Aires - CABA)
+  - [ ] Instrucción: "Selecciona la ubicación de la obra"
+  - [ ] Marker en mapa
+  - [ ] Input: Dirección (auto-completado)
+  - [ ] Input: Barrio (auto-completado)
+  - [ ] Buttons "Atrás" + "Siguiente"
+  
+- [ ] **Paso 4: Revisar y Publicar**
+  - [ ] Step Indicator (4/4)
+  - [ ] Vista previa completa
+  - [ ] Foto, Título, Categoría, Ubicación
+  - [ ] Button "Publicar" (primary)
+  - [ ] Nota: "Sin validación en MVP. La obra aparecerá inmediatamente en el mapa."
+
+**Frames:** 4 pasos completos
+
+---
+
+### 11. CrearEncuentroPage (NUEVO - Solo Artistas)
+
+**Template:** Form Template  
+**Tipo de usuario:** Solo Artistas
+
+- [ ] **CrearEncuentroPage**
+  - [ ] App Bar "Nuevo Encuentro" + Close
+  - [ ] **Formulario:**
+    - [ ] Input: Ubicación (donde va a pintar) + Mapa (Buenos Aires - CABA)
+    - [ ] Date picker: Fecha
+    - [ ] Time picker: Hora
+    - [ ] Textarea: Descripción
+    - [ ] Toggle: "Evento repetitivo" (ON/OFF)
+    - [ ] **Si repetitivo:**
+      - [ ] Selector: Diario / Semanal / Mensual / Anual (usar rrule)
+    - [ ] Toggle: "Permitir que visitantes se unan" (ON/OFF)
+  - [ ] Button "Crear Encuentro" (primary)
+  - [ ] Nota: "Los visitantes que te siguen recibirán una notificación"
+
+**Frames:** 1 estado completo
+
+---
+
+### 12. EncuentroDetailPage (NUEVO)
+
+**Template:** Detail Page Template
+
+- [ ] **EncuentroDetailPage**
+  - [ ] Header:
+    - [ ] Mapa con ubicación del encuentro (Buenos Aires - CABA)
+    - [ ] Pin especial de encuentro
+  - [ ] **Content:**
+    - [ ] Artista: Foto y nombre (link a perfil)
+    - [ ] Ubicación: Dirección + mapa
+    - [ ] Fecha y hora
+    - [ ] Descripción
+    - [ ] Badge: "Evento repetitivo" (si aplica)
+    - [ ] Lista de asistentes (si está habilitada)
+  - [ ] **Sticky Bottom:**
+    - [ ] Button "Unirme al encuentro" (primary) - Solo Visitantes
+    - [ ] Button "Ver en mapa" (outlined)
 
 **Frames:** 1 estado completo
 
@@ -1467,7 +1610,7 @@
   - [ ] Obra Card (grid + list) ⭐ Crítico
   - [ ] Artista Card
   - [ ] Ruta Card
-  - [ ] Top 10 Grid Item
+  - [ ] Top N Grid Item (Rutas)
   - [ ] Filter Modal
   - [ ] Bottom Sheet (Obra Preview)
   - [ ] Obra Detail Header
@@ -1492,13 +1635,15 @@
 
 - [ ] **Día 8: Páginas Secundarias**
   - [ ] ArtistaProfilePage
-  - [ ] Top10Page (2 estados)
+  - [ ] TopNPage (2 estados) - Top N de rutas
   - [ ] RutaListPage (2 estados)
 
 - [ ] **Día 9: Flujo de Creación**
   - [ ] CreateRutaPage (6 pasos) ⭐ Flujo completo
   - [ ] RutaDetailPage
-  - [ ] CreateSalidaPage
+  - [ ] PublicarObraPage (4 pasos) - Solo Artistas
+  - [ ] CrearEncuentroPage - Solo Artistas
+  - [ ] EncuentroDetailPage
 
 ### Fase 5: Prototipado (1 día)
 
@@ -1552,7 +1697,7 @@
 - [ ] Transiciones aplicadas
 - [ ] Flujo de creación de ruta completo y navegable
 - [ ] Flujo de exploración completo
-- [ ] Flujo de Top 10 completo
+- [ ] Flujo de Top N de rutas completo
 
 ### Exportación
 - [ ] Assets de iconos exportados (si custom)

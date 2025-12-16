@@ -1,9 +1,11 @@
 # 🛣️ CreateRutaPage (Flujo Multi-Step)
 
 ## 📋 Descripción
-Flujo de 6 pasos para crear una ruta personalizada de arte urbano. El usuario selecciona puntos A y B, ve obras en el camino, elige cuáles visitar, selecciona medio de transporte, y genera la ruta final.
+Flujo de 6 pasos para crear una ruta personalizada de arte urbano en Buenos Aires (CABA). El usuario selecciona puntos A y B, ve obras en el camino, elige cuáles visitar, selecciona modo de transporte (bici o a pie), y guarda la ruta con opciones: privada, pública estática, o pública dinámica (evento repetitivo con rrule).
 
-**Persona principal:** María (Exploradora Urbana), Carlos (Turista Cultural), Ana (Organizadora)
+**Persona principal:** María (Exploradora Urbana - Visitante), Carlos (Turista Cultural - Visitante), Ana (Organizadora - Visitante)  
+**Enfoque:** Rutas principalmente en bici (aunque también a pie)  
+**Ubicación:** Buenos Aires (CABA) específicamente
 
 ---
 
@@ -15,8 +17,8 @@ Flujo de 6 pasos para crear una ruta personalizada de arte urbano. El usuario se
 | 2 | Punto B | Seleccionar punto de destino |
 | 3 | Obras en el Camino | Ver obras detectadas automáticamente |
 | 4 | Seleccionar Obras | Elegir qué obras visitar |
-| 5 | Transporte | Elegir a pie o en bici |
-| 6 | Generar Ruta | Confirmar y guardar |
+| 5 | Modo de Transporte | Elegir en bici (principal) o a pie |
+| 6 | Guardar y Configurar | Nombre, opciones (privada/pública estática/pública dinámica), configurar repetición si es dinámica |
 
 ---
 
@@ -76,15 +78,17 @@ Flujo de 6 pasos para crear una ruta personalizada de arte urbano. El usuario se
 ```
 
 ### Componentes Paso 1
-| Elemento | Especificación |
-|----------|----------------|
-| Título | "¿Desde dónde sales?" - H3 |
-| Search input | Autocomplete de direcciones |
-| Botón ubicación | Outlined, icono 📍 |
-| Mapa | 60% de la altura disponible |
-| Pin A | Color Primary (#6BA034), label "A" |
-| Feedback dirección | Body Medium, Surface 2 background |
-| Botón Siguiente | Filled, Primary, derecha |
+**Widgets Implementados:** `AppTextField`, `AppButton`, `AppMapPin` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Título | "¿Desde dónde sales?" - H3 | `AppTextStyles.h3` |
+| Search input | Autocomplete de direcciones | `AppTextField` con `onChanged` para autocomplete |
+| Botón ubicación | Outlined, icono 📍 | `AppButton.outlined(icon: Icons.my_location)` |
+| Mapa | 60% de la altura disponible | Mapa provider (Google Maps, Mapbox, etc.) |
+| Pin A | Color Primary (#6BA034), label "A" | `AppMapPin(category: MapPinCategory.userLocation, number: null)` con label "A" |
+| Feedback dirección | Body Medium, Surface 2 background | `Text` con `AppTextStyles.bodyMedium` y `AppColors.surface2` |
+| Botón Siguiente | Filled, Primary, derecha | `AppButton.primary(label: "Siguiente →")` |
 
 ---
 
@@ -216,18 +220,22 @@ Flujo de 6 pasos para crear una ruta personalizada de arte urbano. El usuario se
 ```
 
 ### Componentes Paso 4
-| Elemento | Especificación |
-|----------|----------------|
-| Título | "Selecciona las obras" - H3 |
-| Filtros | Chips horizontales |
-| Lista de obras | List items con checkbox |
-| Checkbox | Circular o cuadrado, Primary cuando checked |
-| Obra item | Título + Artista + Badge + Distancia |
-| Distancia | Body Small, Neutral 600 |
-| Contador | "X obras seleccionadas de Y" |
-| Validación | Mínimo 1, máximo 15 obras |
+**Widgets Implementados:** `AppCategoryFilterChipGroup`, `AppObraCard.list`, `Checkbox` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Título | "Selecciona las obras" - H3 | `AppTextStyles.h3` |
+| Filtros | Chips horizontales | `AppCategoryFilterChipGroup` |
+| Lista de obras | List items con checkbox | `ListView` con `AppObraCard.list` + `Checkbox` |
+| Checkbox | Circular o cuadrado, Primary cuando checked | `Checkbox(value: selected, onChanged: ...)` con `AppColors.primary` |
+| Obra item | Título + Artista + Badge + Distancia | `AppObraCard.list` con props adicionales |
+| Distancia | Body Small, Neutral 600 | `AppTextStyles.bodySmall` con `AppColors.neutral600` |
+| Contador | "X obras seleccionadas de Y" | `Text` con contador dinámico |
+| Validación | Mínimo 1, máximo 15 obras | Validación en `onNext` callback |
 
 ### Obra List Item
+**Widget:** `AppObraCard.list` con `Checkbox` wrapper ✅
+
 ```
 ┌─────────────────────────────────┐
 │ ☑️  ┌──────┐  "Título Obra"     │
@@ -235,13 +243,13 @@ Flujo de 6 pasos para crear una ruta personalizada de arte urbano. El usuario se
 │     └──────┘  📍 200m del camino│
 └─────────────────────────────────┘
 ```
-| Elemento | Especificación |
-|----------|----------------|
-| Checkbox | 24px, izquierda |
-| Thumbnail | 60x60px, radius 8px |
-| Título | Body Medium, Bold, max 1 línea |
-| Artista + Badge | Body Small, row |
-| Distancia | Body Small, icono 📍 |
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Checkbox | 24px, izquierda | `Checkbox` con `size: 24` |
+| Thumbnail | 60x60px, radius 8px | Integrado en `AppObraCard.list` |
+| Título | Body Medium, Bold, max 1 línea | `AppTextStyles.bodyMedium` |
+| Artista + Badge | Body Small, row | `AppTextStyles.bodySmall` + `CategoryBadge` |
+| Distancia | Body Small, icono 📍 | `AppTextStyles.bodySmall` con `AppIcon` |
 
 ---
 
@@ -255,21 +263,21 @@ Flujo de 6 pasos para crear una ruta personalizada de arte urbano. El usuario se
 │ [● ● ● ● ● ○]                   │
 ├─────────────────────────────────┤
 │                                 │
-│ 🚶 ¿Cómo vas a recorrer        │
+│ 🚲 ¿Cómo vas a recorrer        │
 │    la ruta?                     │
 │                                 │
 ├─────────────────────────────────┤
 │                                 │
 │ ┌─────────────────────────────┐│
-││       🚶                       ││
-││     A pie                      ││ ← Opción seleccionable
+││       🚲                       ││
+││     En bici                    ││ ← Opción principal (recomendado)
 ││                               ││
 ││ [Seleccionado ✓]              ││
 │└─────────────────────────────┘│
 │                                 │
 │ ┌─────────────────────────────┐│
-││       🚲                       ││
-││     En bici                    ││ ← Opción seleccionable
+││       🚶                       ││
+││     A pie                      ││ ← Opción secundaria
 ││                               ││
 ││ [Seleccionar]                 ││
 │└─────────────────────────────┘│
@@ -278,7 +286,7 @@ Flujo de 6 pasos para crear una ruta personalizada de arte urbano. El usuario se
 │ ┌─────────────────────────────┐│
 ││ Resumen de ruta               ││
 ││ 📏 Distancia: 2.3 km          ││
-││ ⏱️ Tiempo: ~45 min a pie      ││ ← Actualiza según selección
+││ ⏱️ Tiempo: ~12 min en bici    ││ ← Actualiza según selección (bici/a pie)
 ││ 🎨 Obras: 5 seleccionadas     ││
 │└─────────────────────────────┘│
 ├─────────────────────────────────┤
@@ -287,17 +295,19 @@ Flujo de 6 pasos para crear una ruta personalizada de arte urbano. El usuario se
 ```
 
 ### Componentes Paso 5
-| Elemento | Especificación |
-|----------|----------------|
-| Título | "¿Cómo vas a recorrer?" - H3 |
-| Cards de transporte | Outlined cuando no seleccionado, Filled Primary cuando seleccionado |
-| Icono | 48px, centrado |
-| Texto | Body Large, centrado |
-| Checkbox/Radio | Visual indicator de selección |
-| Card resumen | Surface 2, info actualizable |
-| Distancia | Body Medium, icono 📏 |
-| Tiempo | Body Medium, icono ⏱️ (calcula según transporte) |
-| Obras | Body Medium, icono 🎨 |
+**Widgets Implementados:** `AppButton`, `Card` con `Container` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Título | "¿Cómo vas a recorrer?" - H3 | `AppTextStyles.h3` |
+| Cards de transporte | Outlined cuando no seleccionado, Filled Primary cuando seleccionado | `Card` con `Container` y `border` o `color` según estado |
+| Icono | 48px, centrado | `AppIcon` con `AppIconSize.extraLarge` |
+| Texto | Body Large, centrado | `AppTextStyles.bodyLarge` con `textAlign: TextAlign.center` |
+| Checkbox/Radio | Visual indicator de selección | `Radio` widget o `Checkbox` |
+| Card resumen | Surface 2, info actualizable | `Card` con `AppColors.surface2` |
+| Distancia | Body Medium, icono 📏 | `AppTextStyles.bodyMedium` con `AppIcon` |
+| Tiempo | Body Medium, icono ⏱️ (calcula según transporte) | `AppTextStyles.bodyMedium` con `AppIcon` |
+| Obras | Body Medium, icono 🎨 | `AppTextStyles.bodyMedium` con `AppIcon` |
 
 ### Card de Transporte
 | Estado | Especificación |
@@ -331,7 +341,7 @@ Flujo de 6 pasos para crear una ruta personalizada de arte urbano. El usuario se
 │ ┌─────────────────────────────┐│
 ││ Murales de Palermo            ││ ← Input de nombre
 │└─────────────────────────────┘│
-│ (Opcional)                      │
+│                                 │
 ├─────────────────────────────────┤
 │ 📋 Orden de visita:             │
 │ 1. "Colores de la Ciudad"  ≡   │
@@ -340,31 +350,56 @@ Flujo de 6 pasos para crear una ruta personalizada de arte urbano. El usuario se
 │ 4. "Mural del Sol"         ≡   │
 │ 5. "Arte Libre"            ≡   │
 ├─────────────────────────────────┤
-│ [← Atrás]         [Generar Ruta]│ ← CTA principal
+│ ¿Cómo quieres guardar la ruta?  │
+│                                 │
+│ ○ Privada                       │ ← Solo para mí
+│   (Solo tú puedes verla)         │
+│                                 │
+│ ○ Pública estática              │ ← Compartida, sin fecha
+│   (Otros pueden verla y usarla) │
+│                                 │
+│ ○ Pública dinámica              │ ← Evento repetitivo
+│   (Evento que se repite)        │
+│                                 │
+│ Si seleccionas "Pública dinámica":│
+│ ┌─────────────────────────────┐│
+││ Repetición: [Semanal ▼]      ││ ← Diario/Semanal/Mensual/Anual (rrule)
+││ Fecha inicial: [15/03/2025]  ││ ← Date picker
+││ Hora: [10:00 AM]             ││ ← Time picker
+││ Punto encuentro: [Plaza...]  ││ ← Input
+││ ☑ Permitir que cualquiera   ││ ← Toggle
+││   se una                     ││
+│└─────────────────────────────┘│
+├─────────────────────────────────┤
+│ [← Atrás]         [Guardar Ruta]│ ← CTA principal
 └─────────────────────────────────┘
 ```
 
 ### Componentes Paso 6
-| Elemento | Especificación |
-|----------|----------------|
-| Título | "¡Tu ruta está lista!" - H3, con emoji ✨ |
-| Mapa preview | Ruta final optimizada, pins numerados |
-| Input nombre | Text field, placeholder "Ej: Murales de Palermo" |
-| Label opcional | Caption, Neutral 600 |
-| Lista reordenable | Drag handles (≡), numbered |
-| Botón final | Filled, Primary, "Generar Ruta" |
+**Widgets Implementados:** `AppTextField`, `AppButton`, `AppMapPin` (numerados), `ReorderableListView` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Título | "¡Tu ruta está lista!" - H3, con emoji ✨ | `AppTextStyles.h3` |
+| Mapa preview | Ruta final optimizada, pins numerados | Mapa con `AppMapPin(number: 1, 2, 3...)` |
+| Input nombre | Text field, placeholder "Ej: Murales de Palermo" | `AppTextField(placeholder: "Ej: Murales de Palermo")` |
+| Label opcional | Caption, Neutral 600 | `AppTextStyles.caption` con `AppColors.neutral600` |
+| Lista reordenable | Drag handles (≡), numbered | `ReorderableListView` con `AppMapPin` numerados |
+| Botón final | Filled, Primary, "Generar Ruta" | `AppButton.primary(label: "Generar Ruta")` |
 
 ### Item de Orden
+**Widget:** `ListTile` con `AppBadge.circle` y `AppIcon` ✅
+
 ```
 ┌─────────────────────────────────┐
 │ 1.  "Título de Obra"        ≡  │
 └─────────────────────────────────┘
 ```
-| Elemento | Especificación |
-|----------|----------------|
-| Número | Circle badge Primary, 24px |
-| Título | Body Medium, ellipsis |
-| Drag handle | ≡ icono, 24px, Neutral 400 |
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Número | Circle badge Primary, 24px | `AppBadge.circle(label: "1", backgroundColor: AppColors.primary)` |
+| Título | Body Medium, ellipsis | `AppTextStyles.bodyMedium` con `overflow: TextOverflow.ellipsis` |
+| Drag handle | ≡ icono, 24px, Neutral 400 | `AppIcon` con `Icons.drag_handle` y `AppColors.neutral400` |
 
 ---
 
@@ -426,32 +461,51 @@ Flujo de 6 pasos para crear una ruta personalizada de arte urbano. El usuario se
 ## 🧩 Componentes Compartidos
 
 ### Header de Flujo
-| Elemento | Especificación |
-|----------|----------------|
-| Close button | ✕ 24px, izquierda |
-| Título | "Nueva Ruta" - Body Large, Bold |
-| Indicador paso | "Paso X/6" - Body Small, Neutral 600 |
-| Altura | 56px |
+**Widget Implementado:** `AppTopBar.create` ✅  
+**Ubicación:** `lib/presentation/widgets/app_bars/app_top_bar.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Close button | ✕ 24px, izquierda | `AppTopBar.create(onClose: ...)` |
+| Título | "Nueva Ruta" - Body Large, Bold | `title: "Nueva Ruta"` con `AppTextStyles.bodyLarge` |
+| Indicador paso | "Paso X/6" - Body Small, Neutral 600 | `subtitle: "Paso X/6"` con `AppTextStyles.bodySmall` |
+| Altura | 56px | Material 3 standard |
 
 ### Progress Indicator
-| Elemento | Especificación |
-|----------|----------------|
-| Estilo | 6 dots o linear progress |
-| Dot completado | Primary (#6BA034), filled |
-| Dot actual | Primary, con anillo |
-| Dot pendiente | Neutral 300, outline |
-| Tamaño dot | 10px |
-| Gap | 8px |
+**Widget Implementado:** `AppRouteStepIndicator` ✅  
+**Ubicación:** `lib/presentation/widgets/modals/route_step_indicator.dart`
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Estilo | 6 dots o linear progress | `AppRouteStepIndicator` con 6 pasos |
+| Dot completado | Primary (#6BA034), filled | `AppColors.primary` |
+| Dot actual | Primary, con anillo | `AppColors.primary` con borde |
+| Dot pendiente | Neutral 300, outline | `AppColors.neutral300` |
+| Tamaño dot | 10px | Configurado en `AppRouteStepIndicator` |
+| Gap | 8px | `AppSpacing.space2` |
+
+**Uso:**
+```dart
+AppRouteStepIndicator(
+  currentStep: 1,
+  totalSteps: 6,
+  labels: ['Punto A', 'Punto B', 'Obras', 'Seleccionar', 'Transporte', 'Generar'],
+)
+```
 
 ### Footer de Navegación
-| Elemento | Especificación |
-|----------|----------------|
-| Altura | 72px (incluye padding) |
-| Botón Atrás | Text button, "← Atrás" (solo paso 2+) |
-| Botón Siguiente | Filled Primary, "Siguiente →" |
-| Botón Final | Filled Primary, "Generar Ruta" (paso 6) |
-| Padding | 16px todos lados |
-| Fondo | Surface con border-top |
+**Widgets Implementados:** `AppButton.text`, `AppButton.primary` ✅
+
+| Elemento | Especificación | Widget |
+|----------|----------------|--------|
+| Altura | 72px (incluye padding) | `Container` con `height: 72` |
+| Botón Atrás | Text button, "← Atrás" (solo paso 2+) | `AppButton.text(label: "← Atrás")` |
+| Botón Siguiente | Filled Primary, "Siguiente →" | `AppButton.primary(label: "Siguiente →")` |
+| Botón Final | Filled Primary, "Guardar Ruta" (paso 6) | `AppButton.primary(label: "Guardar Ruta")` |
+| Opciones guardado | Radio buttons (Privada/Pública estática/Pública dinámica) | `Radio` widgets con `AppTextStyles.bodyMedium` |
+| Configuración dinámica | Si selecciona dinámica: Selector repetición, Date/Time pickers, Toggle | Usar `rrule` para manejo de repeticiones |
+| Padding | 16px todos lados | `AppSpacing.space4` |
+| Fondo | Surface con border-top | `AppColors.surface` con `Border(top: BorderSide(...))` |
 
 ---
 

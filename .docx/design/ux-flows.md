@@ -39,10 +39,10 @@
 
 ---
 
-### Flow 2: Crear Ruta Manual
+### Flow 2: Crear Ruta Manual (En Bici o a Pie)
 
-**Usuario:** Carlos (Turista Cultural)  
-**Objetivo:** Planificar un recorrido entre dos puntos con obras en el camino
+**Usuario:** Carlos (Turista Cultural - Visitante)  
+**Objetivo:** Planificar un recorrido en bici entre dos puntos con obras en el camino
 
 ```
 1. Abre app → Mapa
@@ -84,24 +84,34 @@
    ↓
 10. Paso 5/6: Seleccionar medio de transporte
     [Selector de transporte]
+    - Opción "En bici" (bicicleta) - **Recomendado/Principal**
     - Opción "A pie" (caminando)
-    - Opción "En bici" (bicicleta)
     - Vista previa actualizada:
       * Distancia total: "2.3 km"
-      * Tiempo estimado: "45 min caminando" / "12 min en bici"
+      * Tiempo estimado: "12 min en bici" / "45 min caminando"
     ↓
-11. Selecciona "A pie" → Toca "Siguiente"
+11. Selecciona "En bici" → Toca "Siguiente"
     ↓
-12. Paso 6/6: Generar y guardar ruta
+12. Paso 6/6: Guardar y configurar ruta
     [Vista previa final de ruta en mapa]
     - Ruta optimizada mostrada
     - Orden de obras (puede reordenar si desea)
     - Input: Nombre de la ruta
-    - Botón "Generar Ruta"
+    - **Opciones de guardado:**
+      * Radio "Privada" (solo para mí)
+      * Radio "Pública estática" (compartida, sin fecha)
+      * Radio "Pública dinámica" (evento repetitivo)
+    - Si selecciona "Pública dinámica":
+      * Selector de repetición: Diario/Semanal/Mensual/Anual
+      * Date picker: Fecha inicial
+      * Time picker: Hora
+      * Input: Punto de encuentro
+      * Toggle: "Permitir que cualquiera se una" / "Lista exclusiva"
+    - Botón "Guardar Ruta"
     ↓
-13. Ingresa nombre "Murales de Palermo" → Toca "Generar Ruta"
+13. Ingresa nombre "Murales de Palermo", selecciona "Pública estática" → Toca "Guardar Ruta"
     ↓
-14. Feedback: "Ruta generada y guardada"
+14. Feedback: "Ruta guardada y publicada"
     ↓
 15. Vuelve a mapa con ruta trazada
     [Línea conectando puntos A→B con obras, pins numerados]
@@ -110,61 +120,80 @@
 **Puntos clave:**
 - Flujo paso a paso claro (6 pasos)
 - Mapa muestra obras en el camino automáticamente
-- Selección de medio de transporte afecta tiempo estimado
+- Selección de medio de transporte (bici/a pie) afecta tiempo estimado
+- **Enfoque principal en bici** (recomendado)
 - Vista previa en cada paso
 - Validación: mínimo 1 obra seleccionada
-- Posibilidad de reordenar obras antes de generar
+- Posibilidad de reordenar obras antes de guardar
+- **Opciones de guardado:** Privada, Pública estática, Pública dinámica
+- **Rutas dinámicas:** Configuración de repetición con rrule (diario/semanal/mensual/anual)
+- **Lista de asistentes:** Libre o exclusiva para rutas dinámicas
 
 ---
 
-### Flow 3: Convertir Ruta en Salida Grupal
+### Flow 3: Convertir Ruta en Pública Dinámica (Evento Repetitivo)
 
-**Usuario:** Ana (Organizadora de Salidas)  
-**Objetivo:** Organizar una salida grupal para el sábado
+**Usuario:** Ana (Organizadora de Salidas - Visitante)  
+**Objetivo:** Convertir una ruta guardada en un evento repetitivo semanal
 
 ```
 1. Abre app → Menú → "Mis Rutas"
    ↓
-2. Lista de rutas guardadas
+2. Lista de rutas guardadas (privadas y públicas)
    ↓
-3. Toca ruta "Murales de Palermo"
+3. Toca ruta "Murales de Palermo" (pública estática)
    ↓
 4. Pantalla de detalle de ruta
-   [Mapa con ruta, Lista de obras, Botón "Crear Salida Grupal"]
+   [Mapa con ruta, Lista de obras, Botón "Hacer Dinámica"]
    ↓
-5. Toca "Crear Salida Grupal"
+5. Toca "Hacer Dinámica" (convertir en evento repetitivo)
    ↓
-6. Pantalla "Nueva Salida"
+6. Pantalla "Configurar Evento Repetitivo"
    [Formulario]
    - Ruta pre-seleccionada: "Murales de Palermo"
-   - Fecha: Date picker
+   - Selector de repetición: Diario / Semanal / Mensual / Anual
+   - Fecha inicial: Date picker
    - Hora: Time picker
    - Punto de encuentro: Input + mapa
    - Descripción: Textarea
+   - Toggle: "Permitir que cualquiera se una" (ON) / "Lista exclusiva" (OFF)
    ↓
 7. Completa formulario:
-   - Fecha: Sábado 15/03
+   - Repetición: "Semanal"
+   - Fecha inicial: Sábado 15/03
    - Hora: 10:00 AM
    - Punto: "Plaza Serrano"
-   - Descripción: "Recorrido por los mejores murales..."
+   - Descripción: "Recorrido en bici por los mejores murales..."
+   - Toggle: "Permitir que cualquiera se una" (ON)
    ↓
-8. Toca "Crear Salida"
+8. Toca "Guardar Evento"
    ↓
-9. Pantalla de salida creada
-   [Detalles, Código de invitación o link, Lista de participantes (vacía)]
+9. Feedback: "Evento repetitivo creado. Se repetirá cada sábado a las 10:00 AM"
    ↓
-10. Comparte link/código
+10. Pantalla de evento creado
+    [Detalles, Link para compartir, Lista de asistentes (vacía)]
+    - Muestra: "Próximo evento: Sábado 15/03, 10:00 AM"
+    - Badge: "Se repite semanalmente"
     ↓
-11. Otros usuarios se unen
+11. Comparte link
     ↓
-12. Ana ve lista actualizada de participantes
+12. Otros usuarios se unen al evento
+    ↓
+13. Ana ve lista actualizada de asistentes
+    ↓
+14. El evento se repite automáticamente cada sábado (usando rrule)
+    - Visitantes reciben notificaciones de eventos próximos
+    - Pueden unirse a cualquier instancia del evento
 ```
 
 **Puntos clave:**
-- Flujo desde ruta existente (no desde cero)
+- Flujo desde ruta existente (pública estática o privada)
+- Configuración de repetición con rrule (diario/semanal/mensual/anual)
 - Formulario simple y claro
-- Compartir fácil (link o código)
-- Vista de participantes en tiempo real (si hay backend)
+- Compartir fácil (link)
+- Vista de asistentes en tiempo real
+- **Eventos repetitivos:** Se repiten automáticamente según configuración
+- **Notificaciones:** Visitantes reciben notificaciones de eventos próximos
 
 ---
 
@@ -202,34 +231,38 @@
 
 ---
 
-### Flow 5: Gestionar Top 10
+### Flow 5: Gestionar Top N de Rutas (Máximo 10)
 
-**Usuario:** María (Exploradora Urbana)  
-**Objetivo:** Agregar y reordenar su Top 10 personal
+**Usuario:** María (Exploradora Urbana - Visitante)  
+**Objetivo:** Agregar y reordenar su Top N de rutas favoritas
 
 ```
-1. Abre app → Menú → "Mi Top 10"
+1. Abre app → Bottom Nav → "Top N" (o Menú → "Mi Top N")
    ↓
-2. Pantalla "Mi Top 10"
-   [Grid visual tipo galería, Contador "7/10 obras"]
+2. Pantalla "Mi Top N"
+   [Grid visual tipo galería de rutas, Contador "7/10 rutas"]
+   - Cada item muestra: Preview de mapa, nombre de ruta, obras incluidas, distancia
    ↓
-3. Toca botón "+ Agregar Obra"
+3. Toca botón "+ Agregar Ruta"
    ↓
-4. Modal: "Seleccionar obra"
-   [Lista de obras favoritas o búsqueda]
+4. Modal: "Seleccionar ruta"
+   [Lista de rutas disponibles]
+   - Mis rutas (privadas y públicas)
+   - Rutas públicas de otros usuarios
+   - Búsqueda de rutas
    ↓
-5. Selecciona una obra → Toca "Agregar"
+5. Selecciona una ruta "Murales de Palermo" → Toca "Agregar"
    ↓
-6. Feedback: "Agregada a tu Top 10"
+6. Feedback: "Ruta agregada a tu Top N"
    ↓
-7. Vuelve a Top 10 (ahora 8/10)
+7. Vuelve a Top N (ahora 8/10)
    ↓
-8. Mantiene presionado una obra
+8. Mantiene presionado una ruta
    ↓
 9. Modo edición activado
    [Drag & drop habilitado, Botón "Eliminar" visible]
    ↓
-10. Reordena arrastrando obras
+10. Reordena arrastrando rutas
     ↓
 11. Toca "Guardar orden"
     ↓
@@ -237,10 +270,155 @@
 ```
 
 **Puntos clave:**
-- Límite claro de 10 obras
+- **Límite claro de 10 rutas** (no obras)
 - Reordenamiento intuitivo (drag & drop)
 - Feedback visual constante
 - Persistencia local
+- **Disponible para Visitantes y Artistas**
+- Visualización de preview de ruta (mapa, obras, distancia)
+
+---
+
+### Flow 6: Publicar Obra (Artista)
+
+**Usuario:** Diego (Artista Local - Artista)  
+**Objetivo:** Publicar una nueva obra en el mapa de Buenos Aires
+
+```
+1. Abre app → Toca botón "Agregar Obra" (visible solo para Artistas)
+   ↓
+2. Pantalla "Nueva Obra"
+   [Formulario paso a paso]
+   - Paso 1/4: Tomar/Seleccionar foto
+   - Paso 2/4: Información básica
+     * Título: Input
+     * Categoría: Selector (Graffiti, Mural, Escultura, Performance)
+     * Descripción: Textarea (opcional)
+   - Paso 3/4: Ubicación
+     * Mapa interactivo para seleccionar ubicación
+     * Input de dirección
+     * Barrio: Auto-completado
+   - Paso 4/4: Revisar y publicar
+     * Vista previa completa
+     * Botón "Publicar"
+   ↓
+3. Completa todos los pasos
+   - Foto: Toma foto del mural
+   - Título: "Mural de la Cultura"
+   - Categoría: "Mural"
+   - Ubicación: Selecciona en mapa (Palermo)
+   ↓
+4. Toca "Publicar"
+   ↓
+5. Feedback: "Obra publicada exitosamente"
+   ↓
+6. Vuelve al mapa
+   - Nueva obra aparece como pin en el mapa
+   - Aparece en su perfil de artista
+   - Visible para todos los visitantes
+```
+
+**Puntos clave:**
+- Flujo simple paso a paso (4 pasos)
+- Sin validación en MVP (cualquiera puede publicar)
+- Ubicación precisa en mapa de Buenos Aires
+- Aparece inmediatamente en el mapa
+- Artista puede editar/eliminar después
+
+---
+
+### Flow 7: Crear Encuentro (Artista)
+
+**Usuario:** Diego (Artista Local - Artista)  
+**Objetivo:** Crear un encuentro para anunciar que va a pintar en vivo
+
+```
+1. Abre app → Toca botón "Crear Encuentro" (visible solo para Artistas)
+   ↓
+2. Pantalla "Nuevo Encuentro"
+   [Formulario]
+   - Ubicación: Input + mapa (donde va a pintar)
+   - Fecha: Date picker
+   - Hora: Time picker
+   - Descripción: Textarea
+   - Toggle: "Evento repetitivo" (ON/OFF)
+   - Si repetitivo:
+     * Selector: Diario / Semanal / Mensual / Anual
+   - Toggle: "Permitir que visitantes se unan" (ON/OFF)
+   ↓
+3. Completa formulario:
+   - Ubicación: "Villa Crespo, esquina Corrientes y Scalabrini"
+   - Fecha: Sábado 20/03
+   - Hora: 14:00 PM
+   - Descripción: "Voy a pintar un nuevo mural en vivo"
+   - Repetitivo: "Mensual" (ON)
+   - Permitir unirse: ON
+   ↓
+4. Toca "Crear Encuentro"
+   ↓
+5. Feedback: "Encuentro creado. Los visitantes que te siguen recibirán una notificación"
+   ↓
+6. Encuentro aparece en:
+   - Mapa (pin especial de encuentro)
+   - Perfil del artista
+   - Feed de encuentros próximos
+   ↓
+7. Visitantes que siguen al artista reciben notificación
+   ↓
+8. Visitantes pueden unirse al encuentro
+   ↓
+9. El encuentro se repite mensualmente (si está configurado)
+```
+
+**Puntos clave:**
+- Solo disponible para Artistas
+- Puede ser repetitivo (usando rrule)
+- Notificaciones para visitantes que siguen al artista
+- Pin especial en el mapa
+- Lista de asistentes (si permiten unirse)
+
+---
+
+### Flow 8: Unirse a Encuentro (Visitante)
+
+**Usuario:** María (Exploradora Urbana - Visitante)  
+**Objetivo:** Ver un encuentro de artista y unirse para asistir
+
+```
+1. Abre app → Feed o Mapa
+   ↓
+2. Ve notificación: "Diego va a pintar en vivo - Sábado 20/03, 14:00"
+   ↓
+3. Toca la notificación
+   ↓
+4. Pantalla de detalle del encuentro
+   [Información completa]
+   - Artista: Foto y nombre (link a perfil)
+   - Ubicación: Mapa + dirección
+   - Fecha y hora
+   - Descripción
+   - Lista de asistentes (si está habilitada)
+   - Botón "Unirme al encuentro"
+   ↓
+5. Toca "Unirme al encuentro"
+   ↓
+6. Feedback: "Te has unido al encuentro. Recibirás recordatorios"
+   ↓
+7. Aparece en "Mis Encuentros" (sección en perfil)
+   ↓
+8. Recibe recordatorio 1 día antes y 1 hora antes
+   ↓
+9. El día del encuentro, puede ver la ubicación en el mapa
+   ↓
+10. Si el encuentro es repetitivo, se une a todas las instancias futuras
+```
+
+**Puntos clave:**
+- Notificaciones push (si hay backend)
+- Vista de encuentros próximos
+- Recordatorios automáticos
+- Integración con mapa para navegación
+- Soporte para encuentros repetitivos
 
 ---
 
@@ -422,14 +600,17 @@ Usuario envía mensaje
 
 | Pantalla | Acceso desde | Navega a |
 |----------|--------------|----------|
-| **Mapa (Home)** | App launch, Menú | Detalle obra, Crear ruta, Filtros |
-| **Feed** | Menú, Tab bar | Detalle obra, Perfil artista |
-| **Detalle Obra** | Mapa, Feed, Perfil artista | Perfil artista, Mapa, Top 10 |
-| **Perfil Artista** | Detalle obra, Feed | Detalle obra, Instagram |
-| **Top 10** | Menú | Detalle obra, Editar orden |
-| **Crear Ruta** | Mapa, Menú | Mapa (con ruta), Salida grupal |
-| **Mis Rutas** | Menú | Detalle ruta, Crear salida |
-| **Salidas Grupales** | Menú, Desde ruta | Detalle salida, Compartir |
+| **Mapa (Home)** | App launch, Bottom Nav | Detalle obra, Crear ruta, Filtros, Encuentros |
+| **Feed** | Bottom Nav | Detalle obra, Perfil artista |
+| **Top N de Rutas** | Bottom Nav | Detalle ruta, Editar orden |
+| **Detalle Obra** | Mapa, Feed, Perfil artista | Perfil artista, Mapa, Agregar a Top N |
+| **Perfil Artista** | Detalle obra, Feed | Detalle obra, Instagram, Seguir |
+| **Crear Ruta** | Mapa, FAB | Mapa (con ruta), Guardar/Publicar |
+| **Mis Rutas** | Menú | Detalle ruta, Hacer dinámica |
+| **Detalle Ruta** | Mis Rutas, Top N, Feed | Iniciar recorrido, Hacer dinámica, Agregar a Top N |
+| **Publicar Obra** | Botón "Agregar Obra" (Artistas) | Mapa, Perfil artista |
+| **Crear Encuentro** | Botón "Crear Encuentro" (Artistas) | Mapa, Perfil artista |
+| **Detalle Encuentro** | Notificación, Mapa, Feed | Unirse, Ver artista |
 
 ### Patrones de Navegación:
 - **Bottom Sheet:** Para previews rápidos (obra desde mapa)
@@ -454,7 +635,11 @@ Usuario envía mensaje
   - Medio de transporte requerido (a pie o en bici)
   - Nombre de ruta opcional (si no se ingresa, nombre automático)
 - **Salida Grupal:** Fecha futura, hora válida, punto de encuentro requerido
-- **Top 10:** Máximo 10 obras, no duplicados
+- **Top N de Rutas:** Máximo 10 rutas, no duplicados (Visitantes y Artistas)
+- **Rutas:** Pueden ser privadas, públicas estáticas, o públicas dinámicas (eventos repetitivos)
+- **Encuentros:** Solo Artistas pueden crear, Visitantes pueden unirse
+- **Publicación de Obras:** Solo Artistas, sin validación en MVP
+- **Repetición:** Usar rrule para eventos repetitivos (diario/semanal/mensual/anual)
 - **Filtros:** Al menos una categoría o artista debe estar seleccionado
 
 ---

@@ -137,6 +137,7 @@ class _AppBarsPreviewPageState extends State<AppBarsPreviewPage> {
                   borderRadius: AppBorderRadius.medium,
                 ),
                 child: AppMapBar(
+                  searchHint: 'Buscar obras...',
                   onSearchTap: () {
                     debugPrint('Search tapped');
                   },

@@ -14,18 +14,22 @@ class CalculateRuta {
     required Ubicacion puntoA,
     required Ubicacion puntoB,
     required List<String> obraIds,
-    required String transporte,
+    required String modoTransporte, // 'bici' o 'a_pie'
   }) async {
     if (obraIds.isEmpty) {
       return const Left(ValidationFailure('Debe seleccionar al menos una obra'));
+    }
+    
+    // Validar modo de transporte
+    if (modoTransporte != 'bici' && modoTransporte != 'a_pie') {
+      return const Left(ValidationFailure('Modo de transporte debe ser "bici" o "a_pie"'));
     }
     
     return await repository.calculateRuta(
       puntoA: puntoA,
       puntoB: puntoB,
       obraIds: obraIds,
-      transporte: transporte,
+      modoTransporte: modoTransporte,
     );
   }
 }
-

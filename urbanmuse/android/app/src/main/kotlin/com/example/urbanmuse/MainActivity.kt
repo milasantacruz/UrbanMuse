@@ -1,4 +1,4 @@
-package com.example.urbanmuse
+package com.streetmuse.app
 
 import io.flutter.embedding.android.FlutterActivity
 

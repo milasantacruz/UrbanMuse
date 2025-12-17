@@ -1,8 +1,10 @@
 name: urbanmuse
-description: "Graffiti Trails - Aplicación MVP para explorar arte urbano"
+description: "Street Muse - Explora y descubre arte urbano en tu ciudad. Encuentra grafitis, murales, esculturas y más."
 publish_to: 'none' # Paquete privado
 
 version: 1.0.0+1
+# homepage: https://streetmuse.app  # Descomentar cuando esté disponible
+# repository: https://github.com/tu-usuario/street-muse  # Descomentar cuando esté disponible
 
 environment:
   sdk: ^3.8.1

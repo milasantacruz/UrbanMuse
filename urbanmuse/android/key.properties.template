@@ -1,0 +1,15 @@
+# Template para configuración de signing
+# Copiar este archivo a key.properties y completar con los valores reales
+# IMPORTANTE: key.properties está en .gitignore y NO debe subirse al repositorio
+
+storePassword=TU_PASSWORD_AQUI
+keyPassword=TU_PASSWORD_AQUI
+keyAlias=upload
+storeFile=../upload-keystore.jks
+
+# INSTRUCCIONES:
+# 1. Generar keystore:
+#    keytool -genkey -v -keystore android/upload-keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+# 2. Copiar este archivo: cp android/key.properties.template android/key.properties
+# 3. Editar android/key.properties con los valores reales
+# 4. Verificar que android/key.properties esté en .gitignore

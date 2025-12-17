@@ -1,12 +1,12 @@
 {
-    "name": "urbanmuse",
-    "short_name": "urbanmuse",
+    "name": "Street Muse",
+    "short_name": "Street Muse",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
-    "orientation": "portrait-primary",
+    "background_color": "#F5F8FA",
+    "theme_color": "#6BA034",
+    "description": "Explora y descubre arte urbano en tu ciudad. Encuentra grafitis, murales, esculturas y más.",
+    "orientation": "any",
     "prefer_related_applications": false,
     "icons": [
         {

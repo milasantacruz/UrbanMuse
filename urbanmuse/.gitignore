@@ -33,6 +33,10 @@ migrate_working_dir/
 .pub/
 /build/
 
+# GitHub Pages - docs/ contiene el build para deploy
+# NO ignorar docs/ ya que se necesita para GitHub Pages
+# docs/
+
 # Symbolication related
 app.*.symbols
 

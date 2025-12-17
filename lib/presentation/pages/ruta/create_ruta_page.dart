@@ -24,6 +24,7 @@ import '../../widgets/common/loading_indicator.dart';
 import '../../widgets/common/error_widget.dart';
 import '../../widgets/modals/app_filter_modal.dart';
 import '../../widgets/encuentro/rrule_selector.dart';
+import '../../widgets/inputs/app_text_field.dart';
 import '../../../core/theme/theme.dart';
 
 /// Página de creación de ruta (multi-step)
@@ -413,21 +414,7 @@ class _CreateRutaPageState extends State<CreateRutaPage> {
   Widget _buildStepContent() {
     // Debug: Verificar que los pasos se están ejecutando
     debugPrint('=== Building step content for step: $_currentStep ===');
-    
-    // Widget de debug visible
-    Widget debugWidget = Container(
-      padding: EdgeInsets.all(8),
-      color: Colors.red.withOpacity(0.3),
-      child: Text(
-        'DEBUG: Paso $_currentStep de 7',
-        style: TextStyle(
-          color: Colors.red,
-          fontWeight: FontWeight.bold,
-          fontSize: 16,
-        ),
-      ),
-    );
-    
+
     Widget? stepWidget;
     switch (_currentStep) {
       case 1:
@@ -460,14 +447,8 @@ class _CreateRutaPageState extends State<CreateRutaPage> {
         stepWidget = const SizedBox.shrink();
         break;
     }
-    
-    // Retornar el widget del paso con el debug widget arriba
-    return Column(
-      children: [
-        debugWidget,
-        Expanded(child: stepWidget),
-      ],
-    );
+
+    return stepWidget;
   }
 
   // Paso 1: Seleccionar punto A
@@ -729,20 +710,6 @@ class _CreateRutaPageState extends State<CreateRutaPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Widget de prueba para verificar que se renderiza
-            Container(
-              padding: EdgeInsets.all(AppSpacing.space4),
-              color: Colors.blue.withOpacity(0.2),
-              child: Text(
-                'PASO 5: TRANSPORTE Y TIPO DE RUTA',
-                style: AppTextStyles.titleLarge.copyWith(
-                  color: Colors.blue,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            SizedBox(height: AppSpacing.space4),
             Text(
               'Modo de transporte',
               style: AppTextStyles.titleLarge,
@@ -830,19 +797,6 @@ class _CreateRutaPageState extends State<CreateRutaPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // Widget de prueba para verificar que se renderiza
-        Container(
-          padding: EdgeInsets.all(AppSpacing.space4),
-          color: Colors.green.withOpacity(0.2),
-          child: Text(
-            'PASO 6: PARTICIPANTES',
-            style: AppTextStyles.titleLarge.copyWith(
-              color: Colors.green,
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
         Padding(
           padding: EdgeInsets.all(AppSpacing.space4),
           child: Column(
@@ -976,20 +930,10 @@ class _CreateRutaPageState extends State<CreateRutaPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Nombre de la ruta
-          Text(
-            'Nombre de la ruta',
-            style: AppTextStyles.labelLarge,
-          ),
-          SizedBox(height: AppSpacing.space2),
-          TextField(
+          AppTextField.filled(
+            label: 'Nombre de la ruta',
+            hint: 'Ej: Ruta de Palermo a San Telmo',
             controller: _nombreController,
-            decoration: InputDecoration(
-              hintText: 'Ej: Ruta de Palermo a San Telmo',
-              border: OutlineInputBorder(
-                borderRadius: AppBorderRadius.medium,
-              ),
-            ),
             onChanged: (value) {
               setState(() => _nombreRuta = value);
             },

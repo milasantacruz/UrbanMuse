@@ -15,6 +15,7 @@ import '../buttons/app_button.dart';
 import '../common/loading_indicator.dart';
 import '../common/error_widget.dart';
 import '../common/app_clickable_container.dart';
+import '../inputs/app_text_field.dart';
 import 'dart:math' as math;
 import '../../../domain/entities/obra.dart';
 import '../../../domain/entities/ruta.dart';
@@ -152,6 +153,7 @@ class _CreateRutaModalState extends State<CreateRutaModal> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => di.getIt<RutaBloc>()),
@@ -200,7 +202,7 @@ class _CreateRutaModalState extends State<CreateRutaModal> {
             child: Container(
               height: MediaQuery.of(context).size.height * 0.9,
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: colorScheme.surface,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(AppBorderRadius.large.topLeft.x),
                   topRight: Radius.circular(AppBorderRadius.large.topRight.x),
@@ -214,7 +216,7 @@ class _CreateRutaModalState extends State<CreateRutaModal> {
                     decoration: BoxDecoration(
                       border: Border(
                         bottom: BorderSide(
-                          color: AppColors.outlineVariant,
+                          color: colorScheme.outlineVariant,
                           width: 1,
                         ),
                       ),
@@ -263,7 +265,7 @@ class _CreateRutaModalState extends State<CreateRutaModal> {
                     decoration: BoxDecoration(
                       border: Border(
                         top: BorderSide(
-                          color: AppColors.outlineVariant,
+                          color: colorScheme.outlineVariant,
                           width: 1,
                         ),
                       ),
@@ -329,21 +331,36 @@ class _CreateRutaModalState extends State<CreateRutaModal> {
             style: AppTextStyles.titleLarge,
           ),
           SizedBox(height: AppSpacing.space4),
-          _buildPuntoCard('Punto A', widget.puntoA, AppColors.primary),
+          _buildPuntoCard(
+            'Punto A',
+            widget.puntoA,
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            foregroundColor: Theme.of(context).colorScheme.onPrimary,
+          ),
           SizedBox(height: AppSpacing.space3),
-          _buildPuntoCard('Punto B', widget.puntoB, AppColors.secondary),
+          _buildPuntoCard(
+            'Punto B',
+            widget.puntoB,
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            foregroundColor: Theme.of(context).colorScheme.onSecondary,
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildPuntoCard(String label, Ubicacion ubicacion, Color color) {
+  Widget _buildPuntoCard(
+    String label,
+    Ubicacion ubicacion, {
+    required Color backgroundColor,
+    required Color foregroundColor,
+  }) {
     return Container(
       padding: EdgeInsets.all(AppSpacing.space4),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: backgroundColor.withOpacity(0.1),
         borderRadius: AppBorderRadius.medium,
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: backgroundColor.withOpacity(0.3)),
       ),
       child: Row(
         children: [
@@ -351,14 +368,14 @@ class _CreateRutaModalState extends State<CreateRutaModal> {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: color,
+              color: backgroundColor,
               shape: BoxShape.circle,
             ),
             child: Center(
               child: Text(
                 label == 'Punto A' ? 'A' : 'B',
                 style: AppTextStyles.labelLarge.copyWith(
-                  color: label == 'Punto A' ? AppColors.onPrimary : AppColors.onSecondary,
+                  color: foregroundColor,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -482,13 +499,17 @@ class _CreateRutaModalState extends State<CreateRutaModal> {
                               width: 32,
                               height: 32,
                               decoration: BoxDecoration(
-                                color: isSelected ? AppColors.error : AppColors.primary,
+                                color: isSelected
+                                    ? Theme.of(context).colorScheme.error
+                                    : Theme.of(context).colorScheme.primary,
                                 shape: BoxShape.circle,
                                 boxShadow: AppShadows.small,
                               ),
                               child: Icon(
                                 isSelected ? Icons.close : Icons.add,
-                                color: AppColors.white,
+                                color: isSelected
+                                    ? Theme.of(context).colorScheme.onError
+                                    : Theme.of(context).colorScheme.onPrimary,
                                 size: 20,
                               ),
                             ),
@@ -767,7 +788,7 @@ class _CreateRutaModalState extends State<CreateRutaModal> {
                 ),
                 SizedBox(height: AppSpacing.space4),
                 
-                Divider(color: AppColors.outlineVariant),
+                Divider(color: Theme.of(context).colorScheme.outlineVariant),
                 SizedBox(height: AppSpacing.space4),
                 
                 // Obras seleccionadas
@@ -814,18 +835,9 @@ class _CreateRutaModalState extends State<CreateRutaModal> {
           SizedBox(height: AppSpacing.space5),
           
           // Nombre de la ruta
-          Text(
-            'Nombre de la ruta',
-            style: AppTextStyles.labelLarge,
-          ),
-          SizedBox(height: AppSpacing.space2),
-          TextField(
-            decoration: InputDecoration(
-              hintText: 'Ej: Ruta de Palermo a San Telmo',
-              border: OutlineInputBorder(
-                borderRadius: AppBorderRadius.medium,
-              ),
-            ),
+          AppTextField.filled(
+            label: 'Nombre de la ruta',
+            hint: 'Ej: Ruta de Palermo a San Telmo',
             onChanged: (value) {
               setState(() => _nombreRuta = value);
             },
@@ -928,7 +940,7 @@ class _CreateRutaModalState extends State<CreateRutaModal> {
               Text(
                 label,
                 style: AppTextStyles.labelMedium.copyWith(
-                  color: AppColors.onSurfaceVariant,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               SizedBox(height: AppSpacing.space1),

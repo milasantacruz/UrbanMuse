@@ -35,26 +35,9 @@ xcopy /E /I /Y build\web\* docs\
 REM Crear .nojekyll
 echo. > docs\.nojekyll
 
-REM Crear 404.html para manejar rutas SPA
-(
-echo ^<!DOCTYPE html^>
-echo ^<html^>
-echo ^<head^>
-echo   ^<meta charset="utf-8"^>
-echo   ^<title^>Street Muse^</title^>
-echo   ^<script^>
-echo     // Redirigir a index.html para manejar rutas SPA
-echo     var path = window.location.pathname;
-echo     var repoName = '%REPO_NAME%';
-echo     var newPath = '/' + repoName + '/index.html' + (path === '/' ? '' : path);
-echo     window.location.replace(newPath);
-echo   ^</script^>
-echo ^</head^>
-echo ^<body^>
-echo   ^<p^>Redirecting...^</p^>
-echo ^</body^>
-echo ^</html^>
-) > docs\404.html
+REM Crear 404.html para manejar rutas SPA (copiando index.html)
+REM Esto permite que al recargar o abrir una ruta directa, GitHub Pages sirva la app.
+copy /Y docs\index.html docs\404.html >nul
 
 echo.
 echo ✅ Build completado en docs/
@@ -66,6 +49,6 @@ echo 3. Commit: git commit -m "Deploy: Actualizar GitHub Pages"
 echo 4. Push: git push origin main
 echo.
 echo 🌐 La app estará disponible en:
-echo    https://UrbanMuse.github.io/UrbanMuse/
+echo    https://milasantacruz.github.io/%REPO_NAME%/
 echo.
 echo ⏱️  Espera 1-5 minutos para que GitHub Pages se actualice.

@@ -28,7 +28,7 @@ Preparar la aplicación **Street Muse** (UrbanMuse) para su publicación en Goog
 
 ### Tarea 1.1: Actualizar Configuración de Build ✅ **COMPLETADA**
 **Prioridad:** Alta  
-**Tiempo estimado:** 2-3 horas  
+**Tiempo estimado:** 2-3 horas
 **Estado:** ✅ Completada
 
 #### Archivo: `android/app/build.gradle.kts`
@@ -110,7 +110,7 @@ version: 1.0.0+1
 
 ### Tarea 1.2: Configurar AndroidManifest.xml ✅ **COMPLETADA**
 **Prioridad:** Alta  
-**Tiempo estimado:** 1-2 horas  
+**Tiempo estimado:** 1-2 horas
 **Estado:** ✅ Completada
 
 #### Archivo: `android/app/src/main/AndroidManifest.xml`
@@ -181,7 +181,7 @@ version: 1.0.0+1
 
 ### Tarea 1.3: Configurar ProGuard/R8 ✅ **COMPLETADA**
 **Prioridad:** Media  
-**Tiempo estimado:** 2-3 horas  
+**Tiempo estimado:** 2-3 horas
 **Estado:** ✅ Completada
 
 #### Archivo: `android/app/proguard-rules.pro`
@@ -214,7 +214,7 @@ version: 1.0.0+1
 
 ### Tarea 1.4: Configurar Signing para Release ⚠️ **PARCIALMENTE COMPLETADA**
 **Prioridad:** Alta  
-**Tiempo estimado:** 1-2 horas  
+**Tiempo estimado:** 1-2 horas
 **Estado:** ⚠️ Configuración lista, requiere keystore manual
 
 **Pasos:**

@@ -77,6 +77,23 @@ dev_dependencies:
   # Generación de código para JSON
   json_serializable: ^6.8.0
   json_annotation: ^4.9.0
+  flutter_native_splash: ^2.4.7
+
+# ============================================
+# Splash Screen (flutter_native_splash)
+# ============================================
+flutter_native_splash:
+  # Fondo (alineado a surface en tema claro)
+  color: "#FEF7FF"
+  # Usamos el ícono existente (reemplazable por logo de marca)
+  image: web/icons/draw_abstract.png
+  android: true
+  ios: true
+  web: true
+
+  android_12:
+    color: "#FEF7FF"
+    image: web/icons/draw_abstract.png
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

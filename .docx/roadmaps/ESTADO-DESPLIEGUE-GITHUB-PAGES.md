@@ -39,29 +39,15 @@
 
 ## 📋 Próximos Pasos
 
-### Paso 1: Configurar Nombre del Repositorio (Manual)
+### Paso 1: Configurar Nombre del Repositorio ✅
 
-**⚠️ IMPORTANTE:** Actualizar el nombre del repositorio en los scripts:
+**✅ COMPLETADO:** El nombre del repositorio está correctamente configurado como "UrbanMuse" en todos los scripts:
 
-1. Editar `scripts/build_web.sh` (línea 5):
-   ```bash
-   REPO_NAME="TU_NOMBRE_REAL_DEL_REPO"  # Cambiar "UrbanMuse" por el nombre real
-   ```
-
-2. Editar `scripts/build_web.bat` (línea 4):
-   ```batch
-   set REPO_NAME=TU_NOMBRE_REAL_DEL_REPO
-   ```
-
-3. Editar `scripts/deploy_github_pages.sh` (línea 6):
-   ```bash
-   REPO_NAME="TU_NOMBRE_REAL_DEL_REPO"
-   ```
-
-4. Editar `scripts/deploy_github_pages.bat` (línea 4):
-   ```batch
-   set REPO_NAME=TU_NOMBRE_REAL_DEL_REPO
-   ```
+- ✅ `scripts/build_web.sh` - `REPO_NAME="UrbanMuse"`
+- ✅ `scripts/build_web.bat` - `REPO_NAME=UrbanMuse`
+- ✅ `scripts/deploy_github_pages.sh` - `REPO_NAME="UrbanMuse"` y URL configurada
+- ✅ `scripts/deploy_github_pages.bat` - `REPO_NAME=UrbanMuse` y URL configurada
+- ✅ URL de despliegue: `https://UrbanMuse.github.io/UrbanMuse/`
 
 ### Paso 2: Probar Build Localmente (Opcional pero Recomendado)
 
@@ -114,7 +100,7 @@ git push origin main
 ### Paso 5: Verificar Deploy
 
 1. Esperar 1-5 minutos después del push
-2. Visitar: `https://TU_USUARIO.github.io/TU_REPO_NAME/`
+2. Visitar: `https://UrbanMuse.github.io/UrbanMuse/`
 3. Verificar:
    - [ ] La app carga correctamente
    - [ ] No hay errores 404
@@ -146,10 +132,10 @@ git push origin main
 
 **Estado:** ✅ **Preparación Completada - Listo para Deploy**
 
-**Progreso:** 80% completado
+**Progreso:** 85% completado
 
 **Pendiente:**
-1. ⚠️ Actualizar nombre del repositorio en scripts (manual)
+1. ✅ ~~Actualizar nombre del repositorio en scripts~~ **COMPLETADO - Configurado como "UrbanMuse"**
 2. ⚠️ Configurar GitHub Pages en Settings (manual)
 3. ⚠️ Ejecutar deploy y push (manual)
 
@@ -157,7 +143,7 @@ git push origin main
 
 ## 📝 Notas Importantes
 
-1. **Nombre del Repositorio:** Los scripts usan "UrbanMuse" por defecto. Debe actualizarse al nombre real del repositorio en GitHub.
+1. **Nombre del Repositorio:** ✅ Configurado correctamente como "UrbanMuse" en todos los scripts. URL de despliegue: `https://UrbanMuse.github.io/UrbanMuse/`
 
 2. **Base Href:** El base href se configura automáticamente en los scripts. Si el repositorio se llama diferente, actualizar `REPO_NAME` en todos los scripts.
 
@@ -178,7 +164,7 @@ git push origin main
 
 ---
 
-**Última actualización:** 2025-01-27  
+**Última actualización:** 2025-01-27 (Scripts configurados con nombre correcto "UrbanMuse")  
 **Responsable:** Equipo de desarrollo
 
 ---
